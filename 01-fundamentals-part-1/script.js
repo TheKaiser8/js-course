@@ -169,6 +169,7 @@ multiple
 lines`);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 7: Taking Decisions: if / else Statements (Sez. 2, lez. 18)
 const age = 15;
@@ -199,3 +200,4 @@ if (birthYear <= 2000) {
   century = 21;
 }
 console.log(century);
+*/
