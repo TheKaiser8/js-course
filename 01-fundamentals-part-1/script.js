@@ -270,6 +270,7 @@ if (height) {
 }
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 10: Equality Operators: == vs. === (Sez. 2, lez. 22)
 // Operatori di uguaglianza
@@ -309,3 +310,39 @@ if (favourite === 23) {
 
 // different operator (operatore diverso): != (loose version), !== (strict version)
 if (favourite !== 23) console.log("Why not 23?");
+*/
+
+///////////////////////////////////////////////
+/*
+// LEZIONE 11: Boolean Logic (Sez. 2, lez. 23)
+// AND, OR & NOT OPERATORS
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 12: Logical Operators (Sez. 2, lez. 24)
+const hasDriversLicense = true; // A
+const hasGoodVision = true; // B
+
+// operatore AND
+console.log(hasDriversLicense && hasGoodVision); // false in questo caso
+
+// operatore OR
+console.log(hasDriversLicense || hasGoodVision); // true in questo caso
+
+// operatore NOT
+console.log(!hasDriversLicense); // false in questo caso
+
+// if(hasDriversLicense && hasGoodVision) {
+//     console.log("Sarah is able to drive");
+// } else {
+//     console.log("Someone else should drive");
+// }
+
+const isTired = false; // C (se è stanco oppure no)
+console.log(hasDriversLicense || hasGoodVision || isTired); // true in questo caso
+
+if (hasDriversLicense && hasGoodVision && !isTired) {
+  console.log("Sarah is able to drive");
+} else {
+  console.log("Someone else should drive");
+}
