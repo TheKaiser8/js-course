@@ -30,6 +30,7 @@ let myCurrentJob = "Teacher"; // NO: let job2 = 'teacher';
 console.log(myFirstJob, myCurrentJob);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 2: Data Types (Sez. 2, lez. 12)
 true; // valore BOOLEANO
@@ -54,3 +55,22 @@ console.log(typeof year, year);
 
 // CURIOSITà BUG: il valore null per JS viene tipizzato come un object, invece di essere definito undefined, questo è chiaramente un BUG che però non viene corretto per motivi di legacy (eredità)
 console.log(typeof null);
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 3: let, const and var (Sez. 2, lez. 13)
+let age = 30;
+age = 31;
+
+const birthYear = 1991;
+// birthYear = 1990; // NON è possibile riassegnare il valore di una costante
+
+// const job; // NON è possibile dichiarare una COSTANTE VUOTA
+
+// var e let sono apparentemente molto simili, ma let è nell'ambito del blocco (block scope) e var nell'ambito della funzione (function scope)
+var job = "programmer";
+job = "teacher";
+
+// JS consente di creare una variabile senza dichiarare il tipo di variabile, ma NON si dovrebbe MAI fare perché JS crea la variabile nell'intero OGGETTO GLOBALE e non solamente nello SCOPE CORRENTE
+lastName = "Schmedtmann";
+console.log(lastName);

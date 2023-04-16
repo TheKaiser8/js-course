@@ -7,6 +7,7 @@ let population = 59.11;
 console.log(country, continent, population);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 2: Data Types (Sez. 2, lez. 12)
 let isIsland = false;
@@ -18,3 +19,12 @@ console.log(
   typeof country,
   typeof language
 );
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 3: let, const and var (Sez. 2, lez. 13)
+language = "italiano";
+const country = "Italia";
+const continent = "Europa";
+const isIsland = false;
+isIsland = true; // cambiare il valore ad una const genera l'errore "invalid assignment"
