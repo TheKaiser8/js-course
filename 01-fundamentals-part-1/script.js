@@ -139,3 +139,30 @@ console.log(x, y);
 const averageAge = (ageJonas + ageSarah) / 2;
 console.log(ageJonas, ageSarah, averageAge);
 */
+
+///////////////////////////////////////////////
+// LEZIONE 6: Strings and Template Literals (Sez. 2, lez. 17)
+const firstName = "Jonas";
+const job = "teacher";
+const birthYear = 1991;
+const year = 2037;
+
+const jonas =
+  "I'm " + firstName + ", a " + (year - birthYear) + " year old " + job + "!";
+console.log(jonas);
+
+// Stringhe con TEMPLATE LITERAL:
+const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+console.log(jonasNew);
+
+// Stringa multilinea SENZA template literal:
+console.log(
+  "String with \n\
+multiple \n\
+lines"
+);
+
+// Stringa multilinea con TEMPLATE LITERAL:
+console.log(`String with
+multiple
+lines`);

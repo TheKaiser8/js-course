@@ -76,3 +76,14 @@ const description =
   language;
 console.log(description);
 */
+
+///////////////////////////////////////////////
+// LEZIONE 6: Strings and Template Literals (Sez. 2, lez. 17)
+// 1. Recreate the 'description' variable from the last assignment, this time using the template literal syntax
+
+const populationItaly = 59.11;
+const country = "Italy";
+const continent = "Europe";
+const language = "italiano";
+const description = `${country} is in ${continent}, and its ${populationItaly} million people speak ${language}`;
+console.log(description);
