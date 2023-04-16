@@ -41,6 +41,7 @@ const isIsland = false;
 isIsland = true; // cambiare il valore ad una const genera l'errore "invalid assignment"
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 4: Basic Operators (Sez. 2, lez. 14)
 // 1. If your country split in half, and each half would contain half the population, then how many people would live in each half?
@@ -74,3 +75,4 @@ const description =
   " million people speak " +
   language;
 console.log(description);
+*/

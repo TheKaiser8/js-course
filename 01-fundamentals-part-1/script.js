@@ -77,6 +77,7 @@ lastName = "Schmedtmann";
 console.log(lastName);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 4: Basic Operators (Sez. 2, lez. 14)
 // const ageJonas = 2037 - 1991;
@@ -117,3 +118,22 @@ const isFullAge = ageSarah >= 18; // variabile che restituisce un valore boolean
 
 // Operatori matematici + operatori di confronto:
 console.log(now - 1991 > now - 2018); // true perché 46 > 19 --> JS sa automaticamente eseguire prima le operazioni matematiche e poi quelle di confronto
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 5: Operator Precedence (Sez. 2, lez. 15)
+const now = 2037;
+const ageJonas = now - 1991;
+const ageSarah = now - 2018;
+console.log(now - 1991 > now - 2018);
+
+// MDN web docs --> operator precedence per tabella precedenza operatori
+// L'operatore matematico meno (-) ha una precedenza superiore all'operatore di confronto (>), per cui viene eseguito prima
+console.log(25 - 10 - 5); // 10; esecuzione da sinistra a destra
+
+let x, y;
+x = y = 25 - 10 - 5; // x = y = 10; y = 10 e x = 10 perchè le operazioni di assegnazione avvengono da destra verso sinistra, quindi prima y e poi x
+console.log(x, y);
+
+const averageAge = (ageJonas + ageSarah) / 2;
+console.log(ageJonas, ageSarah, averageAge);
