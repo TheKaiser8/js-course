@@ -349,6 +349,7 @@ if (hasDriversLicense && hasGoodVision && !isTired) {
 }
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 13: The switch Statement (Sez. 2, lez. 26)
 // Istruzione SWITCH: per confrontare l'uguaglianza rigorosa (STRICT EQUALITY)
@@ -392,3 +393,18 @@ switch (day) {
 // } else {
 //     console.log('Not a valid day!');
 // }
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 14: Statements and Expressions (Sez. 2, lez. 27)
+// ESPRESSIONE: codice che produce un valore, come una parola
+// Esempi:
+3 + 4;
+1991;
+true && false && !false;
+
+// DICHIARAZIONE (STATEMENT): sequenza di azioni, come la frase completa composta da più parole (espressioni)
+// Esempi:
+if (23 > 10) {
+  const str = "23 is bigger";
+}
