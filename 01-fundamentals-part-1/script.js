@@ -243,6 +243,8 @@ console.log(n);
 // '10'-'4'-'3'-2+'5' = "15"
 */
 
+/*
+///////////////////////////////////////////////
 // LEZIONE 9: Truthy and Falsy Values (Sez. 2, lez. 21)
 // In JS esistono solo 5 valori FALSI (falsy value): 0, empty string "", undefined, null e NaN (not a number)
 console.log(Boolean(0)); // false
@@ -266,3 +268,44 @@ if (height) {
 } else {
   console.log("Height is UNDEFINED");
 }
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 10: Equality Operators: == vs. === (Sez. 2, lez. 22)
+// Operatori di uguaglianza
+const age = 18;
+// se c'è una sola condizione possiamo omettere le parentesi graffe
+if (age === 18) console.log("You just became an adult :D (strict equality)");
+// l'operatore di uguaglianza triplo (===) viene chiamato operatore di uguaglianza rigorosa (strict equality) e NON effettua una COERCIZIONE TIPO
+// '18' === 18 // false
+
+// l'operatore di uguaglianza doppia (==) viene chiamato operatore di uguaglianza libera (loose equality) ed effettua la COERCIZIONE TIPO
+// '18' == 18 // true
+if (age == 18) console.log("You just became an adult :D (loose equality)");
+
+// prompt function
+// const favourite = prompt("What's your favourite number?");
+// console.log(favourite); // 23 in formato stringa, quindi '23'
+// console.log(typeof favourite); // string
+
+// if (favourite == 23) { // '23' = 23 stringa convertita in numero
+//     console.log("Cool! 23 is an amazing number!");
+// }
+
+// Per convertire il numero ottenuto dal prompt dobbiamo utilizzare la funzione Number
+const favourite = Number(prompt("What's your favourite number?"));
+console.log(favourite); // 23
+console.log(typeof favourite); // number
+if (favourite === 23) {
+  // 23 === 23
+  console.log("Cool! 23 is an amazing number!");
+} else if (favourite === 7) {
+  console.log("7 is also a cool number");
+} else if (favourite === 9) {
+  console.log("9 is also a cool number");
+} else {
+  console.log("Number is not 23 or 7 or 9");
+}
+
+// different operator (operatore diverso): != (loose version), !== (strict version)
+if (favourite !== 23) console.log("Why not 23?");
