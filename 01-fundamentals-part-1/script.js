@@ -348,3 +348,47 @@ if (hasDriversLicense && hasGoodVision && !isTired) {
   console.log("Someone else should drive");
 }
 */
+
+///////////////////////////////////////////////
+// LEZIONE 13: The switch Statement (Sez. 2, lez. 26)
+// Istruzione SWITCH: per confrontare l'uguaglianza rigorosa (STRICT EQUALITY)
+const day = "monday";
+
+switch (day) {
+  case "monday": // day === 'monday' (STRICT EQUALITY: se day è uguale a monday allora verrà eseguito)
+    console.log("Plan course structure");
+    console.log("Go to coding meetup");
+    break; // il break serve per interrompere l'esecuzione del codice, altrimenti verrebbero eseguiti anche i console log successivi fino al primo break
+  case "tuesday":
+    console.log("Prepare theory videos");
+    break;
+  case "wednesday":
+  case "thursday": // vale per entrambi i casi (wednesday & thursday)
+    console.log("Write code examples");
+    break;
+  case "friday":
+    console.log("Record videos");
+    break;
+  case "saturday":
+  case "sunday": // vale per entrambi i casi (saturday & sunday)
+    console.log("Enjoy the weekend");
+    break;
+  default:
+    console.log("Not a valid day!");
+}
+
+// con istruzione IF/ELSE: (viene ripetuto codice come: day === ed è meno leggibile la struttura)
+// if (day === 'monday') {
+//     console.log('Plan course structure');
+//     console.log('Go to coding meetup');
+// } else if (day === 'tuesday') {
+//     console.log('Prepare theory videos');
+// } else if (day === 'wednesday' || day === 'thursday') {
+//     console.log('Write code examples');
+// } else if (day === 'friday') {
+//     console.log('Record videos');
+// } else if (day === 'saturday' || day === 'sunday') {
+//     console.log('Enjoy the weekend');
+// } else {
+//     console.log('Not a valid day!');
+// }

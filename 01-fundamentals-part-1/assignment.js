@@ -165,3 +165,28 @@ if (population < 50 && language === "english" && !isIsland) {
   console.log(`L'${country} non soddisfa i tuoi criteri`);
 }
 */
+
+///////////////////////////////////////////////
+// LEZIONE 13: The switch Statement (Sez. 2, lez. 26)
+const language = "italian";
+
+switch (language) {
+  case "chinese":
+  case "mandarin":
+    console.log("MOST number of native speakers!");
+    break;
+  case "spanish":
+    console.log("2nd place in number of native speakers");
+    break;
+  case "english":
+    console.log("3nd place");
+    break;
+  case "hindi":
+    console.log("Number 4");
+    break;
+  case "arabic":
+    console.log("5th most spoken language");
+    break;
+  default:
+    console.log("Great language too :D");
+}
