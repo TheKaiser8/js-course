@@ -411,6 +411,7 @@ if (23 > 10) {
 }
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 15: The Conditional (Ternary) Operator (Sez. 2, lez. 28)
 // OPERATORE CONDIZIONALE o TERNARIO: è composto dalla condizione, dall'if e dall'else
@@ -437,3 +438,4 @@ console.log(drink2);
 // Ora possiamo usare il template literal con all'interno una condizione perché l'operatore ternario produce un valore
 console.log(`I like to drink ${age >= 18 ? "wine" : "water"}`); // forma estesa
 console.log(`I like to drink ${drink}`); // forma contratta se dichiaro una variabile con operatore ternario
+*/
