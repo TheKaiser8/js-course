@@ -201,3 +201,42 @@ if (birthYear <= 2000) {
 }
 console.log(century);
 */
+
+///////////////////////////////////////////////
+// LEZIONE 8: Type Conversion and Coercion (Sez. 2, lez. 20)
+
+// TYPE CONVERSION: (conversione manuale, utilizzata raramente)
+const inputYear = "1991"; // 1991 scritto in questo modo è una stringa
+console.log(inputYear + 18); // restituisce 199118 perché crea una stringa da 2 stringhe (NON fa il calcolo numerico essendo '1991' una stringa)
+
+// Per utilizzare una stringa come numero possiamo utilizzare la funzione Number():
+console.log(Number(inputYear) + 18); // 2009
+// il valore di input originale non cambia, rimane una stringa, viene solo utilizzato come numero
+console.log(Number(inputYear), inputYear); // 1991, "1991"
+
+// Provando a convertire una stringa che non può essere convertita in un numero:
+const firstName = "Jonas";
+console.log(Number(firstName)); // restituisce NaN (Not a number)
+console.log(typeof NaN); // restituisce number perché è un numero non valido, ma comunque un numero
+
+// Conversione numero in stringa:
+console.log(String(23)); // restituisce 23 sotto forma di stringa --> "23"
+
+// N.B. Una funzione deve sempre iniziare con la prima lettera MAIUSCOLA (Number, String, ecc.)
+
+// TYPE COERCION: (conversione automatica di JS)
+console.log("I am " + 23 + " years old"); // operatore + converte in automatico da numero a stringa, non il contrario
+console.log("23" - "10" - 3); // operatore - converte in automatico da stringa a numero, non il contrario
+console.log("23" + "10" + 3); // operatore + restituisce 23103
+
+// Gli operatori * e / funzionano invece nell'unico modo possibile
+console.log("23" * "2"); // 46
+console.log("23" / "2"); // 11.5
+
+// Gioco indovina l'output:
+let n = "1" + 1; // 11
+n = n - 1; // 10
+console.log(n);
+
+// 2+3+4+'5' = 9+'5' = "95"
+// '10'-'4'-'3'-2+'5' = "15"

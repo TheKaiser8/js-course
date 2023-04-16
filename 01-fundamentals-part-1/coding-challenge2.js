@@ -1,3 +1,4 @@
+/*
 // Use the BMI example from Challenge #1, and the code you already wrote, and improve it.
 
 // Your tasks:
@@ -47,3 +48,4 @@ if (markBMI > johnBMI) {
 } else {
   console.log(`John's BMI (${johnBMI}) is higher than Mark's (${markBMI})!`);
 }
+*/
