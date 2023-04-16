@@ -77,6 +77,7 @@ const description =
 console.log(description);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 6: Strings and Template Literals (Sez. 2, lez. 17)
 // 1. Recreate the 'description' variable from the last assignment, this time using the template literal syntax
@@ -87,3 +88,20 @@ const continent = "Europe";
 const language = "italiano";
 const description = `${country} is in ${continent}, and its ${populationItaly} million people speak ${language}`;
 console.log(description);
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 7: Taking Decisions: if / else Statements (Sez. 2, lez. 18)
+// 1. If your country's population is greater that 33 million, log a string like this to the console: 'Portugal's population is above average'. Otherwise, log a string like 'Portugal's population is 22 million below average' (the 22 is the average of 33 minus the country's population)
+// 2. After checking the result, change the population temporarily to 13 and then to 130. See the different results, and set the population back to original
+
+const populationItaly = 59.11;
+const country = "Italy";
+
+if (populationItaly > 33) {
+  console.log(`${country}'s population is above average`);
+} else {
+  console.log(
+    `${country}'s population is ${33 - populationItaly} million below average`
+  );
+}

@@ -140,6 +140,7 @@ const averageAge = (ageJonas + ageSarah) / 2;
 console.log(ageJonas, ageSarah, averageAge);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 6: Strings and Template Literals (Sez. 2, lez. 17)
 const firstName = "Jonas";
@@ -166,3 +167,35 @@ lines"
 console.log(`String with
 multiple
 lines`);
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 7: Taking Decisions: if / else Statements (Sez. 2, lez. 18)
+const age = 15;
+
+// // metodo NON comune:
+// const isOldEnough = age >= 18; // restituisce valore booleano
+
+// SE la condizione è VERA verrà eseguito questo blocco di codice
+// if(isOldEnough) {
+//     console.log('Sarah can start driving license 🚗')
+// }
+
+// metodo COMUNE (viene definita struttura di controllo (control structure)):
+if (age >= 18) {
+  console.log("Sarah can start driving license 🚗");
+} else {
+  const yearsLeft = 18 - age;
+  console.log(`Sarah is too young. Wait another ${yearsLeft} years 😉`);
+}
+// else è un blocco opzionale, se non contiene blocchi di codice può essere omesso
+
+const birthYear = 1991;
+let century;
+
+if (birthYear <= 2000) {
+  century = 20; // mi aspetto questo risultato
+} else {
+  century = 21;
+}
+console.log(century);
