@@ -1,5 +1,8 @@
 /*
 // LEZIONE 1: Values and Variables (Sez. 2, lez. 10)
+1. Declare variables called 'country', 'continent' and 'population' and assign their values according to your own country (population in millions)
+2. Log their values to the console
+
 let country = "Italia";
 let continent = "Europa";
 let population = 59.11;
@@ -10,6 +13,9 @@ console.log(country, continent, population);
 /*
 ///////////////////////////////////////////////
 // LEZIONE 2: Data Types (Sez. 2, lez. 12)
+1. Declare a variable called 'isIsland' and set its value according to your country. The variable should hold a Boolean value. Also declare a variable 'language', but don't assign it any value yet
+2. Log the types of 'isIsland', 'population', 'country' and 'language' to the console
+
 let isIsland = false;
 let language;
 
@@ -24,6 +30,10 @@ console.log(
 /*
 ///////////////////////////////////////////////
 // LEZIONE 3: let, const and var (Sez. 2, lez. 13)
+1. Set the value of 'language' to the language spoken where you live (some countries have multiple languages, but just choose one)
+2. Think about which variables should be const variables (which values will never change, and which might change?). Then, change these variables to const.
+3. Try to change one of the changed variables now, and observe what happens
+
 language = "italiano";
 const country = "Italia";
 const continent = "Europa";
