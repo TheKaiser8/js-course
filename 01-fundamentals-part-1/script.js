@@ -395,6 +395,7 @@ switch (day) {
 // }
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 14: Statements and Expressions (Sez. 2, lez. 27)
 // ESPRESSIONE: codice che produce un valore, come una parola
@@ -408,3 +409,31 @@ true && false && !false;
 if (23 > 10) {
   const str = "23 is bigger";
 }
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 15: The Conditional (Ternary) Operator (Sez. 2, lez. 28)
+// OPERATORE CONDIZIONALE o TERNARIO: è composto dalla condizione, dall'if e dall'else
+// Un OPERATORE produce sempre un valore, pertanto è un'ESPRESSIONE
+const age = 23;
+// age >= 18 ? console.log('I like to drink wine') : console.log('I like to drink water');
+// age >= 18 condizione
+// console.log('I like to drink wine') if
+// console.log('I like to drink water') else
+
+const drink = age >= 18 ? "wine" : "water";
+console.log(drink);
+// in questo modo dichiariamo una variabile con una condizione scrivendo una sola riga
+
+// con il blocco IF/ELSE il nostro codice risulterebbe così:
+let drink2; // la variabile va dichiarata fuori dal blocco condizionale per renderla disponibile e visibile al di fuori
+if (age >= 18) {
+  drink2 = "wine";
+} else {
+  drink2 = "water";
+}
+console.log(drink2);
+
+// Ora possiamo usare il template literal con all'interno una condizione perché l'operatore ternario produce un valore
+console.log(`I like to drink ${age >= 18 ? "wine" : "water"}`); // forma estesa
+console.log(`I like to drink ${drink}`); // forma contratta se dichiaro una variabile con operatore ternario
