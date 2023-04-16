@@ -57,6 +57,7 @@ console.log(typeof year, year);
 console.log(typeof null);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 3: let, const and var (Sez. 2, lez. 13)
 let age = 30;
@@ -74,3 +75,45 @@ job = "teacher";
 // JS consente di creare una variabile senza dichiarare il tipo di variabile, ma NON si dovrebbe MAI fare perché JS crea la variabile nell'intero OGGETTO GLOBALE e non solamente nello SCOPE CORRENTE
 lastName = "Schmedtmann";
 console.log(lastName);
+*/
+
+///////////////////////////////////////////////
+// LEZIONE 4: Basic Operators (Sez. 2, lez. 14)
+// const ageJonas = 2037 - 1991;
+// const ageSarah = 2037 - 2018;
+// console.log(ageJonas, ageSarah) // 46, 19
+// Ma stiamo ripetendo 2 volte lo stesso numero, per cui creiamo una variabile per definire l'anno corrente
+
+// Operatori matematici (math operators):
+const now = 2037;
+const ageJonas = now - 1991;
+const ageSarah = now - 2018;
+console.log(ageJonas, ageSarah); // 46, 19
+
+console.log(ageJonas * 2, ageJonas / 10, 2 ** 3);
+// 2 ** 3 significa 2 alla potenza di 3 = 2 * 2 * 2 (2 alla 3a)
+
+// Operatore + per le stringhe --> concatenazione di 2 o più stringhe:
+const firstName = "Jonas";
+const lastName = "Schmedtmann";
+console.log(firstName + " " + lastName); // creo stringa con spazio vuoto per creare uno spazio tra firstName e lastName
+
+// Operatore typeof già affrontato in LEZIONE 2
+
+// Operatori di assegnazione (assignments operator):
+let x = 10 + 5; // 15
+x += 10; // x = x + 10 --> x = 15 + 10 = 25
+x *= 4; // x = x * 4 --> x = 25 * 4 = 100
+x++; // x = x + 1 --> x = 100 + 1 = 101
+x--; // x = 100
+x--; // x = 99
+console.log(x);
+
+// Operatori di confronto (comparison operator: >, <, >=, <=) per produrre valori BOOLEANI (true or false):
+console.log(ageJonas > ageSarah); // true
+console.log(ageSarah >= 18); // true
+
+const isFullAge = ageSarah >= 18; // variabile che restituisce un valore booleano come risultato (true in questo caso)
+
+// Operatori matematici + operatori di confronto:
+console.log(now - 1991 > now - 2018); // true perché 46 > 19 --> JS sa automaticamente eseguire prima le operazioni matematiche e poi quelle di confronto
