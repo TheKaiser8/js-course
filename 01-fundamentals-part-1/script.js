@@ -120,6 +120,7 @@ const isFullAge = ageSarah >= 18; // variabile che restituisce un valore boolean
 console.log(now - 1991 > now - 2018); // true perché 46 > 19 --> JS sa automaticamente eseguire prima le operazioni matematiche e poi quelle di confronto
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 5: Operator Precedence (Sez. 2, lez. 15)
 const now = 2037;
@@ -137,3 +138,4 @@ console.log(x, y);
 
 const averageAge = (ageJonas + ageSarah) / 2;
 console.log(ageJonas, ageSarah, averageAge);
+*/
