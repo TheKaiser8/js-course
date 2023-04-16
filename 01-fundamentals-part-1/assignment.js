@@ -108,6 +108,7 @@ if (populationItaly > 33) {
 }
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 8: Type Conversion and Coercion (Sez. 2, lez. 20)
 // 1. Predict the result of these 5 operations without executing them:
@@ -117,3 +118,4 @@ if (populationItaly > 33) {
 "123" < 57; // false
 5 + 6 + "4" + 9 - 4 - 2; // 1143
 // 2. Execute the operations to check if you were right
+*/

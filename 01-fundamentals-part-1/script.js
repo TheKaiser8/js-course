@@ -202,6 +202,7 @@ if (birthYear <= 2000) {
 console.log(century);
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 8: Type Conversion and Coercion (Sez. 2, lez. 20)
 
@@ -240,3 +241,28 @@ console.log(n);
 
 // 2+3+4+'5' = 9+'5' = "95"
 // '10'-'4'-'3'-2+'5' = "15"
+*/
+
+// LEZIONE 9: Truthy and Falsy Values (Sez. 2, lez. 21)
+// In JS esistono solo 5 valori FALSI (falsy value): 0, empty string "", undefined, null e NaN (not a number)
+console.log(Boolean(0)); // false
+console.log(Boolean(undefined)); // false
+console.log(Boolean("Jonas")); // true
+console.log(Boolean({})); // ---> oggetto vuoto: true
+console.log(Boolean("")); // false
+// la funzione Boolean (trasformazione in valore booleano) non è mai utilizzata in pratica, qui è utlizzata per spiegare i valori veri o falsi
+
+const money = 1;
+// in un'istruzione if/else JS forzerà qualsiasi variabile per convertirla in una di tipo booleano
+if (money) {
+  console.log("Don't spend it all ;)");
+} else {
+  console.log("You should get a job!");
+}
+
+let height;
+if (height) {
+  console.log("YAY! Height is defined");
+} else {
+  console.log("Height is UNDEFINED");
+}
