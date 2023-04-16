@@ -318,6 +318,7 @@ if (favourite !== 23) console.log("Why not 23?");
 // AND, OR & NOT OPERATORS
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 12: Logical Operators (Sez. 2, lez. 24)
 const hasDriversLicense = true; // A
@@ -346,3 +347,4 @@ if (hasDriversLicense && hasGoodVision && !isTired) {
 } else {
   console.log("Someone else should drive");
 }
+*/

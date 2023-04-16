@@ -145,6 +145,7 @@ if (numNeighbours === 1) {
 }
 */
 
+/*
 ///////////////////////////////////////////////
 // LEZIONE 12: Logical Operators (Sez. 2, lez. 24)
 // 1. Comment out the previous code so the prompt doesn't get in the way
@@ -163,3 +164,4 @@ if (population < 50 && language === "english" && !isIsland) {
 } else {
   console.log(`L'${country} non soddisfa i tuoi criteri`);
 }
+*/
