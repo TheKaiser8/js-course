@@ -440,6 +440,7 @@ for (let i = 0; i < jonas.length; i++) {
 }
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 14: Looping Backwards and Loops in Loops (Sez. 3, lez. 48)
 const jonas = [
@@ -463,4 +464,34 @@ for (let exercise = 1; exercise < 4; exercise++) {
   for (let rep = 1; rep <= 5; rep++) {
     console.log(`Exercise ${exercise}: lifting weight repetition ${rep} 🏋️`);
   }
+}
+*/
+
+//////////////////////////////////
+// LEZIONE 15: The while Loop (Sez. 3, lez. 49)
+// console.log('--- FOR LOOP ---');
+// for (let rep = 1; rep <= 10; rep++) {
+//     console.log(`Lifting weights repetition ${rep} 🏋️`);
+// }
+
+// while loop: possiamo specificare solo un condizione (è più versatile del ciclo for perché non ha bisogno necessariamente di un contatore, è indispensabile solo la condizione che deve essere vera per continuare a funzionare)
+console.log("--- WHILE LOOP ---");
+let rep = 1;
+while (rep <= 10) {
+  console.log(`Lifting weights repetition ${rep} 🏋️`);
+  rep++;
+}
+
+// esempio che non dipende da un contatore ma solamente da una variabile casuale (non sappiamo quando dovrà finire il ciclo --> WHILE LOOP)
+// DESCRIZIONE: programma che lancia i dadi fino a che non esce 6
+console.log("--- PROGRAMMA LANCIO DADI ---");
+let diceDecimal01 = Math.random(); // numero casuale tra 0 e 1 con decimali
+let diceDecimal16 = Math.random() * 6; // numero casuale tra 0 e 5 con decimali
+let dice = Math.trunc(Math.random() * 6) + 1; // numero casuale tra 1 e 6
+console.log(diceDecimal01, diceDecimal16, dice);
+
+while (dice !== 6) {
+  console.log(`You rolled a ${dice}`); // se avessimo solo questa riga di codice, a questo punto (se non uscisse il numero 6) sarebbe un ciclo infinito e il browser andrebbe in crash
+  dice = Math.trunc(Math.random() * 6) + 1; // numero casuale tra 1 e 6
+  if (dice === 6) console.log(`Loop is about to end... You rolled a ${dice}!`);
 }
