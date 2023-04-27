@@ -147,6 +147,7 @@ function fruitProcessor(apples, oranges) {
 console.log(fruitProcessor(2, 3));
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 6: Reviewing Functions (Sez. 3, lez. 37)
 const calcAge = function (birthYear) {
@@ -168,3 +169,4 @@ const yearUntilRetirement = function (birthYear, firstName) {
 };
 console.log(yearUntilRetirement(1991, "Jonas"));
 console.log(yearUntilRetirement(1970, "Mike"));
+*/
