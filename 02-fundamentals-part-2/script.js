@@ -127,6 +127,7 @@ console.log(yearUntilRetirement(1980, "Bob"));
 // Una differenza molto importante tra le funzioni (declarations, expressions e arrows) è che le ARROW FUNCTIONS non ottengono la parola chiave THIS
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 5: Functions Calling Other Functions (Sez. 3, lez. 36)
 // function cutFruitPieces(fruit) {
@@ -144,3 +145,26 @@ function fruitProcessor(apples, oranges) {
 }
 
 console.log(fruitProcessor(2, 3));
+*/
+
+//////////////////////////////////
+// LEZIONE 6: Reviewing Functions (Sez. 3, lez. 37)
+const calcAge = function (birthYear) {
+  return 2037 - birthYear;
+};
+
+const yearUntilRetirement = function (birthYear, firstName) {
+  const age = calcAge(birthYear);
+  const retirement = 65 - age; // anni mancanti al pensionamento
+
+  if (retirement > 0) {
+    console.log(`${firstName} retires in ${retirement} years`);
+    return retirement;
+  } else {
+    console.log(`${firstName} has already retired!`);
+    return -1; // numero standard di ritorno per indicarci che non ha significato
+  }
+  // return `${firstName} retires in ${retirement} years`;
+};
+console.log(yearUntilRetirement(1991, "Jonas"));
+console.log(yearUntilRetirement(1970, "Mike"));

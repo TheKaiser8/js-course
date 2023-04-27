@@ -76,6 +76,7 @@ console.log(
 );
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 5: Functions Calling Other Functions (Sez. 3, lez. 36)
 // 1. Create a function called 'describePopulation'. Use the function type you like the most. This function takes in two arguments: 'country' and 'population', and returns a string like this: 'China has 1441 million people, which is about 18.2% of the world.'
@@ -97,3 +98,4 @@ const descChina = describePopulation("China", 1441);
 console.log(descChina);
 const descUSA = describePopulation("USA", 331.9);
 console.log(descUSA);
+*/
