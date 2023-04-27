@@ -376,3 +376,12 @@ console.log(jonas.age);
 // "Jonas is a 46-year old teacher, and he has a driver's license"
 console.log(jonas.getSummary());
 */
+
+//////////////////////////////////
+// LEZIONE 12: Iteration: The for Loop (Sez. 3, lez. 46)
+// Come if.. else, anche i loops sono strutture di controllo
+
+// for loop keeps running while condition is TRUE
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep} 🏋️`);
+}

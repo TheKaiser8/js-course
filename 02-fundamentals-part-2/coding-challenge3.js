@@ -9,6 +9,7 @@
 
 // Test data: Marks weights 78 kg and is 1.69 m tall. John weights 92 kg and is 1.95 m tall.
 
+/*
 const mark = {
   fullName: "Mark Miller",
   mass: 78,
@@ -50,3 +51,4 @@ if (mark.BMI > john.BMI) {
     }'s BMI (${mark.BMI.toFixed(1)})!`
   );
 }
+*/
