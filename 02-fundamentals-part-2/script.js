@@ -16,6 +16,7 @@ if (hasDriversLicense) console.log("I can drive");
 // const private = 534;
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 2: Functions (Sez. 3, lez. 33)
 // Function: pezzo di codice che possiamo riutilizzare più volte e che può ricevere o restituire dati
@@ -50,3 +51,39 @@ console.log(appleOrangeJuice);
 // Number: funzione che converte una stringa in un numero
 const num = Number("23");
 console.log(num);
+*/
+
+//////////////////////////////////
+// LEZIONE 3: Function Declarations vs. Expressions (Sez. 3, lez. 34)
+// In JS le FUNZIONI sono in realtà solo valori che possiamo o meno memorizzare in variabili
+
+// Esempio di FUNCTION DECLARATION:
+// function calcAge1(birthYear) {
+//     // const age = 2037 - birthYear;
+//     // return age;
+//     // dobbiamo solamente restituire un valore, per cui non è necessario creare una variabile
+//     return 2037 - birthYear;
+// }
+
+// const age1 = calcAge1(1991);
+// console.log(age1);
+
+// Esempio di FUNCTION EXPRESSION (funzione senza un nome assegnato, FUNZIONE ANONIMA):
+const calcAge2 = function (birthYear) {
+  return 2037 - birthYear;
+};
+
+const age2 = calcAge2(1991);
+console.log(age2);
+
+// DIFFERENZA PRINCIPALE tra FUNCTION DECLARATION e FUNCTION EXPRESSION: le FUNCTION DECLARATION possono essere chiamate prima che vengano definite nel codice
+
+// Quindi la funzione calcAge1 può essere scritta in questo modo:
+const age1 = calcAge1(1991); // posso richiamarla prima di definirla
+console.log(age1);
+
+function calcAge1(birthYear) {
+  return 2037 - birthYear; // posso definirla dopo averla richiamata
+}
+
+// si possono utilizzare le 2 tipologie di FUNZIONI in base alla propria preferenza, la cosa importante è conoscerle e saperle riconoscere
