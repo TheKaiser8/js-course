@@ -388,6 +388,7 @@ for (let rep = 1; rep <= 10; rep++) {
 }
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 13: Looping Arrays, Breaking and Continuing (Sez. 3, lez. 47)
 const jonas = [
@@ -436,4 +437,30 @@ for (let i = 0; i < jonas.length; i++) {
   if (typeof jonas[i] === "number") break; // il ciclo viene terminato appena viene trovato un numero
 
   console.log(jonas[i], typeof jonas[i]);
+}
+*/
+
+//////////////////////////////////
+// LEZIONE 14: Looping Backwards and Loops in Loops (Sez. 3, lez. 48)
+const jonas = [
+  "Jonas",
+  "Schmedtmann",
+  2037 - 1991,
+  "teacher",
+  ["Michael", "Steven", "Peter"],
+  true,
+];
+
+// backwards for loop: ciclo for sugli elementi di un array partendo dall'ultimo elemento
+for (let i = jonas.length - 1; i >= 0; i--) {
+  console.log(i, jonas[i]);
+}
+
+// loop inside in loop: 3 esercizi con 5 ripetizioni ciascuno
+for (let exercise = 1; exercise < 4; exercise++) {
+  console.log(`--------- Starting exercise ${exercise}`);
+
+  for (let rep = 1; rep <= 5; rep++) {
+    console.log(`Exercise ${exercise}: lifting weight repetition ${rep} 🏋️`);
+  }
 }
