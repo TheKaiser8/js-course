@@ -377,6 +377,7 @@ console.log(jonas.age);
 console.log(jonas.getSummary());
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 12: Iteration: The for Loop (Sez. 3, lez. 46)
 // Come if.. else, anche i loops sono strutture di controllo
@@ -384,4 +385,55 @@ console.log(jonas.getSummary());
 // for loop keeps running while condition is TRUE
 for (let rep = 1; rep <= 10; rep++) {
   console.log(`Lifting weights repetition ${rep} 🏋️`);
+}
+*/
+
+//////////////////////////////////
+// LEZIONE 13: Looping Arrays, Breaking and Continuing (Sez. 3, lez. 47)
+const jonas = [
+  "Jonas",
+  "Schmedtmann",
+  2037 - 1991,
+  "teacher",
+  ["Michael", "Steven", "Peter"],
+  true,
+];
+
+const types = [];
+
+for (let i = 0; i < jonas.length; i++) {
+  // reading from jonas array
+  console.log(jonas[i], typeof jonas[i]); // l'array è effettivamente un oggetto
+
+  // filling types array (riempire l'array dei tipi)
+  // types[i] = typeof jonas [i]; // MODO 1
+  types.push(typeof jonas[i]); // MODO 2 (PUSH METHOD)
+}
+
+console.log(types);
+
+// for loop years array and push in ages array
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+  ages.push(2037 - years[i]);
+}
+console.log(ages);
+
+// statement continue & break statement
+// CONTINUE viene utilizzato per interrompere l'interazione corrente del ciclo e continuare con quella successiva
+console.log("--- ONLY STRINGS ---");
+for (let i = 0; i < jonas.length; i++) {
+  if (typeof jonas[i] !== "string") continue; // se non sono stringhe il ciclo continua e non vengono stampate in console (con CONTINUE vengono saltati i valori che non rispettano la condizione)
+
+  console.log(jonas[i], typeof jonas[i]);
+}
+
+console.log("--- BREAK AFTER NUMBER ---");
+// BREAK viene utilizzato per terminare completamente l'intero ciclo
+for (let i = 0; i < jonas.length; i++) {
+  if (typeof jonas[i] === "number") break; // il ciclo viene terminato appena viene trovato un numero
+
+  console.log(jonas[i], typeof jonas[i]);
 }
