@@ -263,6 +263,7 @@ if (friends.includes("Steven")) {
 }
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 9: Introduction to Objects (Sez. 3, lez. 42)
 // OBJECTS: struttura dati che ci permette di dare un nome ad ogni valore (coppia CHIAVE-VALORE)
@@ -276,3 +277,52 @@ const jonas = {
 // ogni chiave è anche definita PROPRIETà (property), quindi questo OGGETTO ha 5 PROPRIETà
 
 // ***A differenza degli array, negli OGGETTI l'ordine delle proprietà NON è importante!
+*/
+
+//////////////////////////////////
+// LEZIONE 10: Dot vs. Bracket Notation (Sez. 3, lez. 43)
+const jonas = {
+  firstName: "Jonas",
+  lastName: "Schmedtmann",
+  age: 2037 - 1991,
+  job: "teacher",
+  friends: ["Michael", "Steven", "Peter"],
+};
+console.log(jonas);
+
+// RECUPERO E ACCESSO DATI OGGETTO:
+console.log(jonas.lastName); // DOT NOTATION
+console.log(jonas["lastName"]); // BRACKET NOTATION (necessario specificare una stringa con il nome della proprietà)
+
+// ***Utilizzando la BRACKET NOTATION possiamo utilizzare un'espressione tra le parentesi per, ad esempio, calcolare il valore di una stringa (come una concatenazione)
+const nameKey = "Name"; // parte ripetuta di 2 proprietà (firstName e lastName)
+console.log(jonas["first" + nameKey]); // tra le square bracket posso mettere un'espressione
+console.log(jonas["last" + nameKey]);
+
+const interestedIn = prompt(
+  "What do you want to know about Jonas? Choose between firstName, lastName, age, job and friends"
+);
+console.log(jonas.interestedIn); // undefined viene visualizzato in console quando tentiamo di accedere ad una proprietà di un oggetto che non esiste (undefined è un valore falso)
+
+// Con la BRACKET NOTATION riusciamo ad ottenere la proprietà che ci interessa:
+console.log(jonas[interestedIn]); // in questo modo JS sostituisce interestedIn con il valore effettivo della variabile che sarà il valore cercato nell'oggetto Jonas
+
+// Creo una condizione per visualizzare in console una risposta consona al valore inserito nel prompt
+if (jonas[interestedIn]) {
+  console.log(jonas[interestedIn]);
+} else {
+  console.log(
+    "Wrong request! Choose between firstName, lastName, age, job and friends"
+  );
+}
+
+// AGGIUNGERE DATI OGGETTO:
+jonas.location = "Portugal"; // DOT NOTATION
+jonas["twitter"] = "@jonasschmedtman"; // BRACKET NOTATION
+console.log(jonas);
+
+// CHALLENGE
+// Jonas has 3 friends, and his best friend is called Michael
+console.log(
+  `${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`
+);

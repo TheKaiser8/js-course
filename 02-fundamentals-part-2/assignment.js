@@ -149,6 +149,7 @@ neighbours[neighbours.indexOf("Slovenia")] = "Republic of Slovenia"; // in una r
 console.log(neighbours);
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 9: Introduction to Objects (Sez. 3, lez. 42)
 // 1. Create an object called 'myCountry' for a country of your choice, containing properties 'country', 'capital', 'language', 'population' and 'neighbours' (an array like we used in previous assignments)
@@ -162,3 +163,32 @@ const myCountry = {
 };
 
 console.log(myCountry);
+*/
+
+//////////////////////////////////
+// LEZIONE 10: Dot vs. Bracket Notation (Sez. 3, lez. 43)
+// 1. Using the object from the previous assignment, log a string like this to the console: 'Finland has 6 million finnish-speaking people, 3 neighbouring countries and a capital called Helsinki.'
+// 2. Increase the country's population by two million using dot notation, and then decrease it by two million using brackets notation.
+
+const myCountry = {
+  country: "Italy",
+  capital: "Rome",
+  language: "italian",
+  population: 59.3,
+  neighbours: ["Switzerland", "France", "Austria", "Slovenia"],
+};
+
+console.log(
+  `${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}.`
+);
+
+// SOLUZIONE 1: aumento o decremento in base al valore originale
+// console.log(myCountry.population + 2);
+// console.log(myCountry['population'] - 2);
+
+// SOLUZIONE 2: aumento o decremento in base all'ultimo valore di population
+myCountry.population += 2;
+console.log(myCountry.population);
+
+myCountry["population"] -= 2;
+console.log(myCountry.population);
