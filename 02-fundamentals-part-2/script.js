@@ -171,6 +171,7 @@ console.log(yearUntilRetirement(1991, "Jonas"));
 console.log(yearUntilRetirement(1970, "Mike"));
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 7: Introduction to Arrays (Sez. 3, lez. 39)
 // ARRAY: struttura dati che funge da contenitore di valori
@@ -218,3 +219,44 @@ console.log(age1, age2, age3);
 // const ages = [calcAge(years2[0]), calcAge(years2[1]), calcAge(years2[years2.length - 1])] // posso creare un array anche con le funzioni di espressioni perchè producono un valore
 const ages = [age1, age2, age3]; // creo array con le età calcolate
 console.log(ages);
+*/
+
+//////////////////////////////////
+// LEZIONE 8: Basic Array Operations (Methods) (Sez. 3, lez. 40)
+const friends = ["Michael", "Steven", "Peter"];
+
+// ADD ELEMENT:
+// PUSH METHOD: funzione che permette di aggiungere elementi alla FINE DI un ARRAY
+// friends.push('Jay');
+console.log(friends);
+// Il metodo push restituisce un valore, quindi se ci serve il valore della LUNGHEZZA dell'array possiamo memorizzare il dato in una variabile
+const newLength = friends.push("Jay");
+console.log(newLength);
+
+// UNSHIFT METHOD: funzione che permette di aggiungere elementi all'INIZIO di un ARRAY
+friends.unshift("John"); // salvato in variabile restituisce la LUNGHEZZA dell'array
+console.log(friends);
+
+// REMOVE ELEMENT
+// POP METHOD: funzione che permette di eliminare l'ULTIMO ELEMENTO di un ARRAY
+// friends.pop(); // remove LAST
+const popped = friends.pop(); // memorizzato in variabile restituisce l'ELEMENTO RIMOSSO
+console.log(popped);
+console.log(friends);
+
+// SHIFT METHOD: funzione che permette di eliminare il PRIMO ELEMENTO di un ARRAY
+friends.shift(); // remove FIRST, come il metodo pop memorizzato in variabile restituisce l'ELEMENTO RIMOSSO
+console.log(friends);
+
+// FIND INDEX/ELEMENT
+// INDEXOF METHOD: funzione che permette di ricavare l'INDICE di un elemento di un array
+console.log(friends.indexOf("Steven")); // 1
+console.log(friends.indexOf("Bob")); // -1, indice di un elemento che NON ESISTE
+
+// INCLUDES METHOD: funzione che permette di verificare se un elemento di un array è PRESENTE (TRUE) o NO (FALSE) => restituisce un valore BOOLEANO
+console.log(friends.includes("Steven")); // true
+console.log(friends.includes("Bob")); // false
+// includes method esegue un'uguaglianza rigorosa (STRICT EQUALITY) e viene utilizzato per creare delle condizioni
+if (friends.includes("Steven")) {
+  console.log("You have a friend called Steven");
+}
