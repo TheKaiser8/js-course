@@ -23,6 +23,7 @@ console.log(finland);
 // non fatto un console.log unico per non avere una stringa unica
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 3: Function Declarations vs. Expressions (Sez. 3, lez. 34)
 // 1. The world population is 7900 million people. Create a function declaration called 'percentageOfWorld1' which receives a 'population' value, and returns the percentage of the world population that the given population represents. For example, China has 1441 million people, so it's about 18.2% of the world population
@@ -54,4 +55,21 @@ const percFinland = percentageOfWorld2(6);
 
 console.log(
   `% con Function EXPRESSION: Russia: ${percRussia}, Germania: ${percGermany}, Finlandia: ${percFinland}`
+);
+*/
+
+//////////////////////////////////
+// LEZIONE 4: Arrow Functions (Sez. 3, lez. 35)
+// 1. Recreate the last assignment, but this time create an arrow function called 'percentageOfWorld3'
+
+// ARROW FUNCTIONS:
+const percentageOfWorld3 = (population) =>
+  ((population / 7900) * 100).toFixed(2);
+
+const percRussia = percentageOfWorld3(143.4);
+const percGermany = percentageOfWorld3(83.2);
+const percFinland = percentageOfWorld3(6);
+
+console.log(
+  `% con ARROW FUNCTION: Russia: ${percRussia}, Germania: ${percGermany}, Finlandia: ${percFinland}`
 );

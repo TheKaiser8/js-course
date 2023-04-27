@@ -53,6 +53,7 @@ const num = Number("23");
 console.log(num);
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 3: Function Declarations vs. Expressions (Sez. 3, lez. 34)
 // In JS le FUNZIONI sono in realtà solo valori che possiamo o meno memorizzare in variabili
@@ -87,3 +88,39 @@ function calcAge1(birthYear) {
 }
 
 // si possono utilizzare le 2 tipologie di FUNZIONI in base alla propria preferenza, la cosa importante è conoscerle e saperle riconoscere
+*/
+
+//////////////////////////////////
+// LEZIONE 4: Arrow Functions (Sez. 3, lez. 35)
+// ARROW FUNCTIONS: sono function expressions in forma contratta, introdotte da ES6
+
+// Function EXPRESSION:
+const calcAge2 = function (birthYear) {
+  return 2037 - birthYear;
+};
+
+// ARROW FUNCTION: la funzione return è implicita e viene scritta in una sola riga quando è semplice (con poco codice e un parametro solo)
+const calcAge3 = (birthYear) => 2037 - birthYear;
+const age3 = calcAge3(1991);
+console.log(age3);
+
+// ARROW FUNCTION con più righe di codice e 1 PARAMETRO solo
+// const yearUntilRetirement = birthYear => {
+//     const age = 2037 - birthYear;
+//     const retirement = 65 - age; // anni mancanti al pensionamento
+//     return retirement;
+// }
+
+// console.log(yearUntilRetirement(1991));
+
+// ARROW FUNCTION con più righe di codice e PIù PARAMETRI
+const yearUntilRetirement = (birthYear, firstName) => {
+  const age = 2037 - birthYear;
+  const retirement = 65 - age; // anni mancanti al pensionamento
+  return `${firstName} retires in ${retirement} years`;
+};
+
+console.log(yearUntilRetirement(1991, "Jonas"));
+console.log(yearUntilRetirement(1980, "Bob"));
+
+// Una differenza molto importante tra le funzioni (declarations, expressions e arrows) è che le ARROW FUNCTIONS non ottengono la parola chiave THIS
