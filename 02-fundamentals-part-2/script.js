@@ -329,6 +329,7 @@ console.log(
 );
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 11: Object Methods (Sez. 3, lez. 44)
 const jonas = {
@@ -374,3 +375,4 @@ console.log(jonas.age);
 // CHALLENGE:
 // "Jonas is a 46-year old teacher, and he has a driver's license"
 console.log(jonas.getSummary());
+*/

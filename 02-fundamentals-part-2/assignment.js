@@ -195,6 +195,7 @@ myCountry["population"] -= 2;
 console.log(myCountry.population);
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 11: Object Methods (Sez. 3, lez. 44)
 // 1. Add a method called 'describe' to the 'myCountry' object. This method will log a string to the console, similar to the string logged in the previous assignment, but this time using the 'this' keyword.
@@ -255,3 +256,4 @@ const myCountry = {
 myCountry.describe();
 myCountry.checkIsland();
 console.log(myCountry);
+*/
