@@ -467,6 +467,7 @@ for (let exercise = 1; exercise < 4; exercise++) {
 }
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 15: The while Loop (Sez. 3, lez. 49)
 // console.log('--- FOR LOOP ---');
@@ -495,3 +496,4 @@ while (dice !== 6) {
   dice = Math.trunc(Math.random() * 6) + 1; // numero casuale tra 1 e 6
   if (dice === 6) console.log(`Loop is about to end... You rolled a ${dice}!`);
 }
+*/

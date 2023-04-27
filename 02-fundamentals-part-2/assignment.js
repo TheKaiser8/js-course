@@ -323,6 +323,7 @@ for (let i = 0; i < listOfNeighbours.length; i++) {
 }
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 15: The while Loop (Sez. 3, lez. 49)
 // 1. Recreate the challenge from the lecture 'Looping Arrays, Breaking and Continuing', but this time using a while loop (call the array 'percentages3')
@@ -342,3 +343,4 @@ while (i < populations.length) {
   i++;
 }
 console.log(percentages3);
+*/
