@@ -99,3 +99,22 @@ console.log(descChina);
 const descUSA = describePopulation("USA", 331.9);
 console.log(descUSA);
 */
+
+//////////////////////////////////
+// LEZIONE 7: Introduction to Arrays (Sez. 3, lez. 39)
+// 1. Create an array containing 4 population values of 4 countries of your choice. You may use the values you have been using previously. Store this array into a variable called 'populations'
+// 2. Log to the console whether the array has 4 elements or not (true or false)
+// 3. Create an array called 'percentages' containing the percentages of the world population for these 4 population values. Use the function 'percentageOfWorld1' that you created earlier to compute the 4 percentage values
+
+const populations = [59, 1441, 331.9, 143.4];
+console.log(populations.length === 4); // ottengo un valore booleano (true se === 4, false in caso contrario)
+
+const percentageOfWorld1 = (population) =>
+  ((population / 7900) * 100).toFixed(2);
+const percItaly = percentageOfWorld1(populations[0]);
+const percChina = percentageOfWorld1(populations[1]);
+const percUSA = percentageOfWorld1(populations[2]);
+const percRussia = percentageOfWorld1(populations[populations.length - 1]);
+
+const percentages = [percItaly, percChina, percUSA, percRussia];
+console.log(percentages);

@@ -170,3 +170,51 @@ const yearUntilRetirement = function (birthYear, firstName) {
 console.log(yearUntilRetirement(1991, "Jonas"));
 console.log(yearUntilRetirement(1970, "Mike"));
 */
+
+//////////////////////////////////
+// LEZIONE 7: Introduction to Arrays (Sez. 3, lez. 39)
+// ARRAY: struttura dati che funge da contenitore di valori
+
+const friend1 = "Michael";
+const friend2 = "Steven";
+const friend3 = "Peter";
+
+const friends = ["Michael", "Steven", "Peter"]; // literal syntax
+console.log(friends);
+
+// Altro modo per creare un ARRAY: utilizzando la funzione new Array
+const years = new Array(1991, 1984, 2008, 2020);
+console.log(years);
+
+console.log(friends[0]); // gli ARRAY sono a base 0, pertanto il primo elemento è il numero 0 (Michael)
+console.log(friends[2]); // Peter
+
+console.log(friends.length); // numero elemento di un ARRAY, NON è in base 0, quindi indica il numero effettivo di elementi
+console.log(friends[friends.length - 1]); // per ricavare l'ultimo elemento di un ARRAY
+
+friends[2] = "Jay"; // per mutare/cambiare un elemento di un ARRAY
+console.log(friends);
+// Nonostante l'ARRAY sia stato dichiarato come variabile CONST, è stato possibile modificarlo perché un ARRAY non è un valore primitivo (primitive value)
+
+// Quello che NON è possibile fare è modificare l'intero ARRAY, infatti risulta illegale
+// friends = ['Bob', 'Alice'];
+
+// ARRAY con valori di tipologie differenti:
+const firstName = "Jonas";
+const jonas = [firstName, "Schmedtmann", 2037 - 1991, "teacher", friends]; // inserendo friends si inserisce un ARRAY dentro un ARRAY
+console.log(jonas);
+console.log(jonas.length);
+
+// Exercise
+const calcAge = (birthYear) => 2037 - birthYear;
+const years2 = [1990, 1967, 2002, 2010, 2018];
+
+const age1 = calcAge(years2[0]);
+const age2 = calcAge(years2[1]);
+const age3 = calcAge(years2[years2.length - 1]);
+
+console.log(age1, age2, age3);
+
+// const ages = [calcAge(years2[0]), calcAge(years2[1]), calcAge(years2[years2.length - 1])] // posso creare un array anche con le funzioni di espressioni perchè producono un valore
+const ages = [age1, age2, age3]; // creo array con le età calcolate
+console.log(ages);
