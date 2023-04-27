@@ -279,6 +279,7 @@ const jonas = {
 // ***A differenza degli array, negli OGGETTI l'ordine delle proprietà NON è importante!
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 10: Dot vs. Bracket Notation (Sez. 3, lez. 43)
 const jonas = {
@@ -326,3 +327,50 @@ console.log(jonas);
 console.log(
   `${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`
 );
+*/
+
+//////////////////////////////////
+// LEZIONE 11: Object Methods (Sez. 3, lez. 44)
+const jonas = {
+  firstName: "Jonas",
+  lastName: "Schmedtmann",
+  birthYear: 1991,
+  job: "teacher",
+  friends: ["Michael", "Steven", "Peter"],
+  hasDriversLicense: true,
+
+  // ottenendo un valore con una funzione, possiamo far sì che la proprietà di un oggetto abbia come valore il risultato di una funzione (ogni funzione collegata ad un OGGETTO è definita METODO)
+  // *** Un METODO è in realtà anche una PROPRIETà
+  // calcAge: function(birthYear) {
+  //     return 2037 - birthYear;
+  // }
+
+  // utilizzando una speciale variabile (this) possiamo rendere il codice meno ripetitivo ("don't repeat yourself(DRY)")
+  // calcAge: function() {
+  //     return 2037 - this.birthYear;
+  // }
+
+  // se abbiamo bisogno di utilizzare/richiamare il dato più volte, è opportuno salvarlo in una variabile per non eseguire più volte il calcolo attraverso la funzione:
+  calcAge: function () {
+    this.age = 2037 - this.birthYear; // creo una nuova proprietà di questo oggetto utilizzando il metodo this
+    return this.age;
+  },
+
+  getSummary: function () {
+    return `${this.firstName} is a ${this.calcAge()}-year old ${
+      this.job
+    }, and he has ${this.hasDriversLicense ? "a" : "no"} driver's license.`; // utilizzo il metodo calcAge invece di richiamare la proprietà age perché non posso presumere che sia stato già richiamato prima il metodo calcAge, quindi la proprietà age potrebbe non esistere ancora
+  },
+};
+console.log(jonas.calcAge(1991)); // DOT NOTATION
+console.log(jonas["calcAge"](1991)); // BRACKET NOTATION
+
+// con metodo THIS: possiamo leggere direttamente il dato contenuto nell'oggetto senza passare alcun parametro
+console.log(jonas.calcAge()); // Jonas è l'oggetto che sta chiamando il metodo calcAge
+
+// creando una variabile AGE per avere la soluzione più EFFICIENTE:
+console.log(jonas.age);
+
+// CHALLENGE:
+// "Jonas is a 46-year old teacher, and he has a driver's license"
+console.log(jonas.getSummary());
