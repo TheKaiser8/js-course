@@ -262,3 +262,17 @@ if (friends.includes("Steven")) {
   console.log("You have a friend called Steven");
 }
 */
+
+//////////////////////////////////
+// LEZIONE 9: Introduction to Objects (Sez. 3, lez. 42)
+// OBJECTS: struttura dati che ci permette di dare un nome ad ogni valore (coppia CHIAVE-VALORE)
+const jonas = {
+  firstName: "Jonas",
+  lastName: "Schmedtmann",
+  age: 2037 - 1991,
+  job: "teacher",
+  friends: ["Michael", "Steven", "Peter"],
+};
+// ogni chiave è anche definita PROPRIETà (property), quindi questo OGGETTO ha 5 PROPRIETà
+
+// ***A differenza degli array, negli OGGETTI l'ordine delle proprietà NON è importante!

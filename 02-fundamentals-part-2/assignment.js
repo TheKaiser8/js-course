@@ -148,3 +148,17 @@ if (!neighbours.includes("Germany")) {
 neighbours[neighbours.indexOf("Slovenia")] = "Republic of Slovenia"; // in una riga sola
 console.log(neighbours);
 */
+
+//////////////////////////////////
+// LEZIONE 9: Introduction to Objects (Sez. 3, lez. 42)
+// 1. Create an object called 'myCountry' for a country of your choice, containing properties 'country', 'capital', 'language', 'population' and 'neighbours' (an array like we used in previous assignments)
+
+const myCountry = {
+  country: "Italy",
+  capital: "Rome",
+  language: "italian",
+  population: 59.3,
+  neighbours: ["Switzerland", "France", "Austria", "Slovenia"],
+};
+
+console.log(myCountry);
