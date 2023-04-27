@@ -221,6 +221,7 @@ const ages = [age1, age2, age3]; // creo array con le età calcolate
 console.log(ages);
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 8: Basic Array Operations (Methods) (Sez. 3, lez. 40)
 const friends = ["Michael", "Steven", "Peter"];
@@ -260,3 +261,4 @@ console.log(friends.includes("Bob")); // false
 if (friends.includes("Steven")) {
   console.log("You have a friend called Steven");
 }
+*/

@@ -121,6 +121,7 @@ const percentages = [percItaly, percChina, percUSA, percRussia];
 console.log(percentages);
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 8: Basic Array Operations (Methods) (Sez. 3, lez. 40)
 // 1. Create an array containing all the neighbouring countries of a country of your choice. Choose a country which has at least 2 or 3 neighbours. Store the array into a variable called 'neighbours'
@@ -146,3 +147,4 @@ if (!neighbours.includes("Germany")) {
 
 neighbours[neighbours.indexOf("Slovenia")] = "Republic of Slovenia"; // in una riga sola
 console.log(neighbours);
+*/
