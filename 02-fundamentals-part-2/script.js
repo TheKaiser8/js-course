@@ -90,6 +90,7 @@ function calcAge1(birthYear) {
 // si possono utilizzare le 2 tipologie di FUNZIONI in base alla propria preferenza, la cosa importante è conoscerle e saperle riconoscere
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 4: Arrow Functions (Sez. 3, lez. 35)
 // ARROW FUNCTIONS: sono function expressions in forma contratta, introdotte da ES6
@@ -124,3 +125,22 @@ console.log(yearUntilRetirement(1991, "Jonas"));
 console.log(yearUntilRetirement(1980, "Bob"));
 
 // Una differenza molto importante tra le funzioni (declarations, expressions e arrows) è che le ARROW FUNCTIONS non ottengono la parola chiave THIS
+*/
+
+//////////////////////////////////
+// LEZIONE 5: Functions Calling Other Functions (Sez. 3, lez. 36)
+// function cutFruitPieces(fruit) {
+//     return fruit * 4;
+// }
+
+const cutFruitPieces = (fruit) => fruit * 4; // con ARROW FUNCTION
+
+function fruitProcessor(apples, oranges) {
+  const applePieces = cutFruitPieces(apples);
+  const orangePieces = cutFruitPieces(oranges);
+
+  const juice = `Juice with ${applePieces} pieces of apple and ${orangePieces} pieces of orange.`;
+  return juice; // restituisce la variabile prodotta con questa funzione
+}
+
+console.log(fruitProcessor(2, 3));
