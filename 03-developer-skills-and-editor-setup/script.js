@@ -103,6 +103,7 @@ const tempAmplitudeNew = calcTempAmplitudeNew(temperatures, temperatures2);
 console.log('Temperature array amplitude:', tempAmplitudeNew);
 */
 
+/*
 ///////////////////////////////////////
 // LEZIONE 2: Debugging with the Console and Breakpoints (Sez. 5, lez. 61)
 
@@ -153,3 +154,4 @@ const calcTempAmplitudeBug = function (t1, t2) {
 
 const tempAmplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
 console.log('Temperature array amplitude:', tempAmplitudeBug);
+*/
