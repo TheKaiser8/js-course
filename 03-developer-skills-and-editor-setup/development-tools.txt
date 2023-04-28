@@ -1,0 +1,11 @@
+- Ricaricare automaticamente la pagina: Live Server
+    2 modi:
+        1. con estensione vs code
+        2. con node.js (JavaScript runtime) e un pacchetto npm (+ professionale)
+
+Con il metodo 2. eseguire i seguenti passaggi:
+    - installare node.js
+    - da terminale eseguire il comando: node -v --> per verificare la versione di node installata
+    - da terminale eseguire il comando: npm install live-server -g --> per installare npm di live server globalmente (per averlo in tutti i progetti) (su mac aggiungere all'inizio del comando: sudo)
+    - attendere l'installazione dei pacchetti
+    - per utilizzare live server è sufficiente digitare su terminale la riga di comando: live-server
