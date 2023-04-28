@@ -1,6 +1,7 @@
 // Remember, we're gonna use strict mode in all scripts now!
 'use strict';
 
+/*
 ///////////////////////////////////////
 // LEZIONE 1: Using Google, StackOverflow and MDN (Sez. 5, lez. 59)
 //
@@ -100,3 +101,55 @@ const calcTempAmplitudeNew = function (t1, t2) {
 
 const tempAmplitudeNew = calcTempAmplitudeNew(temperatures, temperatures2);
 console.log('Temperature array amplitude:', tempAmplitudeNew);
+*/
+
+///////////////////////////////////////
+// LEZIONE 2: Debugging with the Console and Breakpoints (Sez. 5, lez. 61)
+
+const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celsius',
+
+    // 3. FIX BUG (aggiungo funzione Number per restiruire un numero)
+    // value: Number(prompt('Degrees celsius:')), // la funzione prompt restituisce sempre una stringa ( se voglio un numero devo mettere il)
+    value: 10,
+  };
+
+  // 2. FIND BUG
+  console.log(measurement); // già analizzando l'oggetto si capisce che value è una stringa
+  console.table(measurement); // posso stampare in console l'oggetto sotto forma di tabella
+  // nella tabella, in FIREFOX, se i valori sono stringhe non vengono evidenziati tra virgolette
+
+  console.log(measurement.value);
+  console.warn(measurement.value);
+  console.error(measurement.value);
+  const kelvin = measurement.value + 273;
+  return kelvin;
+};
+// 1. IDENTIFY BUG
+console.log(measureKelvin());
+
+// Debugging with debugger (sources)
+const calcTempAmplitudeBug = function (t1, t2) {
+  const temps = t1.concat(t2);
+
+  let max = 0; // assumiamo che il valore sia 0
+  let min = 0; // assumiamo che il valore min sia 0
+
+  for (let i = 0; i < temps.length; i++) {
+    const curTemp = temps[i]; // creo variabile perché utilizzo più volte quel dato
+
+    // debugger; // con l'istruzione debugger di JS il browser apre direttamente lo strumento debugger senza andare in sources
+    if (typeof curTemp !== 'number') continue; // se non sono numeri il ciclo continua, terminando l'iterazione corrente e passa alla successiva senza eseguire la logica sottostante
+
+    if (curTemp > max) max = curTemp;
+    if (curTemp < min) min = curTemp;
+  }
+
+  console.log(`Max temp: ${max}, min temp: ${min}`);
+  return max - min;
+};
+
+const tempAmplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
+console.log('Temperature array amplitude:', tempAmplitudeBug);
