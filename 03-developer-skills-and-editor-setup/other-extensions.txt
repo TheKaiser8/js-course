@@ -1,0 +1,5 @@
+- Settings Sync: per sincronizzare le impostazioni di vscode in altri pc
+- TODO Highlight: per evidenziare parti di testo con colori diversi
+    --> per configurare: 
+            - su VSCode: File --> Preferences --> Settings OPPURE shortcut Ctrl + ;
+            - cercare l'icona per visualizzare le impostazioni in formato JSON (generalmente icona in alto a DX di fianco alla finestra a 2 ante per lo split editor)

@@ -1,0 +1,13 @@
+Installare e configurare Prettier
+
+1. Installare "Prettier - Code formatter" dalle estensioni
+2. Configurare Prettier come code formatter predefinito:
+    - su VSCode: File --> Preferences --> Settings OPPURE shortcut Ctrl + ;
+    - in Settings cercare "default formatter" poi --> in Editor: Default Formatter selezionare "Prettier - Code formatter (esbenp.prettier-vscode)"
+    - in Settings cercare "Format on save" poi --> in Editor: Format On Save mettere segno di spunta per salvare automaticamente i file ad ogni modifica
+3. Customizzare Prettier:
+    - creare un file di configurazione .prettierrc scrivendo una sorta di oggetto (non lo è realmente perché non è codice JavaScript)
+    {
+        "singleQuote": true, --> per avere le virgolette singole
+        "arrowParens": "avoid" --> per non mettere le parentesi dove non necessarie nelle arrow functions (ad esempio quando abbiamo solo 1 parametro)
+    }
