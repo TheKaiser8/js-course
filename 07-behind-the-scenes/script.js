@@ -111,6 +111,7 @@ console.log(x === window.x); // false
 console.log(z === window.z); // false
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 3: The this Keyword in Practice (Sez. 8, Lez. 97)
 
@@ -148,3 +149,62 @@ matilda.calcAge(); // this keyword punta sempre all'oggetto che sta chiamando il
 // eliminando la funzione dall'oggetto jonas:
 const f = jonas.calcAge;
 f(); // in questo modo non fa riferimento ad alcun oggetto, pertanto è undefined
+*/
+
+////////////////////////////////////
+// LEZIONE 4: Regular Functions vs. Arrow Functions (Sez. 8, Lez. 98)
+// var firstName = 'Matilda'; // le var creano delle proprietà sull'oggetto globale, pertanto in questo modo la keyword this troverà la variabile firstName e sarà in grado utilizzarla con una arrow function che utilizza la keyword this ***altro motivo per NON USARE VAR
+
+const jonas = {
+  firstName: 'Jonas',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); // ottiene tutto l'oggetto jonas, punta all'oggetto che sta chiamando il metodo
+    console.log(2037 - this.year); // 46
+
+    // Soluzione 1:
+    // const self = this; // creo variabile aggiuntiva self (or that), a questo livello this punta all'oggetto jonas, per cui la proprietà year è leggibile
+    // const isMillenial = function () {
+    //   // console.log(this);
+    //   // console.log(this.year >= 1981 && this.year <= 1996);
+
+    //   // con self:
+    //   console.log(self); // jonas object
+    //   console.log(self.year >= 1981 && self.year <= 1996); // true
+    // };
+    // isMillenial(); // all'interno di una chiamata di funzione this keyword è undefined (anche se all'interno di un metodo).
+    // // Per ovviare a questo ci sono 2 soluzioni: variabile aggiuntiva self fuori dalla funzione (soluzione prima di ES6) o arrow function
+
+    // Soluzione 2 (con arrow function utilizza la chiave this lessicale, per cui otterrà la proprietà dall'ambito padre, in questo caso il metodo calcAge):
+    const isMillenial = () => {
+      console.log(this); // jonas object
+      console.log(this.year >= 1981 && this.year <= 1996); // true
+    };
+    isMillenial();
+  },
+
+  greet: () => console.log(`Hey ${this.firstName}`), // output: Hey undefined
+  // BEST PRACTICE: non utilizzare mai un'ARROW FUNCTION come metodo
+
+  // greet: function () {
+  //   console.log(this); // object jonas
+  //   console.log(`Hey ${this.firstName}`); // output: Hey Jonas
+  // },
+};
+jonas.greet();
+jonas.calcAge();
+
+// Arguments keyword (disponibile solo per le funzioni regolari, NO arrow function):
+const addExpr = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+addExpr(2, 3);
+addExpr(2, 3, 7, 10); // posso aggiungere argomenti alla funzione senza specificarne il nome
+
+// arrow function (arguments keyword NOT exists)
+var addArrow = (a, b) => {
+  console.log(arguments); // arguments is not defined
+  return a + b;
+};
+addArrow(2, 3);
