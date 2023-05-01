@@ -211,6 +211,7 @@ var addArrow = (a, b) => {
 addArrow(2, 3);
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 5: Primitives vs. Objects (Primitive vs. Reference Types) (Sez. 8, Lez. 99)
 // Primitives sono numeri, stringhe, boolean, undefined, null, symbol, bigInt
@@ -232,3 +233,47 @@ console.log('Me:', me); // age: 27
 // Questo può essere fonte di confusione
 
 // *** N.B. Sono IMMUTABILI solo le const PRIMITIVES non le const REFERENCES, perchè in JS ENGINE, il valore di un'oggetto nella CALL STACK è in realtà l'indirizzo a cui punta nell'HEAP, per cui il valore viene cambiato nell'heap e l'indirizzo di riferimento (quindi il valore nello STACK non cambia)
+*/
+
+////////////////////////////////////
+// LEZIONE 6: Primitives vs. Objects in Practice (Sez. 8, Lez. 100)
+
+// Primitive types
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davis';
+console.log(lastName, oldLastName);
+
+// Reference types
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+const marriedJessica = jessica; // stiamo solo copiando il riferimento che poi punterà allo stesso oggetto, NON stiamo creando un nuovo oggetto
+marriedJessica.lastName = 'Davis'; // cambio una proprietà
+console.log('Before marriage:', jessica); // l'oggetto sarà identico
+console.log('After marriage:', marriedJessica); // l'oggetto sarà identico
+
+// marriedJessica = {}; // NON possiamo modificare la variabile const perché andrebbe a riassegnare il valore cambiando l'indirizzo di riferimento ed essendo una const non è possibile fare una riassegnazione (cosa che sarebbe possibile con let)
+
+// Copia degli oggetti
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+// Funzione che unisce 2 oggetti e ne restituisce 1 nuovo (ma è solo una SHALLOW COPY che non funzionerebbe nel caso di un oggetto dentro un oggetto)
+const jessicaCopy = Object.assign({}, jessica2); // nuovo oggetto in cui vengono effettivamente copiate tutte le proprietà
+jessicaCopy.lastName = 'Davis';
+console.log('Before copy:', jessica2); // lastName: Williams
+console.log('After copy:', jessicaCopy); // lastName: Davis
+
+// Aggiungiamo 2 membri della famiglia
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+console.log('Before push:', jessica2); // oggetto identico
+console.log('After push:', jessicaCopy); // oggetto identico
