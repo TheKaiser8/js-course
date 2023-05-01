@@ -151,6 +151,7 @@ const f = jonas.calcAge;
 f(); // in questo modo non fa riferimento ad alcun oggetto, pertanto è undefined
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 4: Regular Functions vs. Arrow Functions (Sez. 8, Lez. 98)
 // var firstName = 'Matilda'; // le var creano delle proprietà sull'oggetto globale, pertanto in questo modo la keyword this troverà la variabile firstName e sarà in grado utilizzarla con una arrow function che utilizza la keyword this ***altro motivo per NON USARE VAR
@@ -208,3 +209,26 @@ var addArrow = (a, b) => {
   return a + b;
 };
 addArrow(2, 3);
+*/
+
+////////////////////////////////////
+// LEZIONE 5: Primitives vs. Objects (Primitive vs. Reference Types) (Sez. 8, Lez. 99)
+// Primitives sono numeri, stringhe, boolean, undefined, null, symbol, bigInt
+let age = 30;
+let oldAge = age;
+age = 31;
+console.log(age); // 31
+console.log(oldAge); // 30
+
+const me = {
+  name: 'Jonas',
+  age: 30,
+};
+
+const friend = me;
+friend.age = 27;
+console.log('Friend:', friend); // age: 27
+console.log('Me:', me); // age: 27
+// Questo può essere fonte di confusione
+
+// *** N.B. Sono IMMUTABILI solo le const PRIMITIVES non le const REFERENCES, perchè in JS ENGINE, il valore di un'oggetto nella CALL STACK è in realtà l'indirizzo a cui punta nell'HEAP, per cui il valore viene cambiato nell'heap e l'indirizzo di riferimento (quindi il valore nello STACK non cambia)
