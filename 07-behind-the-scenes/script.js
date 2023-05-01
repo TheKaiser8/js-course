@@ -59,6 +59,7 @@ calcAge(1991);
 // printAge();
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 2: Hosting and Time Dead Zone (TDZ) in Practice (Sez. 8, Lez. 95)
 
@@ -108,3 +109,42 @@ const z = 3;
 console.log(x === window.x); // true
 console.log(x === window.x); // false
 console.log(z === window.z); // false
+*/
+
+////////////////////////////////////
+// LEZIONE 3: The this Keyword in Practice (Sez. 8, Lez. 97)
+
+console.log(this); // in global scope è l'oggetto globale window
+
+const calcAge = function (birthYear) {
+  console.log(2037 - birthYear);
+  console.log(this); // in questo caso la keyword this è undefined
+};
+calcAge(1991);
+
+// con arrow function (non ottiene la keyword this, ma utilizza la lexical this keyword e quindi significa che la utilizza dalla sua funzione genitore):
+const calcAgeArrow = birthYear => {
+  console.log(2037 - birthYear);
+  console.log(this); // in questo caso la keyword this è l'oggetto globale window
+};
+calcAgeArrow(1980);
+
+// this keyword all'interno di un metodo:
+const jonas = {
+  year: 1991,
+  calcAge: function () {
+    console.log(this); // ottiene tutto l'oggetto jonas, punta all'oggetto che sta chiamando il metodo
+    console.log(2037 - this.year); // 46
+  },
+};
+jonas.calcAge();
+
+const matilda = {
+  year: 2017,
+};
+matilda.calcAge = jonas.calcAge; // method borrowing: un oggetto prende in prestito un metodo di un altro oggetto (in questo modo evitiamo la duplicazione di codice)
+matilda.calcAge(); // this keyword punta sempre all'oggetto che sta chiamando il metodo, per cui punta all'oggetto matilda in questo caso
+
+// eliminando la funzione dall'oggetto jonas:
+const f = jonas.calcAge;
+f(); // in questo modo non fa riferimento ad alcun oggetto, pertanto è undefined
