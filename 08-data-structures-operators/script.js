@@ -51,6 +51,16 @@ const restaurant = {
       `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
     );
   },
+
+  // aggiungo metodo per ordinare pizza con almeno 1 ingrediente, gli altri parametri sono opzionali per cui utilizzo un REST PARAMETER:
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+    const str = `Your pizza with ${mainIngredient} and ${
+      otherIngredients.length > 0 ? otherIngredients + ' as' : 'without'
+    } additional ingredients`;
+    console.log(str);
+  },
 };
 
 /*
@@ -164,6 +174,7 @@ restaurant.orderDelivery({
 });
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 3: The Spread Operator (...) (Sez. 9, Lez. 105)
 
@@ -230,3 +241,47 @@ const restaurantCopy = { ...restaurant };
 restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurantCopy.name); // Ristorante Roma
 console.log(restaurant.name); // Classico Italiano
+*/
+
+////////////////////////////////////
+// LEZIONE 4: Rest Pattern and Parameters (Sez. 9, Lez. 106)
+
+// REST OPERATOR con ARRAY:
+// L'operatore REST serve a comprimere gli elementi in un array e fa l'esatto opposto a ciò che fa lo SPREAD OPERATOR (decomprimere un array). Condividono la stessa sintassi
+
+const arr = [1, 2, ...[3, 4]]; // SPREAD OPERATOR perché si trova a DESTRA del = (a destra dell'assegnazione)
+
+const [a, b, ...others] = [1, 2, 3, 4, 5]; // REST OPERATOR perché si trova a SINISTRA del = (a sinistra dell'assegnazione)
+console.log(a, b, others); // 1 2 [3, 4, 5]
+
+// utilizzo simultaneo di REST e SPREAD OPERATOR (REST element deve essere sempre l'ultimo elemento e ce ne può essere solamente 1):
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+]; // destrutturo e salvo in variabili il primo e il terzo elemento del mainMenu e raccolgo in un array i restanti cibi
+console.log(pizza, risotto, otherFood);
+
+// REST OPERATOR con OGGETTI:
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(sat, weekDays);
+
+// FUNZIONI con REST PARAMETERS:
+// funzione in grado di sommare gli argomenti passati (numero NON definito di argomenti) che ci permette di passare sia un array (destrutturandolo nella chiamata di funzione) o singoli elementi
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    const element = numbers[i];
+    sum += element;
+  }
+  console.log(sum);
+};
+add(2, 3); // 5
+add(5, 3, 7, 2); // 17
+add(8, 2, 5, 3, 2, 1, 4); // 25
+
+const x = [23, 5, 7];
+add(...x); // 35
+
+// richiamo metodo creato a riga 56
+restaurant.orderPizza('funghi', 'prosciutto', 'olive'); // funghi ['prosciutto', 'olive']
+restaurant.orderPizza('funghi'); // funghi []
