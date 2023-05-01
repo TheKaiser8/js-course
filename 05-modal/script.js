@@ -42,3 +42,21 @@ const closeModal = function () {
 
 btnCloseModal.addEventListener('click', closeModal); // NON richiamiamo la funzione closeModal(), ma sarà JavaScript a richiamarla solo nel momento in cui si verificherà l'evento click. Noi immettiamo solamento la variabile closeModal come argomento della funzione
 overlay.addEventListener('click', closeModal);
+
+/////////////////////////////////////
+// LEZIONE 3: Handling an "Esc" Keypress Event (Sez. 7, lez. 81)
+
+// Gli eventi tastiera sono eventi globali perché non si verificano su un elemento specifico del documento ma sull'intero documento (considerato come un grande oggetto), per cui rimaniamo in ascolto di eventi ovunque, indipendentemente da dove si trovano nella pagina
+
+// keyup: viene attivato appena rilasciamo il dito dal tasto
+// keypress: viene attivato continuamente fino a che manteniamo la pressione sul tasto
+// keydown: viene attivato appena premiamo il tasto, la più utilizzata
+
+document.addEventListener('keydown', function (event) {
+  console.log('un tasto è stato premuto');
+  console.log(event); // JS crea un oggetto evento con tutte le informazioni e stampando in console possiamo leggerle e capire quale tasto è stato premuto
+  console.log(event.key); // essendo un oggetto possiamo ottenere il valore di una proprietà (key in questo caso)
+
+  if (event.key === 'Escape' && !modal.classList.contains('hidden'))
+    closeModal(); // "Escape" è il valore della chiave key dell'oggetto event, quindi quando quella chiave ha quel valore viene richiamata la funzione di chiusura della modale
+}); // quando si verifica un evento di keydown, JS passa l'oggetto "event" come argomento della funzione
