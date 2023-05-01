@@ -1,5 +1,6 @@
 'use strict';
 
+/*
 ////////////////////////////////////
 // LEZIONE 1: Scoping in Practice (Sez. 8, Lez. 93)
 
@@ -56,3 +57,54 @@ calcAge(1991);
 // // NON posso accedere alle variabili dichiarate all'interno della funzione calcAge:
 // console.log(age);
 // printAge();
+*/
+
+////////////////////////////////////
+// LEZIONE 2: Hosting and Time Dead Zone (TDZ) in Practice (Sez. 8, Lez. 95)
+
+// VARIABILI:
+// utilizziamo le variabili prima di dichiararle per vedere la risposta di JS:
+// console.log(me); // undefined, le var sono issate (sollevate, hoisted) con il valore di undefined
+// console.log(job); // Uncaught ReferenceError: can't access lexical declaration 'job' before initialization. Si trova in TDZ
+// console.log(year); // Uncaught ReferenceError: can't access lexical declaration 'year' before initialization. Si trova in TDZ
+
+var me = 'Jonas';
+let job = 'teacher';
+const year = 1991;
+
+// FUNZIONI:
+// utilizziamo le funzioni prima di dichiararle per vedere la risposta di JS:
+// console.log(addDecl(2, 3)); // 5
+// console.log(addExpr(2, 3)); // Uncaught ReferenceError: can't access lexical declaration 'addExpr' before initialization. Si trova in TDZ. Utilizzando var (invece di const) otteniamo: Uncaught TypeError: addExpr is not a function perché undefined (viene letta così: undefined(2,3))
+// console.log(addArrow(2, 3)); // Uncaught ReferenceError: can't access lexical declaration 'addArrow' before initialization. Si trova in TDZ. Utilizzando var (invece di const) otteniamo: Uncaught TypeError: addArrov is not a function perché undefined (viene letta così: undefined(2,3))
+
+// function declaration
+function addDecl(a, b) {
+  return a + b;
+}
+
+// function expression
+const addExpr = function (a, b) {
+  return a + b;
+};
+
+// arrow function
+var addArrow = (a, b) => a + b;
+
+// ESEMPIO TRAPPOLA:
+console.log(numProducts); // undefined, undefined è anche un false value per cui a causa del sollevamento (hoisting) numProducts è = 0 per cui il carrello viene cancellato
+if (!numProducts) deleteShoppingCart();
+
+var numProducts = 10;
+
+function deleteShoppingCart() {
+  console.log('All products deleted!');
+}
+
+var x = 1; // le variabili dichiarate con var creano una proprietà sull'oggetto window globale
+let y = 2;
+const z = 3;
+// window è l'oggetto globale di JS nel browser
+console.log(x === window.x); // true
+console.log(x === window.x); // false
+console.log(z === window.z); // false
