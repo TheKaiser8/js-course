@@ -178,3 +178,52 @@ book.apply(lufthansa, flightData); // CON array SALVATO in variabile
 
 // *** APPLY METHOD non è più utilizzato in JS moderno, si utilizza CALL METHOD passando un'array di argomenti espansi con l'utilizzo dello spread operator
 book.call(eurowings, ...flightData);
+
+//////////////////////////////////
+// LEZIONE 7: The bind Method (Sez. 10, Lez. 134)
+// BIND method non chiama immediatamente la funzione, ma restituisce una nuova funzione in cui è associata la keyword THIS
+const bookEW = book.bind(eurowings); // restituendo una funzione possiamo creare una variabile per tutte le volte che richiamiamo l'oggetto eurowings, in modo tale che THIS punterà sempre su questo oggetto
+bookEW(931, 'Steven Williams');
+console.log(eurowings);
+
+const bookLH = book.bind(lufthansa);
+bookLH(31, 'Mark Prost');
+console.log(lufthansa);
+
+// possiamo creare una variabile specifica per lo stesso numero di volo:
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Michael Gross'); // l'unico parametro da inserire diventa il nome
+
+// Con Event Listener:
+lufthansa.planes = 300; // aggiungiamo proprietà numero aerei compagnia
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+}; // metodo che aggiunge aerei
+// lufthansa.buyPlane();
+
+// document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane); // in questo modo la parola chiave this punterà sull'evento, per cui sul pulsante 'buy' e non sull'oggetto lufthansa
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa)); // in questo modo la funzione di callback punta all'oggetto lufthansa
+
+// Applicazione parziale (partial application): possiamo pre-impostare dei parametri
+// FUNZIONE GENERALE
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+// FUNZIONE SPECIFICA:
+const addVAT = addTax.bind(null, 0.23); // in questo caso non deve puntare a nulla la keyword this e la pre-impostiamo come NULL
+// sarebbe come: addVAT = value + value * 0.23;
+console.log(addVAT(100));
+
+// Challenge (senza metodo bind):
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+const taxRate25 = addTaxRate(0.23);
+console.log(taxRate25(100));
