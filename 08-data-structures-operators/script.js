@@ -325,6 +325,7 @@ if (restaurant.orderPizza) {
 restaurant.orderPizza && restaurant.orderPizza('prosciutto', 'funghi');
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 6: The Nullish Coalescing Operator (??) (Sez. 9, Lez. 108)
 // Operatore introdotto in ES2020, che funziona con l'idea di valori NULLI e UNDEFINED, NON valori falsi (NON include zero --> 0 o stringa vuota --> '')
@@ -338,3 +339,40 @@ const guestCorrect = restaurant.numGuests ?? 10;
 console.log(guestCorrect); // 0
 
 // 0 e '' non sono valori nulli o indefiniti
+*/
+
+////////////////////////////////////
+// LEZIONE 7: Logical Assignment Operators (Sez. 9, Lez. 109)
+// Introdotti in ES2021
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20,
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// // Impostiamo un numero predefinito di ospiti se non presente la proprietà numGuests:
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+
+// con l'operatore logico OR di assegnazione (OR ASSIGNMENT OPERATOR) possiamo fare tutto in maniera più concisa:
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+// con NULLISH COALESCING ASSIGNMENT OPERATOR per correggere l'errore dello zero visto come una valore falso:
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// AND ASSIGNMENT OPERATOR:
+// Creo stringa per rendere anonimo il proprietario del ristorante
+// rest1.owner = rest1.owner && '<ANONYMOUS>'; // undefined
+// rest2.owner = rest2.owner && '<ANONYMOUS>'; // <ANONYMOUS>
+
+rest1.owner &&= '<ANONYMOUS>'; // risultato migliore perché NON otteniamo undefined
+rest2.owner &&= '<ANONYMOUS>'; // <ANONYMOUS>
+console.log(rest1);
+console.log(rest2);
