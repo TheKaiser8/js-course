@@ -132,6 +132,7 @@ const greetArrowFunction = greeting => name =>
 greetArrowFunction('Ciao')('Jonas');
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 6: The call and apply Methods (Sez. 10, Lez. 133)
 const lufthansa = {
@@ -227,3 +228,4 @@ const addTaxRate = function (rate) {
 };
 const taxRate25 = addTaxRate(0.23);
 console.log(taxRate25(100));
+*/
