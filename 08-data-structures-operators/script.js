@@ -378,3 +378,34 @@ rest2.owner &&= '<ANONYMOUS>'; // <ANONYMOUS>
 console.log(rest1);
 console.log(rest2);
 */
+
+////////////////////////////////////
+// LEZIONE 8: Looping Arrays: The for-of Loop (Sez. 9, Lez. 111)
+// espansione del menu:
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+// con ciclo for:
+console.log('----- CICLO FOR -----');
+for (let i = 0; i < menu.length; i++) {
+  const element = menu[i];
+  console.log(element);
+}
+
+// con ciclo for-of (è ancora possibile l'utilizzo delle parole chiave continue e break):
+console.log('----- CICLO FOR-OF -----');
+for (const item of menu) console.log(item); // ciclo for-of pensato in origine solo per ottenere l'elemento corrente
+
+// In questo modo possiamo ottenere anche l'indice corrente (viene restituito un array con l'indice dell'elemento e l'elemento stesso):
+for (const item of menu.entries()) {
+  console.log(item); // [0, 'Focaccia']
+  console.log(`${item[0] + 1}: ${item[1]}`); // faccio partire il menu da 1 manualmente
+}
+
+// utilizzando la destrutturazione posso ottenere l'indice corrente in modo migliore:
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+
+// Questo è il motivo per cui iterando l'array menu tramite il metodo entries() ottengo degli array composti da indice ed elemento:
+console.log([...menu.entries()]); // espando l'array creandone uno nuovo, quindi ottengo un array che contiene un'array in ogni posizione
