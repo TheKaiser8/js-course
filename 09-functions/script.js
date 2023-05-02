@@ -73,6 +73,7 @@ checkIn(flight, jonas);
 // LEZIONE 3: First-Class and Higher-Order Functions (Sez. 10, Lez. 130)
 // vedi slide
 
+/*
 //////////////////////////////////
 // LEZIONE 4: Functions Accepting Callback Functions (Sez. 10, Lez. 131)
 // Funzione che elimina gli spazi vuoti:
@@ -107,3 +108,24 @@ document.body.addEventListener('click', high5); // funzione evento DOM che gener
 ['Jonas', 'Martha', 'Adam'].forEach(high5); // per ogni elemento dell'array viene richiamata la funzione di callback high5
 
 // *** N.B. L'utilizzo di FUNZIONI di CALLBACK rende più semplice scrivere il codice in parti riutilizzabili e interconnesse, ma soprattutto permette la creazione di ASTRAZIONI ad un livello più elevato. La funzione HIGHER-ORDER, nel nostro caso, non si preoccupa di come avviene la trasformazione della stringa (richiama semplicemente la funzione che avviene ad un livello di astrazione inferiore)
+*/
+
+//////////////////////////////////
+// LEZIONE 5: Functions Returning Functions (Sez. 10, Lez. 132)
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+const greeterHey = greet('Hey');
+greeterHey('Jonas');
+greeterHey('Steven');
+
+// Chiamata della funzione sulla stessa riga di codice(la funzione greet() ha come argomento name nella funzione di ritorno):
+greet('Hello')('Jonas');
+
+// Con ARROW FUNCTION:
+const greetArrowFunction = greeting => name =>
+  console.log(`${greeting} ${name}`);
+
+greetArrowFunction('Ciao')('Jonas');
