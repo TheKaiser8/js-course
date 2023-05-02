@@ -461,6 +461,7 @@ console.log('Pre ES6:', restaurantExample.orderPreES6(1, 0));
 console.log('Post ES6:', restaurantExample.orderPostES6(1, 0));
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 10: Optional Chaining (?.) (Sez. 9, Lez. 113)
 // Introdotto da ES2020
@@ -515,4 +516,59 @@ if (users.length > 0) {
   console.log(users[0].name);
 } else {
   console.log('User array empty');
+}
+*/
+
+////////////////////////////////////
+// LEZIONE 11: Looping Objects: Object Keys, Values, and Entries (Sez. 9, Lez. 114)
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  // posso calcolare il nome di una proprietà: day-6
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
+// CICLI SULLE PROPERTY NAMES:
+
+// con il metodo Object.keys otteniamo un array con le chiavi (proprietà) dell'oggetto richiesto:
+const properties = Object.keys(openingHours); // è un array su cui si puù eseguire un ciclo
+console.log(properties); // ['thu', 'fri', 'sat']
+
+console.log(`Restaurant is open on ${properties.length} days`); // per ottenere il numero di proprietà (n° giorni di apertura)
+
+for (const day of Object.keys(openingHours)) {
+  console.log(day); // thu // fri // sat
+}
+
+let openStr = `We are open on ${properties.length} days: `; // creo stringa dinamica a cui verrà aggiunta la proprietà iterata
+
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// CICLI SULLE PROPERTY VALUES:
+const values = Object.values(openingHours); // ottengo un array con i valori
+console.log(values);
+
+// Sugli OGGETTI il metodo entries() restituira sia la chiave che il valore dell'oggetto
+const entries = Object.entries(openingHours); // ciclo sull'intero oggetto e ottengo un array di array per cui posso fare un ciclo
+console.log(entries);
+
+for (const x of entries) {
+  console.log(x); // ottengo gli array che si trovano all'intero dell'array entries
+}
+// [chiave, valore]:
+// Possiamo utilizzare chiave e valore di ogni array facendo un ciclo e utilizzando la destrutturazione (in questo caso il valore è rappresentato da un oggetto):
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
