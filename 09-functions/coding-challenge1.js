@@ -24,6 +24,7 @@
 
 // Hints: Use many of the tools you learned about in this and the last section 😉
 
+/*
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
@@ -105,3 +106,4 @@ poll.displayResults.call({ answers: [5, 2, 3] }, 'string'); // specifico il type
 
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string'); // specifico il type passato come stringa
+*/

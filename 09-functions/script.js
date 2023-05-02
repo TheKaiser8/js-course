@@ -229,3 +229,23 @@ const addTaxRate = function (rate) {
 const taxRate25 = addTaxRate(0.23);
 console.log(taxRate25(100));
 */
+
+//////////////////////////////////
+// LEZIONE 8: Immediately Invoked Function Expressions (IIFE) (Sez. 10, Lez. 136)
+// Funzioni di cui abbiamo bisogno che vengano eseguite una sola volta e poi mai più
+
+// Scritta in questo modo potremmo utilizzare la funzione quante volte vogliamo:
+const runOnce = function () {
+  console.log('This will never run again');
+};
+runOnce(); // viene invocata quando ne abbiamo bisogno e quando vogliamo noi
+
+// IIFE: per renderla eseguibile immediatamente e una sola volta NON dobbiamo salvarla in variabile, ma RACCHIUDERLA tra PARENTESI e INVOCARLA IMMEDIATAMENTE:
+(function () {
+  console.log('This will never run again');
+})(); // racchiudendo tutto tra parentesi abbiamo trasformato la funzione in espressione e la possiamo invocare immediatamente facendo seguito con le parentesi () --> diventa un'espressione di funzione: (function () { console.log('This will never run again'); }) è il valore di funzione che viene invocato con le 2 parentesi subito dopo
+
+// stessa cosa per un ARROW FUNCTION:
+(() => console.log('This will ALSO never run again'))();
+
+// IIFE --> racchiudo tra parentesi e invoco immediatamente: (.....espressione di funzione.....)()
