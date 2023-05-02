@@ -379,6 +379,7 @@ console.log(rest1);
 console.log(rest2);
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 8: Looping Arrays: The for-of Loop (Sez. 9, Lez. 111)
 // espansione del menu:
@@ -409,3 +410,51 @@ for (const [i, el] of menu.entries()) {
 
 // Questo è il motivo per cui iterando l'array menu tramite il metodo entries() ottengo degli array composti da indice ed elemento:
 console.log([...menu.entries()]); // espando l'array creandone uno nuovo, quindi ottengo un array che contiene un'array in ogni posizione
+*/
+
+////////////////////////////////////
+// LEZIONE 9: Enhanced Object Literals (Sez. 9, Lez. 112)
+// 3 miglioramenti: 1) potenziato object literal, 2) migliorata e semplificata la scrittura di metodi all'interno di oggetti, 3) è possibile calcolare i nomi delle proprietà oggetto
+const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']; // 3)
+
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  [weekDays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  // posso calcolare il nome di una proprietà: day-6
+  [`day-${2 + 4}`]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
+const restaurantExample = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  // prima di ES6:
+  // openingHours: openingHours, // per avere un oggetto che si trova all'esterno dell'oggetto corrente bisognava dichiarare in questo modo la proprietà
+
+  // con ES6 viene potenziato l'oggetto letterale (object literal):
+  openingHours, // viene creata una proprietà oggetto con quell'esatto nome di variabile oggetto che si trova all'esterno
+
+  // metodo di scrittura di un metodo prima di ES6:
+  orderPreES6: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]; // restituisco array
+  },
+
+  // metodo di scrittura con ES6:
+  orderPostES6(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]; // restituisco array
+  },
+};
+console.log('Pre ES6:', restaurantExample.orderPreES6(1, 0));
+console.log('Post ES6:', restaurantExample.orderPostES6(1, 0));
