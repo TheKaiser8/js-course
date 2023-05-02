@@ -31,6 +31,7 @@ createdBooking('LH123', 2, 800);
 createdBooking('LH123', undefined, 1000);
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 2: How Passing Arguments Works: Value vs. Reference (Sez. 10, Lez. 129)
 const flight = 'LH234';
@@ -66,3 +67,43 @@ checkIn(flight, jonas);
 // *** Manipolare lo stesso oggetto in funzioni diverse può creare problemi, ATTENZIONE!!!
 
 // JS NON ha il passaggio per RIFERIMENTO, ma SOLO per VALORE, a differenza di altri linguaggi come C++ dove puoi passare un riferimento a qualsiasi valore. Con JS negli oggetti passiamo un riferimento, ma quel riferimento è semplicemente un valore che contiene un indirizzo di memoria
+*/
+
+//////////////////////////////////
+// LEZIONE 3: First-Class and Higher-Order Functions (Sez. 10, Lez. 130)
+// vedi slide
+
+//////////////////////////////////
+// LEZIONE 4: Functions Accepting Callback Functions (Sez. 10, Lez. 131)
+// Funzione che elimina gli spazi vuoti:
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+  // return str.replaceAll(' ', '').toLowerCase(); // con replaceAll()
+};
+console.log(oneWord('CIAO a TutTI'));
+
+// Funzione che trasforma in maiuscolo la PRIMA PAROLA della stringa passata:
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+console.log(upperFirstWord('ciao a tutti'));
+
+// Funzione HIGHER-ORDER (di ordine superiore) che accetta una funzione (chiamata anche CALLBACK function) come argomento:
+const trasformer = function (str, fn) {
+  console.log(`Original string: ${str}`);
+  console.log(`Transformed string: ${fn(str)}`);
+
+  console.log(`Transformed by: ${fn.name}`); // posso ottenere il nome della funzione come se fosse una proprietà
+};
+trasformer('Prova funzione di ordine superiore', upperFirstWord); // passiamo solo il valore della funzione upperFirstWord, non la funzione stessa upperFirstWord()
+trasformer('Prova funzione di ordine superiore', oneWord);
+
+const high5 = function () {
+  console.log('👋');
+};
+document.body.addEventListener('click', high5); // funzione evento DOM che genera in console l'emoji richiamata attraverso la funzione di callback high5
+
+['Jonas', 'Martha', 'Adam'].forEach(high5); // per ogni elemento dell'array viene richiamata la funzione di callback high5
+
+// *** N.B. L'utilizzo di FUNZIONI di CALLBACK rende più semplice scrivere il codice in parti riutilizzabili e interconnesse, ma soprattutto permette la creazione di ASTRAZIONI ad un livello più elevato. La funzione HIGHER-ORDER, nel nostro caso, non si preoccupa di come avviene la trasformazione della stringa (richiama semplicemente la funzione che avviene ad un livello di astrazione inferiore)
