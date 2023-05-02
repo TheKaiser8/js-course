@@ -288,6 +288,7 @@ restaurant.orderPizza('funghi', 'prosciutto', 'olive'); // funghi ['prosciutto',
 restaurant.orderPizza('funghi'); // funghi []
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 5: Short Circuiting (&& and ||) (Sez. 9, Lez. 107)
 // Gli operatori logici possono usare qualsiasi tipo di dato e restituire qualsiasi tipo di dato facendo qualcosa chiamato short-circuiting (corto circuito) o short circuit evaluation
@@ -322,3 +323,18 @@ if (restaurant.orderPizza) {
 }
 // con AND operator:
 restaurant.orderPizza && restaurant.orderPizza('prosciutto', 'funghi');
+*/
+
+////////////////////////////////////
+// LEZIONE 6: The Nullish Coalescing Operator (??) (Sez. 9, Lez. 108)
+// Operatore introdotto in ES2020, che funziona con l'idea di valori NULLI e UNDEFINED, NON valori falsi (NON include zero --> 0 o stringa vuota --> '')
+restaurant.numGuests = 0;
+
+const guests = restaurant.numGuests || 10;
+console.log(guests); // 10
+
+// Con NULLISH COALESCING OPERATOR:
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect); // 0
+
+// 0 e '' non sono valori nulli o indefiniti
