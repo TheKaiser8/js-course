@@ -764,6 +764,7 @@ console.log(question.get(question.get('correct') === answer));
 // LEZIONE 15: Summary: Which Data Structure to Use? (Sez. 9, Lez. 119)
 // vedi slide
 
+/*
 //////////////////////////////////
 // LEZIONE 16: Working With Strings - Part 1 (Sez. 9, Lez. 121)
 const airline = 'TAP Air Portugal';
@@ -816,3 +817,104 @@ checkMiddleSeat('3E');
 console.log(new String('Jonas')); // processo dietro le quinte di JS (Conversione da primitiva a oggetto)
 console.log(typeof new String('Jonas')); // object
 console.log(typeof new String('Jonas').slice(1)); // string
+*/
+
+//////////////////////////////////
+// LEZIONE 17: Working With Strings - Part 2 (Sez. 9, Lez. 122)
+const airline = 'TAP Air Portugal';
+
+// Scrivere la stringa in minuscolo (toLowerCase()) o MAIUSCOLO (toUpperCase()):
+console.log(airline.toLowerCase()); // tap air portugal
+console.log(airline.toUpperCase()); // TAP AIR PORTUGAL
+console.log('jonas'.toUpperCase()); // JONAS, direttamente su una stringa
+
+// CORREGGERE un nome:
+const passenger = 'jOnAS';
+const passengerLower = passenger.toLowerCase();
+console.log(passengerLower); // jonas
+// Prima lettera in maiuscolo:
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect); // Jonas
+
+// Funzione che passando un nome restituisce il nome con la prima lettera maiuscola (capitalization)
+const fixCapitalization = function (name) {
+  const nameLower = name.toLowerCase();
+  const nameCorrect = nameLower[0].toUpperCase() + nameLower.slice(1);
+  console.log(nameCorrect);
+};
+fixCapitalization('mATTeo');
+fixCapitalization('SARa');
+fixCapitalization('aldO');
+
+// CONFRONTO EMAIL:
+const email = 'hello@jonas.io';
+const loginEmail = '  Hello@Jonas.Io \n'; // \n' per andare a capo
+
+const lowerEmail = loginEmail.toLowerCase();
+// rifiniamo la mail eliminando gli spazi vuoti e i caratteri di invio per terminare una riga (trim() method):
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail);
+
+// Possiamo semplificare il codice creando una sola variabile per ottenere la mail normalizzata:
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+// confronto le 2 email:
+console.log(email === normalizedEmail); // true
+
+// Funzione che confronta 2 email (email corretta e email input) e restituisce la mail normalizzata se l'utente ha inserito erroneamente spazi o caratteri di invio all'inizio o alla fine della stringa:
+const compareEmail = function (correctEmail, inputEmail) {
+  const normalizedEmail = inputEmail.toLowerCase().trim();
+  console.log(normalizedEmail);
+  if (correctEmail === normalizedEmail) {
+    console.log('La mail corrisponde');
+  } else {
+    console.log('La mail è errata nonostante la normalizzazione');
+  }
+};
+compareEmail('prova@email.com', '\n prova@EMail.Com'); // true, La mail corrisponde
+compareEmail('prova@email.com', '   prova@EMail.Com   '); // true, La mail corrisponde
+compareEmail('prova@email.com', 'prova @email.com'); // false (non rimuove spazi vuoti all'interno della stringa), La mail è errata nonostante la normalizzazione
+
+// SOSTITUZIONE parti di stringa (REPLACING):
+// Singoli caratteri:
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.'); // primo argomento: elemento da sostituire, secondo argomento: sostituto
+console.log(priceUS); // 288.97$
+
+// Parole intere:
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replace('door', 'gate')); // il metodo replace sostituisce solamente la prima parola che corrisponde, non tutte
+console.log(announcement.replaceAll('door', 'gate')); // replaceAll() risolve il problema precedente e sostituisce tutte le parole che corrispondono al primo argomento inserito
+
+// Senza replaceAll() bisogna utilizzare una REGULAR EXPRESSION:
+console.log(announcement.replace(/door/g, 'gate')); // dobbiamo mettere la parola da sostituire tra 2 slash e affiancarci il flag g che sta per global
+
+// Metodi che restituiscono BOOLEANI:
+let plane = 'A320neo';
+console.log(plane.includes('A320')); // true
+console.log(plane.includes('neo')); // true
+console.log(plane.includes('Boeing')); // false
+console.log(plane.startsWith('Air')); // false
+plane = 'Airbus A320neo';
+console.log(plane.startsWith('Air')); // true
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+  console.log('Part of the NEW Airbus family');
+}
+
+// Esercizio controllo bagagli e passeggero:
+const checkBaggage = function (items) {
+  // è importante trasformare in minuscolo ogni input utente per poter confrontare più facilmente (i metodi delle stringhe sono case sensitive e potrebbero alterare le condizioni di controllo)
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board');
+  } else {
+    console.log('Welcome a board!');
+  }
+};
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
