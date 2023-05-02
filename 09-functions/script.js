@@ -252,6 +252,7 @@ runOnce(); // viene invocata quando ne abbiamo bisogno e quando vogliamo noi
 // IIFE --> racchiudo tra parentesi e invoco immediatamente: (.....espressione di funzione.....)()
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 9: Closures (Sez. 10, Lez. 137)
 // Closure: NON è una feature che usiamo esplicitamente, NON le creiamo manualmente ma vengono create AUTOMATICAMENTE in determinate situazioni che dobbiamo conoscere e sapere riconoscere
@@ -277,3 +278,47 @@ booker(); // 3 passengers
 
 // NON abbiamo modo di accedere alle CLOSURE perché NON sono TANGIBILI, però possiamo vedere qualche dettaglio di questa proprietà interna della funzioni:
 console.dir(booker); // [[Scopes]] --> visualizzabile solo in EDGE e CHROME, le doppie parentesi indicano che sono proprietà interne alla funzione stessa
+*/
+
+//////////////////////////////////
+// LEZIONE 10: More Closure Examples (Sez. 10, Lez. 138)
+
+// ESEMPIO 1 (SENZA RETURN nelle funzioni):
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g(); // a questo punto l'ambiente di variabile g non c'è più, ma chiamando f() abbiamo comunque accesso alle sue variabili
+f(); // 23 * 2 = 46
+
+// Riassegnazione di f con funzione h(): la closure viene cambiata quando viene riassegnata la variabile
+h();
+f(); // 777 * 2 = 1554
+
+// ESEMPIO 2 (timer):
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3; // divido numero passegeri per 3
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000); // la funzione setTimeout richiede 2 parametri (funzione che verrà eseguita, dopo quanto tempo verrà eseguita in millisecondi)
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+// aggiungo variabile per verificare che CLOSURE abbia la priorità sullo SCOPE CHAIN:
+const perGroup = 1000; // NON viene utilizzato questo valore nel setTimeout perché ha priorità minore della CLOSURE
+boardPassengers(150, 3);
