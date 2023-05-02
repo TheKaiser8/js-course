@@ -280,6 +280,7 @@ booker(); // 3 passengers
 console.dir(booker); // [[Scopes]] --> visualizzabile solo in EDGE e CHROME, le doppie parentesi indicano che sono proprietà interne alla funzione stessa
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 10: More Closure Examples (Sez. 10, Lez. 138)
 
@@ -322,3 +323,4 @@ const boardPassengers = function (n, wait) {
 // aggiungo variabile per verificare che CLOSURE abbia la priorità sullo SCOPE CHAIN:
 const perGroup = 1000; // NON viene utilizzato questo valore nel setTimeout perché ha priorità minore della CLOSURE
 boardPassengers(150, 3);
+*/
