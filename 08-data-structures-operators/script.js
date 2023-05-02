@@ -706,6 +706,7 @@ rest.set(document.querySelector('h1'), 'Heading');
 console.log(rest);
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 14: Maps: Iteration (Sez. 9, Lez. 118)
 // Metodo migliore per popolare una MAPPA:
@@ -757,3 +758,8 @@ const answer = 3; // variabile per non essere infastiditi dal prompt
 
 // soluzione SENZA operatore ternario:
 console.log(question.get(question.get('correct') === answer));
+*/
+
+//////////////////////////////////
+// LEZIONE 15: Summary: Which Data Structure to Use? (Sez. 9, Lez. 119)
+// vedi slide
