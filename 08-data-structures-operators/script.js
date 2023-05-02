@@ -243,6 +243,7 @@ console.log(restaurantCopy.name); // Ristorante Roma
 console.log(restaurant.name); // Classico Italiano
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 4: Rest Pattern and Parameters (Sez. 9, Lez. 106)
 
@@ -285,3 +286,39 @@ add(...x); // 35
 // richiamo metodo creato a riga 56
 restaurant.orderPizza('funghi', 'prosciutto', 'olive'); // funghi ['prosciutto', 'olive']
 restaurant.orderPizza('funghi'); // funghi []
+*/
+
+////////////////////////////////////
+// LEZIONE 5: Short Circuiting (&& and ||) (Sez. 9, Lez. 107)
+// Gli operatori logici possono usare qualsiasi tipo di dato e restituire qualsiasi tipo di dato facendo qualcosa chiamato short-circuiting (corto circuito) o short circuit evaluation
+
+// OR OPERATOR (restituisce il primo valore VERO oppure l'ultimo valore se sono tutti FALSI):
+console.log('----- OR -----');
+console.log(3 || 'Jonas'); // 3, se il primo valore è vero viene restituito immediatamente il primo valore, JS non prende nemmeno in considerazione il secondo valore --> per questo parliamo di SHORT CIRCUITING
+
+console.log('' || 'Jonas'); // Jonas
+console.log(true || 0); // true
+console.log(undefined || null); // null, perché undefined è un valore FALSO, pertanto si procederà al secondo valore e non ci sarà un short circuiting --> viene preso null (anche se FALSO) perché è l'ultimo valore
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null); // Hello, perché sarà il primo valore vero di questa catena di operazioni
+
+// restaurant.numGuests = 23; // se impostiamo il valore su 0 otterremo il valore predefinito 10 perchè 0 viene letto come valore falso
+// Creo proprietà oggetto restaurant con numero degli ospiti:
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10; // 10 numero predefinito di ospiti
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10; // se numGuests esiste restituisce il numero di ospiti corrispondente, altrimenti restituisce 10 come valore predefinito
+console.log(guests2);
+
+// AND operator (restituisce il primo valore falso oppure l'ultimo valore se sono tutti VERI):
+console.log('----- AND -----');
+console.log(0 && 'Jonas'); // 0, AND operator va in short circuiting quando il primo valore è FALSO e restituisce immediatamente quel valore
+console.log(7 && 'Jonas'); // Jonas, viene restituito l'ultimo valore vero
+console.log('Hello' && 23 && null && 'jonas'); // null, è il primo valore falso per cui l'operazione andrà in cortocircuito
+
+// con blocco if / else:
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('prosciutto', 'funghi');
+}
+// con AND operator:
+restaurant.orderPizza && restaurant.orderPizza('prosciutto', 'funghi');
