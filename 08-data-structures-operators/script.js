@@ -819,6 +819,7 @@ console.log(typeof new String('Jonas')); // object
 console.log(typeof new String('Jonas').slice(1)); // string
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 17: Working With Strings - Part 2 (Sez. 9, Lez. 122)
 const airline = 'TAP Air Portugal';
@@ -918,3 +919,75 @@ const checkBaggage = function (items) {
 checkBaggage('I have a laptop, some Food and a pocket Knife');
 checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection');
+*/
+
+//////////////////////////////////
+// LEZIONE 18: Working With Strings - Part 3 (Sez. 9, Lez. 123)
+// split() è uno dei metodi più potenti che ci consente di dividere una stringa in più parti in base ad un divisore di stringa
+console.log('a+very+nice+string'.split('+')); // [ "a", "very", "nice", "string" ], il + è il divisore di stringa che permette di creare un ARRAY con 4 elementi
+console.log('Jonas Schmedtmann'.split(' ')); // [ "Jonas", "Schmedtmann" ]
+
+// con il metodo split() posso creare delle variabili tramite la destrutturazione di una stringa:
+const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
+console.log(firstName, lastName);
+
+// join() è il metodo che ci permette di creare una stringa con spazi divisori (metodo INVERSO di split())
+// creare un array aggiungendo Mr. davanti al nome e rendendo il cognome tutto maiuscolo:
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName); // Mr. Jonas SCHMEDTMANN
+
+// Con SPLIT e JOIN possiamo trasformare una parola con la prima lettera maiuscola in modo molto più facile:
+const capitalizeName = function (name) {
+  const names = name.split(' '); // ottengo un array
+  // console.log(names);
+
+  const fullName = [];
+  for (const n of names) {
+    // con variabile:
+    // name = n[0].toUpperCase() + n.slice(1);
+    // fullName.push(name);
+
+    // senza variabile:
+    // fullName.push(n[0].toUpperCase() + n.slice(1));
+
+    // senza variabile e con metodo replace:
+    fullName.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(fullName.join(' '));
+};
+capitalizeName('jessica ann smith davis');
+capitalizeName('jonas schmedtmann');
+
+// PADDING STRING (padStart() e padEnd()): aggiungere un numero di caratteri fino a quando la stringa non ha la lunghezza desiderata
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+')); // primo argomento: lunghezza della stringa, secondo argomento: carattere con cui riempire la stringa all'inizio
+console.log('Jonas'.padStart(25, '+')); // viene aggiunto il numero di caratteri utile a raggiungere la lunghezza definita
+console.log(message.padStart(25, '+').padEnd(35, '+')); // aggiungo 10 caratteri alla fine della stringa perché da 25 bisogna arrivare ad una lunghezza della stringa di 35 caratteri totali
+
+// Esempio PADDING STRING con numeri nascosti CARTA di CREDITO (visibili solo gli ultimi 4):
+const maskCreditCard = function (number) {
+  // const str = String(number);
+  // OPPURE
+  const str = number + '';
+  console.log(str);
+
+  const last4number = str.slice(-4);
+  console.log(last4number);
+
+  return last4number.padStart(str.length, '*');
+};
+console.log(maskCreditCard(3484852853852259));
+console.log(maskCreditCard(38597289));
+console.log(maskCreditCard('2113243264537548787597476479'));
+
+// REPEAT method:
+const message2 = 'Bad weather... All departure delayed... ';
+console.log(message2.repeat(5)); // crea una grande stringa che ripete la stringa (che ha chiamato il metodo) quel numero di volte che è stato impostato come argomento
+
+// Esempio aerei in attesa per il decollo:
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛫'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
