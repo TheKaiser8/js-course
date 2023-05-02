@@ -412,6 +412,7 @@ for (const [i, el] of menu.entries()) {
 console.log([...menu.entries()]); // espando l'array creandone uno nuovo, quindi ottengo un array che contiene un'array in ogni posizione
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 9: Enhanced Object Literals (Sez. 9, Lez. 112)
 // 3 miglioramenti: 1) potenziato object literal, 2) migliorata e semplificata la scrittura di metodi all'interno di oggetti, 3) è possibile calcolare i nomi delle proprietà oggetto
@@ -458,3 +459,60 @@ const restaurantExample = {
 };
 console.log('Pre ES6:', restaurantExample.orderPreES6(1, 0));
 console.log('Post ES6:', restaurantExample.orderPostES6(1, 0));
+*/
+
+////////////////////////////////////
+// LEZIONE 10: Optional Chaining (?.) (Sez. 9, Lez. 113)
+// Introdotto da ES2020
+
+// console.log(restaurant.openingHours.mon); // undefined perché monday non viene specificato negli orari
+// console.log(restaurant.openingHours.mon.open); // Uncaught TypeError: restaurant.openingHours.mon is undefined --> non possiamo accedere ad una proprietà non definita
+
+// per ovviare a questo problema creiamo una condizione:
+if (restaurant.openingHours.mon) {
+  console.log(restaurant.openingHours.mon.open);
+}
+
+if (restaurant.openingHours.fri) {
+  console.log(restaurant.openingHours.fri.open); // 11 perché esiste friday come giorno in openingHours
+}
+
+// Se abbiamo oggetti profondamente annidati e con molte proprietà opzionali dovremmo creare diverse condizioni complesse che renderebbero molto meno leggibile il codice:
+if (restaurant.openingHours && restaurant.openingHours.mon) {
+  console.log(restaurant.openingHours.mon.open);
+}
+
+// OPTIONAL CHAINING: se una proprietà NON esiste viene restituito immediatamente undefined
+console.log(restaurant.openingHours.mon?.open); // se la proprietà 'mon' esiste verrà letta la proprietà 'open', in caso contrario verrà restituito undefined
+console.log(restaurant.openingHours?.mon?.open);
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']; // 3)
+for (const day of days) {
+  console.log(day);
+  // day non è una proprietà dell'oggetto restaurant.openingHours, pertanto dobbiamo utilizzare la BRACKET NOTATION per utilizzare la variabile day
+  // const open = restaurant.openingHours[day]?.open || 'We are closed'; // problema con il valore zero che viene letto come valore falso
+  const open = restaurant.openingHours[day]?.open ?? 'closed'; // con NULLISH COALESCING OPERATOR
+  console.log(
+    `On ${day}, we ${open === 'closed' ? 'are closed' : `open at ${open}`}` // esempio di stringa complessa con template literals all'interno del template literals (ogni condizione deve avere il suo template literals se viene richiamata una variabile)
+  );
+}
+
+// OPTIONAL CHAINING FOR METHODS:
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist'); // ['Focaccia', 'Pasta']
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist'); // ['Method does not exist']
+
+// OPTIONAL CHAINING FOR ARRAYS:
+const users = [
+  {
+    name: 'Jonas',
+    email: 'hello@jonas.io',
+  },
+];
+console.log(users[0]?.name ?? 'User array empty');
+
+// con istruzione if / else sarebbe più lungo e complesso il codice:
+if (users.length > 0) {
+  console.log(users[0].name);
+} else {
+  console.log('User array empty');
+}
