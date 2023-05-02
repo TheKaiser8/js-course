@@ -341,6 +341,7 @@ console.log(guestCorrect); // 0
 // 0 e '' non sono valori nulli o indefiniti
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 7: Logical Assignment Operators (Sez. 9, Lez. 109)
 // Introdotti in ES2021
@@ -376,3 +377,4 @@ rest1.owner &&= '<ANONYMOUS>'; // risultato migliore perché NON otteniamo undef
 rest2.owner &&= '<ANONYMOUS>'; // <ANONYMOUS>
 console.log(rest1);
 console.log(rest2);
+*/
