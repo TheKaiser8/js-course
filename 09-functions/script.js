@@ -230,6 +230,7 @@ const taxRate25 = addTaxRate(0.23);
 console.log(taxRate25(100));
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 8: Immediately Invoked Function Expressions (IIFE) (Sez. 10, Lez. 136)
 // Funzioni di cui abbiamo bisogno che vengano eseguite una sola volta e poi mai più
@@ -249,3 +250,30 @@ runOnce(); // viene invocata quando ne abbiamo bisogno e quando vogliamo noi
 (() => console.log('This will ALSO never run again'))();
 
 // IIFE --> racchiudo tra parentesi e invoco immediatamente: (.....espressione di funzione.....)()
+*/
+
+//////////////////////////////////
+// LEZIONE 9: Closures (Sez. 10, Lez. 137)
+// Closure: NON è una feature che usiamo esplicitamente, NON le creiamo manualmente ma vengono create AUTOMATICAMENTE in determinate situazioni che dobbiamo conoscere e sapere riconoscere
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+// Chiamiamo la funzione e la salviamo in variabile:
+const booker = secureBooking(); // a questo punto secureBooking esce dallo stack di esecuzione ma booker ha comunque accesso alle sue variabili. La funzione booker nasce all'interno della funzione secureBooking
+
+booker(); // 1 passengers
+booker(); // 2 passengers
+booker(); // 3 passengers
+
+// *** N.B. Una CLOSURE fa sì che una funzione ricordi essenzialmente tutte le variabili che esistevano nel luogo di nascita della funzione. Qualsiasi funzione ha sempre accesso al VARIABLE ENVIRONMENT dell'EXECUTION CONTEXT nel quale è stata creata, quindi CLOSURE rappresenta una sorta di connesione tra VARIABLE ENVIRONMENT e la funzione
+
+// *** CLOSURE ha PRIORITà sullo SCOPE CHAIN anche se la variabile che cerca si trova nell'ambito globale, prima verrà cercata in CLOSURE
+
+// NON abbiamo modo di accedere alle CLOSURE perché NON sono TANGIBILI, però possiamo vedere qualche dettaglio di questa proprietà interna della funzioni:
+console.dir(booker); // [[Scopes]] --> visualizzabile solo in EDGE e CHROME, le doppie parentesi indicano che sono proprietà interne alla funzione stessa
