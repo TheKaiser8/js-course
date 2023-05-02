@@ -993,3 +993,39 @@ planesInLine(5);
 planesInLine(3);
 planesInLine(12);
 */
+
+//////////////////////////////////
+// LEZIONE 19: String Methods Practice (Sez. 9, Lez. 125)
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// Output da ottenere:
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+// Creo funzione getCode per ottenere il codice dell'aeroporto (REFACTORING)
+const getCode = function (str) {
+  return str.slice(0, 3).toUpperCase();
+};
+// in arrow function:
+// const getCode = str => str.slice(0, 3).toUpperCase();
+
+// divido le stringhe per distiguere i voli creando un array:
+console.log(flights.split('+'));
+
+for (const flight of flights.split('+')) {
+  console.log(flight.split(';')); // divido per ottenere le informazioni di ogni volo
+  const [type, from, to, time] = flight.split(';');
+  // console.log(type, from, to, time);
+  // Delayed non è ancora stato modificato per cui va aggiunto l'underscore davanti per far sì che possa essere introdotta l'emoji all'inizio della stringa
+  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll(
+    '_',
+    ' '
+  )} from ${getCode(from)} to ${getCode(to)} (${time.replace(
+    ':',
+    'h'
+  )})`.padStart(45); // non specifichiamo il carattere di padding string perché lo spazio vuoto è di DEFAULT
+  console.log(output);
+}

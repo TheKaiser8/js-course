@@ -25,6 +25,7 @@
 
 // Afterwards, test with your own test data!
 
+/*
 document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
 const converterBtn = document.querySelector('button');
@@ -88,3 +89,4 @@ document.querySelector('button').addEventListener('click', function () {
     console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
   }
 });
+*/
