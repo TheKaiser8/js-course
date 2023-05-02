@@ -639,6 +639,7 @@ console.log(
 console.log(new Set('Jonasschmedtmann').size); // 11
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 13: Maps: Fundamentals (Sez. 9, Lez. 117)
 // MAPS (introdotte in ES6): struttura dati, molto più utile dei SETS, che possiamo usare per mappare i valori alle chiavi come negli oggetti (chiave: valore)
@@ -703,3 +704,56 @@ console.log(rest.get(arr)); // Test
 // Questo può essere molto utile con i DOM ELEMENTS che sono un tipo speciale di oggetto:
 rest.set(document.querySelector('h1'), 'Heading');
 console.log(rest);
+*/
+
+////////////////////////////////////
+// LEZIONE 14: Maps: Iteration (Sez. 9, Lez. 118)
+// Metodo migliore per popolare una MAPPA:
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try again!'],
+]);
+console.log(question); // la struttura dati è un array composto da array esattamente come la chiamata Object.entries()
+console.log(Object.entries(restaurant.openingHours));
+
+// Quindi è un metodo per convertire un OGGETTO in MAPPA:
+const hoursMap = new Map(Object.entries(restaurant.openingHours));
+console.log(hoursMap);
+
+// Convertire MAPPA in ARRAY:
+console.log([...hoursMap]);
+console.log([...question]);
+// con metodi per ottenere chiave e valore:
+console.log([...hoursMap.keys()]); // [ "thu", "fri", "sat" ]
+console.log([...hoursMap.values()]);
+console.log([...question.keys()]); // [ "question", 1, 2, 3, "correct", true, false ]
+console.log([...question.values()]); // [ "What is the best programming language in the world?", "C", "Java", "JavaScript", 3, "Correct 🎉", "Try again!" ]
+
+// QUIZ APP:
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+
+// const answer = Number(prompt('Your answer:'));
+const answer = 3; // variabile per non essere infastiditi dal prompt
+
+// soluzione con blocco if / else:
+// if (answer === 3) {
+//   console.log(question.get(true));
+// } else {
+//   console.log(question.get(false));
+// }
+
+// soluzione con operatore ternario:
+// console.log(
+//   question.get('correct') === answer ? question.get(true) : question.get(false)
+// );
+
+// soluzione SENZA operatore ternario:
+console.log(question.get(question.get('correct') === answer));
