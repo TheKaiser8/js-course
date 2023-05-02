@@ -921,6 +921,7 @@ checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection');
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 18: Working With Strings - Part 3 (Sez. 9, Lez. 123)
 // split() è uno dei metodi più potenti che ci consente di dividere una stringa in più parti in base ad un divisore di stringa
@@ -991,3 +992,4 @@ const planesInLine = function (n) {
 planesInLine(5);
 planesInLine(3);
 planesInLine(12);
+*/
