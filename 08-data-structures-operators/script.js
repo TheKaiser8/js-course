@@ -575,6 +575,7 @@ for (const [key, { open, close }] of entries) {
 }
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 12: Sets (Sez. 9, Lez. 116)
 // Sets (introdotti in ES6): struttura dati che raccoglie valori unici, un set non può avere duplicati. Sono ITERABILI e sono simili agli array
@@ -636,3 +637,69 @@ console.log(
 
 // Sapere quante lettere non duplicate ci sono in una stringa:
 console.log(new Set('Jonasschmedtmann').size); // 11
+*/
+
+////////////////////////////////////
+// LEZIONE 13: Maps: Fundamentals (Sez. 9, Lez. 117)
+// MAPS (introdotte in ES6): struttura dati, molto più utile dei SETS, che possiamo usare per mappare i valori alle chiavi come negli oggetti (chiave: valore)
+
+// *** DIFFERENZA tra MAPS e OGGETTI? Negli oggetti le chiavi sono fondamentalmente sempre stringhe, ma in MAPS le chiavi possono essere anche oggetti, array o altre MAPS
+
+// Come creare una mappa semplicemente:
+const rest = new Map(); // creo una mappa vuota
+rest.set('name', 'Classico Italiano'); // utilizzare il metodo set(), in cui verrano passati gli argomenti (chiave, valore), per riempire la mappa (metodo set() per aggiungere elementi in MAP, come add per SET)
+// Aggiungo 2 sedi del ristorante:
+rest.set(1, 'Firenze, Italy');
+rest.set(2, 'Lisbon, Portugal');
+
+// set() method permette di modificare la mappa e di restituire immediatamente la mappa aggiornata, per cui possiamo concatenere i metodi (CHAINING METHODS)
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open :D')
+  .set(false, 'We are closed :(');
+console.log(rest);
+
+// Leggere i dati da una MAPPA (get() method) passando la chiave che si desidera leggere:
+console.log(rest.get('name')); // Classico Italiano
+console.log(rest.get(true)); // We are open :D
+console.log(rest.get(1)); // Firenze, Italy
+
+const time = 21;
+console.log(rest.get(time >= 11 && time < 23 ? true : false));
+// il risultato dell'operazione (true or false) sarà mappato su uno dei valori impostati nella mappa è andra a prendere il valore corrispondente a true or false
+console.log(rest.get(time >= rest.get('open') && time < rest.get('close')));
+// Passaggi dell'operazione mappata:
+// console.log(rest.get(true && true));
+// console.log(rest.get(true));
+// console.log('We are open :D');
+
+// *** N.B. è molto utile avere valori booleani nelle mappe, ma non bisogna abusarne per non avere un codice poco illegibile
+
+// Controllare se una MAPPA CONTIENE una certa chiave:
+console.log(rest.has('categories')); // true
+
+// Eliminare un elemento da una mappa attraverso la sua chiave:
+rest.delete(2);
+console.log(rest);
+
+// Sapere quante POSIZIONI ha la mappa:
+console.log(rest.size); // 7
+
+// Eliminare (pulire) tutti gli elementi da una mappa:
+// rest.clear();
+// console.log(rest); // {}
+
+// ARRAY o OGGETTI come CHIAVI delle MAPPE:
+rest.set([1, 2], 'Test');
+console.log(rest);
+console.log(rest.get([1, 2])); // undefined, perché l'array aggiunto come chiave con il metodo set e questo che stiamo cercando di ottenere NON sono in realtà lo stesso oggetto nell'HEAP
+// Per ovviare a questo bisogna creare una variabile di quell'array in modo tale che la memoria di JS faccia sempre riferimento a quella variabile
+const arr = [1, 2];
+rest.set(arr, 'Test');
+console.log(rest.get(arr)); // Test
+
+// Questo può essere molto utile con i DOM ELEMENTS che sono un tipo speciale di oggetto:
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
