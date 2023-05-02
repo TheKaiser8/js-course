@@ -8,6 +8,7 @@
 // 3. Compute and log the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
 // 4. Loop over 'gameEvents' and log each element to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this: [FIRST HALF] 17: ⚽ GOAL
 
+/*
 const gameEvents = new Map([
   [17, '⚽ GOAL'],
   [36, '🔁 Substitution'],
@@ -62,3 +63,4 @@ for (const [min, event] of gameEvents) {
   const half = min <= 45 ? 'FIRST' : 'SECOND';
   console.log(`[${half} HALF] ${min}: ${event}`);
 }
+*/

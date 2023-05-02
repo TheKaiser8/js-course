@@ -763,3 +763,56 @@ console.log(question.get(question.get('correct') === answer));
 //////////////////////////////////
 // LEZIONE 15: Summary: Which Data Structure to Use? (Sez. 9, Lez. 119)
 // vedi slide
+
+//////////////////////////////////
+// LEZIONE 16: Working With Strings - Part 1 (Sez. 9, Lez. 121)
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]); // A
+console.log('B737'[1]); // 7, passando direttamente la stringa
+
+console.log(airline.length); // 16
+console.log('B737'.length); // 4, passando direttamente la stringa
+
+// Metodi per le stringhe:
+// per ottenere la POSIZIONE di una certa LETTERA (la prima che viene trovata):
+console.log(airline.indexOf('r')); // 6
+
+// per ottenere la POSIZIONE di una certa LETTERA (l'ultima che viene trovata):
+console.log(airline.lastIndexOf('r')); // 10
+
+// per ottenere la POSIZIONE INIZIALE di una certa PAROLA (la prima che viene trovata):
+console.log(airline.indexOf('Portugal')); // 8
+console.log(airline.indexOf('portugal')); // -1, è CASE SENSITIVE, per cui con la lettera iniziale minuscola non viene trovata la parola e restituisce -1
+
+// SLICE METHOD: estrarre parte di una stringa usando come argomenti gli indici di essa
+console.log(airline.slice(4)); // Air Portugal
+console.log(airline.slice(4, 7)); // Air, specifichiamo come argomenti: parametro di INIZIO e di FINE (il paramentro di FINE NON INCLUDE la posizione stessa (quindi si ferma all'indice 6))
+
+// Estrarre parola di una stringa NON conoscendo gli indici:
+console.log(airline.slice(0, airline.indexOf(' '))); // TAP, trovo l'indice dello spazio vuoto e ottengo l'indice che rappresenta il parametro di FINE della parola
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Portugal, trovo l'indice dell'ULTIMO spazio vuoto e aggiungo 1 per NON INCLUDERE l'indice dello spazio vuoto come parametro di INIZIO
+
+// Con parametri NEGATIVI posso estrarre partendo dalla FINE della stringa:
+console.log(airline.slice(-2)); // al
+console.log(airline.slice(1, -1)); // AP Air Portuga, parte da indice 1 e finisce al penultimo indice
+
+// Creo funzione che controlla se il sedile di un aereo si trova in posizione centrale o meno:
+const checkMiddleSeat = function (seat) {
+  // B e E sono sedili intermedi (centrali)
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log(`${seat} is a middle seat`);
+  } else {
+    console.log(`${seat} isn't a middle seat`);
+  }
+};
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+// *** N.B. Le stringhe sono PRIMITIVE per cui non dovrebbero avere metodi disponibili (come invece hanno gli oggetti), però JS riconosce quando viene chiamato un metodo su una stringa è dietro le quinte converte la PRIMITIVA stringa in un OGGETTO STRINGA secondo un processo chiamato BOXING(primitive string --> object string --> string method --> primitive string):
+console.log(new String('Jonas')); // processo dietro le quinte di JS (Conversione da primitiva a oggetto)
+console.log(typeof new String('Jonas')); // object
+console.log(typeof new String('Jonas').slice(1)); // string
