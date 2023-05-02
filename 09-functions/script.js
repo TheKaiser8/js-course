@@ -110,6 +110,7 @@ document.body.addEventListener('click', high5); // funzione evento DOM che gener
 // *** N.B. L'utilizzo di FUNZIONI di CALLBACK rende più semplice scrivere il codice in parti riutilizzabili e interconnesse, ma soprattutto permette la creazione di ASTRAZIONI ad un livello più elevato. La funzione HIGHER-ORDER, nel nostro caso, non si preoccupa di come avviene la trasformazione della stringa (richiama semplicemente la funzione che avviene ad un livello di astrazione inferiore)
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 5: Functions Returning Functions (Sez. 10, Lez. 132)
 const greet = function (greeting) {
@@ -129,3 +130,51 @@ const greetArrowFunction = greeting => name =>
   console.log(`${greeting} ${name}`);
 
 greetArrowFunction('Ciao')('Jonas');
+*/
+
+//////////////////////////////////
+// LEZIONE 6: The call and apply Methods (Sez. 10, Lez. 133)
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  // book: function() {} // vecchia sintassi
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  }, // sintassi migliorata
+};
+lufthansa.book(239, 'Jonas Schmedtmann');
+lufthansa.book(635, 'John Smith');
+console.log(lufthansa);
+
+// Simuliamo che il gruppo Lufthansa abbia creato una nuova compagnia (i nomi delle proprietà oggetto devono essere gli stessi):
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// book(23, 'Sarah Williams'); // this punterà ad undefined per cui non funzionerà
+
+// *** Ci sono 2 metodi per dire a JS come dev'essere la keyvword THIS: 3 function methods
+// 1) CALL
+// 2) APPLY
+// 3) BIND (ASSOCIAZIONE)
+
+// 1) CALL METHOD
+book.call(eurowings, 23, 'Sarah Williams'); // il PRIMO ARGOMENTO è quello che specifica dove deve puntare la parola chiave THIS
+book.call(lufthansa, 239, 'Mary Cooper');
+
+// 2) APPLY METHOD: come CALL METHOD, ma invece degli argomenti accetta un ARRAY di argomenti
+book.apply(lufthansa, [453, 'David Jones']); // array NON salvato in variabile
+
+const flightData = [249, 'Walter Francis'];
+book.apply(lufthansa, flightData); // CON array SALVATO in variabile
+
+// *** APPLY METHOD non è più utilizzato in JS moderno, si utilizza CALL METHOD passando un'array di argomenti espansi con l'utilizzo dello spread operator
+book.call(eurowings, ...flightData);
