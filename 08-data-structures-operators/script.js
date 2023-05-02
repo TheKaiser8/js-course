@@ -574,3 +574,65 @@ for (const [key, { open, close }] of entries) {
   console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
 */
+
+////////////////////////////////////
+// LEZIONE 12: Sets (Sez. 9, Lez. 116)
+// Sets (introdotti in ES6): struttura dati che raccoglie valori unici, un set non può avere duplicati. Sono ITERABILI e sono simili agli array
+// *** DIFFERENZA SET e ARRAY: nel SET gli elementi sono UNICI e l'ordine degli elementi è irrilevante come per gli oggetti
+const arr = [1, 2, 4, 5];
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]); // passiamo come argomento un iterabile
+console.log(ordersSet); // ['Pasta', 'Pizza', 'Risotto']
+
+// Anche le stringhe sono iterabili:
+console.log(new Set('Jonas')); // [ "J", "o", "n", "a", "s" ]
+
+// Ottenere la dimensione di un set (size per SET, length per gli ARRAY):
+console.log(ordersSet.size); // 3
+console.log(arr.length); // 4
+
+// Controllare se un elemento si trova in un set (has() method) (has per SET, includes per gli ARRAY):
+console.log(ordersSet.has('Pizza')); // true
+console.log(ordersSet.has('Bread')); // false
+console.log(arr.includes(4)); // true
+console.log(arr.includes(3)); // false
+
+// Aggiungere nuovi elementi a un set (add per SET, push per gli ARRAY):
+console.log(ordersSet.add('Garlic bread')); // [ "Pasta", "Pizza", "Risotto", "Garlic bread" ]
+
+// Eliminare elementi da un set:
+ordersSet.delete('Risotto');
+console.log(ordersSet); // [ "Pasta", "Pizza", "Garlic bread" ]
+
+// Eliminare (pulire) tutti gli elementi da un set:
+// ordersSet.clear();
+// console.log(ordersSet); // []
+
+// *** N.B. Se ho bisogno di usare i valori NON utilizzo un SET, ma utilizzo un array perché in un set non ci sono indici e non c'è modo per ottenere i valori
+
+for (const order of ordersSet) console.log(order);
+
+// Caso d'uso principale dei SET: rimuovere valori duplicati da un array
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+// esempio: ci interessa sapere i ruoli in un ristorante
+const staffUnique = new Set(staff);
+console.log(staffUnique); // ['Waiter', 'Chef', 'Manager'];
+
+// Trasformare il SET in un ARRAY (si può fare perché sono entrambi ITERABILI):
+const staffUniqueArray = [...new Set(staff)]; // creo un array e decomprimo l'intero set usando lo spread operator che prende tutti gli elementi dall'iterabile e li scrive nell'array separati da virgole
+console.log(staffUniqueArray);
+
+// Sapere quante posizioni non duplicate ci sono un array senza crearne uno senza duplicati:
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+); // 3
+
+// Sapere quante lettere non duplicate ci sono in una stringa:
+console.log(new Set('Jonasschmedtmann').size); // 11

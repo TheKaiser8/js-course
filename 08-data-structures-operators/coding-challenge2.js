@@ -17,6 +17,7 @@
 // Lewandowski: 2
 // }
 
+/*
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borussia Dortmund',
@@ -114,3 +115,4 @@ for (const player of game.scored) {
   scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
 console.log(scorers);
+*/
