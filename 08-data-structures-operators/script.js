@@ -519,6 +519,7 @@ if (users.length > 0) {
 }
 */
 
+/*
 ////////////////////////////////////
 // LEZIONE 11: Looping Objects: Object Keys, Values, and Entries (Sez. 9, Lez. 114)
 const openingHours = {
@@ -572,3 +573,4 @@ for (const x of entries) {
 for (const [key, { open, close }] of entries) {
   console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
+*/
