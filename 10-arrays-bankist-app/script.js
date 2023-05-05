@@ -75,6 +75,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+/*
 //////////////////////////////////
 // LEZIONE 1: Simple Array Methods (Sez. 11, Lez. 142)
 // RICORDA: I metodi sono funzioni che possiamo chiamare sugli oggetti e gli array sono fondamentalmente oggetti
@@ -118,3 +119,24 @@ console.log([...arr, ...arr2]); // [ "a", "b", "c", "d", "e", "f", "g", "h", "i"
 
 // JOIN METHOD: per scrivere l'array sotto forma di stringa decidendo il separatore
 console.log(letters.join(' - '));
+*/
+
+//////////////////////////////////
+// LEZIONE 2: The new at Method (Sez. 11, Lez. 143)
+const arr = [23, 11, 64];
+
+// Ottenere il PRIMO ELEMENTO:
+console.log(arr[0]); // valore del primo elemento dell'array --> 23
+// con AT method otteniamo la stessa cosa:
+console.log(arr.at(0)); // --> 23, come se indicassimo: arr at position zero
+
+// Ottenere l'ULTIMO ELEMENTO:
+console.log(arr[arr.length - 1]); // --> 64, ultimo elemento dell'array se non conosciamo la sua posizione
+console.log(arr.slice(-1)); // --> Array [ 64 ], otteniamo una copia dell'array con solo l'ultimo elemento
+// --> per ottenere il solo valore è sufficiente aggiungere l'indice dopo il metodo slice:
+console.log(arr.slice(-1)[0]); // --> 64 con SLICE METHOD
+console.log(arr.at(-1)); // --> 64 con AT METHOD
+
+// AT METHOD funziona anche per le STRINGHE:
+console.log('jonas'.at(0)); // --> j
+console.log('jonas'.at(-1)); // --> s
