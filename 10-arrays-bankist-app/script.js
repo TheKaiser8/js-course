@@ -65,11 +65,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -143,6 +143,7 @@ console.log('jonas'.at(0)); // --> j
 console.log('jonas'.at(-1)); // --> s
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 3: Looping Arrays: forEach (Sez. 11, Lez. 144)
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -203,3 +204,24 @@ movements.forEach(function (movement, index, array) {
 });
 
 // *** IMPORTANTE: le istruzioni BREAK e CONTINUE NON funzionano con il ciclo FOR-EACH, verrà SEMPRE ESEGUITO il ciclo per intero, per cui se ho necessità di uscire o interrompere il ciclo dovrò utilizzare il ciclo FOR-OF
+*/
+
+//////////////////////////////////
+// LEZIONE 4: forEach With Maps and Sets (Sez. 11, Lez. 145)
+const currencies = new Map([
+  ['USD', 'United States dollar'], // rappresentano: [key, value]
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+// ARGOMENTI FOREACH con MAPS: 1°: valore, 2°: chiave, 3°: map
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// ARGOMENTI FOREACH con SETS: un set non ha chiavi, ma gli argomenti da passare rimangono gli stessi con lo stesso ordine per evitare confusione (utilizziamo l'underscore come variabile usa e getta (non necessaria) come nome del 2° argomento)
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR']); // creo il set
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value}: ${value}`);
+});
