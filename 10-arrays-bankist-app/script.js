@@ -71,7 +71,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -121,6 +121,7 @@ console.log([...arr, ...arr2]); // [ "a", "b", "c", "d", "e", "f", "g", "h", "i"
 console.log(letters.join(' - '));
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 2: The new at Method (Sez. 11, Lez. 143)
 const arr = [23, 11, 64];
@@ -140,3 +141,65 @@ console.log(arr.at(-1)); // --> 64 con AT METHOD
 // AT METHOD funziona anche per le STRINGHE:
 console.log('jonas'.at(0)); // --> j
 console.log('jonas'.at(-1)); // --> s
+*/
+
+//////////////////////////////////
+// LEZIONE 3: Looping Arrays: forEach (Sez. 11, Lez. 144)
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Soluzione con ciclo FOR-OF:
+console.log('-----> ciclo FOR-OF <-----');
+for (const movement of movements) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`); // metodo Math.abs() per prendere il valore assoluto (rimuove il segno)
+  }
+}
+
+// Per ottenere anche l'INDEX (metodo entries()):
+// Nel FOR-OF il 1° elemento nella destrutturazione è l'indice e il 2° l'elemento corrente
+console.log('-----> ciclo FOR-OF con INDEX <-----');
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement n° ${i + 1}: you deposited ${movement}`);
+  } else {
+    console.log(`Movement n° ${i + 1}: you withdrew ${Math.abs(movement)}`); // metodo Math.abs() per prendere il valore assoluto (rimuove il segno)
+  }
+}
+
+// Soluzione con ciclo FOR-EACH:
+// ciclo forEach richiede una funzione di CALLBACK che ha come argomento l'elemento dell'array che viene richiamato ad ogni iterazione
+console.log('-----> ciclo FOR-EACH <-----');
+movements.forEach(function (movement) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`); // metodo Math.abs() per prendere il valore assoluto (rimuove il segno)
+  }
+});
+
+// forEach con ARROW FUNCTION come FUNZIONE DI CALLBACK:
+console.log(
+  '-----> ciclo FOR-EACH con ARROW FUNCTION come FUNZIONE DI CALLBACK <-----'
+);
+movements.forEach(movement => {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`); // metodo Math.abs() per prendere il valore assoluto (rimuove il segno)
+  }
+});
+
+// forEach passa anche l'INDEX e l'intero ARRAY:
+// *** Come sempre i nomi dei parametri possono essere a piacere, ma è FONDAMENTALE l'ORDINE degli ARGOMENTI PASSATI (1°: elemento corrente. 2°: indice, 3°: intero array)
+console.log('-----> ciclo FOR-EACH con INDEX <-----');
+movements.forEach(function (movement, index, array) {
+  if (movement > 0) {
+    console.log(`Movement n° ${index + 1}: you deposited ${movement}`);
+  } else {
+    console.log(`Movement n° ${index + 1}: you withdrew ${Math.abs(movement)}`); // metodo Math.abs() per prendere il valore assoluto (rimuove il segno)
+  }
+});
+
+// *** IMPORTANTE: le istruzioni BREAK e CONTINUE NON funzionano con il ciclo FOR-EACH, verrà SEMPRE ESEGUITO il ciclo per intero, per cui se ho necessità di uscire o interrompere il ciclo dovrò utilizzare il ciclo FOR-OF
