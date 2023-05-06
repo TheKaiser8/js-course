@@ -61,6 +61,37 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+//////////////////////////////////
+// LEZIONE 5: PROJECT: "Bankist" App (Sez. 11, Lez. 146)
+// Spiegazione progetto
+
+//////////////////////////////////
+// LEZIONE 6: Creating DOM Elements (Sez. 11, Lez. 147)
+
+// GOOD PRACTICE: Creiamo una funzione a cui passiamo i dati per visualizzare i movimenti bancari invece di creare una variabile globale
+const displayMovements = function (movements) {
+  // per non avere i movimenti creati di default durante la scrittura dell'HTML svuotiamo il ccntainer dei movimenti
+  containerMovements.innerHTML = ''; // .textContent restituisce solo il testo, innerHTML restituisce tutto, HTML incluso
+
+  movements.forEach(function (mov, i) {
+    // creiamo variabile per definire la tipologia di movimento
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    // creazione html con template literal:
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${mov}€</div>
+      </div>
+    `;
+    // il metodo insertAdjacentHTML() accetta 2 argomenti (positione e testo)
+    containerMovements.insertAdjacentHTML('afterbegin', html); // utilizzo afterbegin per fare in modo che l'elemento più recente sia in cima e non al fondo
+  });
+};
+displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -206,6 +237,7 @@ movements.forEach(function (movement, index, array) {
 // *** IMPORTANTE: le istruzioni BREAK e CONTINUE NON funzionano con il ciclo FOR-EACH, verrà SEMPRE ESEGUITO il ciclo per intero, per cui se ho necessità di uscire o interrompere il ciclo dovrò utilizzare il ciclo FOR-OF
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 4: forEach With Maps and Sets (Sez. 11, Lez. 145)
 const currencies = new Map([
@@ -225,3 +257,4 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
+*/
