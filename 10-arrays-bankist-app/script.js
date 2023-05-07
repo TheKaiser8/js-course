@@ -258,3 +258,52 @@ currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
 */
+
+//////////////////////////////////
+// LEZIONE 7: Data Transformations: map, filter, reduce (Sez. 11, Lez. 149)
+// Vedi slide
+
+//////////////////////////////////
+// LEZIONE 8: The map Method (Sez. 11, Lez. 150)
+// Map method è un altro modo per eseguire un ciclo su un array ma creando un nuovo array
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Supponiamo che i valori siano espressi in € e vogliamo convertirli in $:
+const eurToUsd = 1.1; // tasso di conversione
+
+// con MAP method (è più orientato verso la PROGRAMMAZIONE FUNZIONALE):
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * eurToUsd; // ad ogni iterazione restituiamo questo calcolo
+// });
+// con ARROW FUNCTION, avendo una sola istruzione, possiamo diminuire la quantità di codice :
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+console.log(movements); // l'array originale non viene cambiato
+console.log(movementsUSD); // map method restituisce un nuovo array
+
+// con FOR-OF loop:
+const movementsUSDforOf = [];
+for (const mov of movements) {
+  const movUSD = mov * eurToUsd;
+  movementsUSDforOf.push(movUSD);
+}
+console.log(movementsUSDforOf);
+
+// Vogliamo ottenere un array contenente tutte le stringhe (restituiamo il valore della stringa):
+// const movementsDescriptions = movements.map((mov, i) => {
+//   if (mov > 0) {
+//     return `Movement n° ${i + 1}: you deposited ${mov}`;
+//   } else {
+//     return `Movement n° ${i + 1}: you withdrew ${Math.abs(mov)}`; // metodo Math.abs() per prendere il valore assoluto (rimuove il segno)
+//   }
+// });
+
+// REFACTORING (con l'operatore ternario posso restituire implicitamente il valore della ARROW FUNCTION):
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement n° ${i + 1}: you ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+console.log(movementsDescriptions);

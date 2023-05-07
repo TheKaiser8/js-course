@@ -17,6 +17,7 @@
 
 // Hints: Use tools from all lectures in this section so far 😉
 
+/*
 const juliaData1 = [3, 5, 2, 12, 7];
 const kateData1 = [4, 1, 15, 8, 3];
 const juliaData2 = [9, 16, 6, 8, 3];
@@ -44,3 +45,4 @@ const checkDogs = function (dogsJulia, dogsKate) {
 };
 checkDogs(juliaData1, kateData1); // Data 1
 checkDogs(juliaData2, kateData2); // Data 2
+*/
