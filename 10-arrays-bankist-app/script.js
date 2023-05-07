@@ -92,6 +92,67 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+//////////////////////////////////
+// LEZIONE 9: Computing Usernames (Sez. 11, Lez. 151)
+
+// Calcolo l'username ottenendo le iniziali del nome utente
+const user = 'Steven Thomas Williams';
+// con SPLIT method ottengo un array con le parole che compongono il nome, per cui posso utilizzare i metodi per fare i cicli sull'array: MAP method --> ciclo sull'array e ottengo un array di lettere (la prima lettera di ogni parola), JOIN method per unire le lettere e formare la stringa come username
+// const username = user
+//   .toLowerCase()
+//   .split(' ')
+//   .map(function (name) {
+//     return name[0];
+//   })
+//   .join('');
+// console.log(username); // stw
+
+// con ARROW FUNCTION come funzione di CALLBACK:
+const usernameTest = user
+  .toLowerCase()
+  .split(' ')
+  .map(name => name[0])
+  .join('');
+console.log(usernameTest); // stw
+
+// con ciclo FOR-OF lo faremmo in questo modo
+// const username = user.toLowerCase().split(' ');
+
+// let usernameCorrect = '';
+// for (const name of username) {
+//   usernameCorrect += name[0];
+// }
+// console.log(usernameCorrect); // stw
+
+// Creo funzione che riceve il nome completo di un utente per CREARE USERNAME:
+// const createUsernames = function (user) {
+//   const username = user
+//     .toLowerCase()
+//     .split(' ')
+//     .map(name => name[0])
+//     .join('');
+//   return username;
+// };
+// console.log(createUsernames(account1.owner));
+// console.log(createUsernames(account2.owner));
+// console.log(createUsernames(account3.owner));
+// console.log(createUsernames(account4.owner));
+
+// Creo funzione che riceve tutti gli account per CREARE la proprietà USERNAME:
+const createUsernames = function (accs) {
+  // NON vogliamo creare un nuovo array, ma modificare quello già esistente, per cui utilizziamo il FOR-EACH:
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+  // non restituiamo nulla perché stiamo solamente modificando un oggetto, ossia creando un effetto collaterale, e NON stiamo creando un nuovo valore da restituire
+};
+createUsernames(accounts);
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -263,6 +324,7 @@ currenciesUnique.forEach(function (value, _, map) {
 // LEZIONE 7: Data Transformations: map, filter, reduce (Sez. 11, Lez. 149)
 // Vedi slide
 
+/*
 //////////////////////////////////
 // LEZIONE 8: The map Method (Sez. 11, Lez. 150)
 // Map method è un altro modo per eseguire un ciclo su un array ma creando un nuovo array
@@ -307,3 +369,4 @@ const movementsDescriptions = movements.map(
     )}`
 );
 console.log(movementsDescriptions);
+*/
