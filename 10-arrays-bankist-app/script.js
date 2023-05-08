@@ -370,3 +370,24 @@ const movementsDescriptions = movements.map(
 );
 console.log(movementsDescriptions);
 */
+
+/////////////////////////////////
+// LEZIONE 10: The filter Method (Sez. 11, Lez. 152)
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// con FILTER method:
+const deposits = movements.filter(function (mov) {
+  return mov > 0; // depositi sono i movimenti con valore maggiore di 0
+});
+console.log(deposits); // [ 200, 450, 3000, 70, 1300 ]
+
+// con FOR-OF loop:
+const depositForLoop = [];
+for (const mov of movements) if (mov > 0) depositForLoop.push(mov);
+console.log(depositForLoop); // [ 200, 450, 3000, 70, 1300 ]
+
+// *** La grande DIFFERENZA tra usare un ciclo FOR e un METODO come FILTER è che nel secondo caso, oltre ad essere una programmazione di tipo funzionale, è possibile concatenare più metodi
+
+// ottengo i prelevamenti (withdrawals):
+const withdrawals = movements.filter(mov => mov < 0); // con ARROW FUNCTION
+console.log(withdrawals); // [ -400, -650, -130 ]
