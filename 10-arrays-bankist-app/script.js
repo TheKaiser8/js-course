@@ -93,6 +93,15 @@ const displayMovements = function (movements) {
 displayMovements(account1.movements);
 
 //////////////////////////////////
+// LEZIONE 11: The reduce Method (Sez. 11, Lez. 153)
+// Funzione per stampare in pagina il saldo corrente
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} €`;
+};
+calcDisplayBalance(account1.movements);
+
+//////////////////////////////////
 // LEZIONE 9: Computing Usernames (Sez. 11, Lez. 151)
 
 // Calcolo l'username ottenendo le iniziali del nome utente
@@ -371,6 +380,7 @@ const movementsDescriptions = movements.map(
 console.log(movementsDescriptions);
 */
 
+/*
 /////////////////////////////////
 // LEZIONE 10: The filter Method (Sez. 11, Lez. 152)
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -391,3 +401,39 @@ console.log(depositForLoop); // [ 200, 450, 3000, 70, 1300 ]
 // ottengo i prelevamenti (withdrawals):
 const withdrawals = movements.filter(mov => mov < 0); // con ARROW FUNCTION
 console.log(withdrawals); // [ -400, -650, -130 ]
+*/
+
+//////////////////////////////////
+// LEZIONE 11: The reduce Method (Sez. 11, Lez. 153)
+// Metodo REDUCE per ridurre gli elementi di un array ad un singolo valore
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Otteniamo il saldo (balance) del conto:
+// REDUCE method accetta come 1° argomento una funzione di callback leggermente diversa dalle altre (come 1° parametro, la funzione di CALLBACK, accetta un accumulatore) e come 2° argomento il valore iniziale dell'accumulatore
+// const balance = movements.reduce(function (acc, curr, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + curr;
+// }, 0);
+// console.log(balance); // 3840
+
+// con ARROW FUNCTION:
+const balance = movements.reduce((acc, curr, i, arr) => acc + curr, 0);
+console.log(balance); // 3840
+
+// con FOR-OF loop:
+let balance2 = 0;
+for (const mov of movements) {
+  balance2 += mov;
+}
+console.log(balance2); // 3840
+
+// N.B. REDUCE method ci permette di evitare di dichiarare una variabile extra e di restituire il valore direttamente
+
+// Ottenere valore MAX di un array:
+const maxValue = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]); // movements[0] è il valore iniziale dell'accumulatore (il primo elemento dell'array, quindi 200 in questo caso)
+console.log(maxValue); // 3000
+
+// *** REDUCE method è probabilmente il metodo per gli array più potente che esista
