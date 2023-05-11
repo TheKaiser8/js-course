@@ -403,6 +403,7 @@ const withdrawals = movements.filter(mov => mov < 0); // con ARROW FUNCTION
 console.log(withdrawals); // [ -400, -650, -130 ]
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 11: The reduce Method (Sez. 11, Lez. 153)
 // Metodo REDUCE per ridurre gli elementi di un array ad un singolo valore
@@ -437,3 +438,4 @@ const maxValue = movements.reduce((acc, mov) => {
 console.log(maxValue); // 3000
 
 // *** REDUCE method è probabilmente il metodo per gli array più potente che esista
+*/
