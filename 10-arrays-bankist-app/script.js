@@ -471,6 +471,7 @@ console.log(maxValue); // 3000
 // *** REDUCE method è probabilmente il metodo per gli array più potente che esista
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 12: The Magic of Chaining Methods (Sez. 11, Lez. 155)
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -500,3 +501,4 @@ console.log(`${testDebug.toFixed(2)} $`);
 // *** N.B. Avere accesso all'array (arr) corrente ci permette di controllare il risultato dell'operazione precedente (del filter method in questo caso)
 
 // *** Il CHAINING dei METODI è molto utile ma NON bisogna ABUSARNE. Concatenare più metodi in array molto grandi può causare problemi di performance (ottenere la funzionalità richiesta concatenando il minor numero di metodi possibile). Inoltre, è BAD PRACTICE concatenare metodi che mutano l'array originale sottostante (esempio: metodi splice e reverse)
+*/
