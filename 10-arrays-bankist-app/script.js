@@ -502,3 +502,21 @@ console.log(`${testDebug.toFixed(2)} $`);
 
 // *** Il CHAINING dei METODI è molto utile ma NON bisogna ABUSARNE. Concatenare più metodi in array molto grandi può causare problemi di performance (ottenere la funzionalità richiesta concatenando il minor numero di metodi possibile). Inoltre, è BAD PRACTICE concatenare metodi che mutano l'array originale sottostante (esempio: metodi splice e reverse)
 */
+
+//////////////////////////////////
+// LEZIONE 13: The find Method (Sez. 11, Lez. 157)
+// Find method permette di trovare un elemento in un array
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// come filter method, anche FIND method ha bisogno di una funzione di callback che ritorna un booleano (il risultato della condizione è vero o falso)
+// *** A DIFFERENZA di filter method, FIND method non restituirà un nuovo array, ma restituirà solo il primo elemento nell'array che soddisfa la condizione specificata
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal); // -400
+
+// FILTER restituisce un nuovo array con tutti gli elementi che soddisfano una data condizione
+// FIND restituisce solamente il primo elemento di un array che soddisfa una data condizione
+
+// FIND method è molto utile per ottenere dati in un array di oggetti
+// Supponiamo di voler ottenere un oggetto specifico mediante il nome del proprietario:
+const account = accounts.find(acc => acc.owner === 'Jessica Davis'); // in questo caso acc non sta per accumulatore ma per account!!!
+console.log(account); // Object { owner: "Jessica Davis", movements: (8) […], interestRate: 1.5, pin: 2222, username: "jd" }
