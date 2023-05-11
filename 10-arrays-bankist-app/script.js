@@ -102,6 +102,37 @@ const calcDisplayBalance = function (movements) {
 calcDisplayBalance(account1.movements);
 
 //////////////////////////////////
+// LEZIONE 12: The Magic of Chaining Methods (Sez. 11, Lez. 155)
+const calcDisplaySummary = function (movements) {
+  // Ottengo le entrate (IN):
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  console.log(incomes); // 5020
+  labelSumIn.textContent = `${incomes}€`;
+
+  // Ottengo le uscite (OUT):
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  console.log(out); // -1180
+  labelSumOut.textContent = `${Math.abs(out)}€`; // Math.abs() per eliminare il segno negativo ed estrapolare solamente il valore assoluto
+
+  // Ottengo il tasso di interesse (favorevole ad ogni deposito, quindi supponiamo che ogni deposito sia un investimento che fa maturare un tasso di interesse):
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(dep => (dep * account1.interestRate) / 100) // tasso di interesse in percentuale: 1.2 / 100
+    .filter((int, i, arr) => {
+      console.log(arr); // [ 2.4, 5.4, 36, 0.84, 15.6 ] il valore 0.84 verrà escluso dal filtro
+      return int >= 1;
+    }) // aggiungo metodo che rende valido il tasso di interesse solamente se è >= 1
+    .reduce((acc, int) => acc + int, 0);
+  console.log(interest);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
+
+//////////////////////////////////
 // LEZIONE 9: Computing Usernames (Sez. 11, Lez. 151)
 
 // Calcolo l'username ottenendo le iniziali del nome utente
@@ -439,3 +470,33 @@ console.log(maxValue); // 3000
 
 // *** REDUCE method è probabilmente il metodo per gli array più potente che esista
 */
+
+//////////////////////////////////
+// LEZIONE 12: The Magic of Chaining Methods (Sez. 11, Lez. 155)
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Supponiamo di voler prendere tutti i movimenti di deposito, di convertirli da € a $ e infine di sommarli per sapere quanto è il deposito sul conto in $:
+const eurToUsd = 1.1; // tasso di conversione
+
+// PIPELINE (sequenza di istruzioni a cascata)
+const totalDepositUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(`${totalDepositUSD.toFixed(2)} $`);
+
+// *** N.B. Si possono concatenare metodi purché restituiscano un array, il metodo REDUCE restituisce un valore, per cui non avremmo potuto concatenare un altro metodo
+
+// Il DEBUG di una pipeline può essere più complicato, per cui si possono utilizzare gli argomenti dei metodi per fare DEBUGGING:
+const testDebug = movements
+  .filter(mov => mov < 0)
+  .map((mov, i, arr) => {
+    console.log(arr);
+    return mov * eurToUsd;
+  })
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(`${testDebug.toFixed(2)} $`);
+
+// *** N.B. Avere accesso all'array (arr) corrente ci permette di controllare il risultato dell'operazione precedente (del filter method in questo caso)
+
+// *** Il CHAINING dei METODI è molto utile ma NON bisogna ABUSARNE. Concatenare più metodi in array molto grandi può causare problemi di performance (ottenere la funzionalità richiesta concatenando il minor numero di metodi possibile). Inoltre, è BAD PRACTICE concatenare metodi che mutano l'array originale sottostante (esempio: metodi splice e reverse)
