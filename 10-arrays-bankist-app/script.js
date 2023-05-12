@@ -90,7 +90,6 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html); // utilizzo afterbegin per fare in modo che l'elemento più recente sia in cima e non al fondo
   });
 };
-displayMovements(account1.movements);
 
 //////////////////////////////////
 // LEZIONE 11: The reduce Method (Sez. 11, Lez. 153)
@@ -99,38 +98,36 @@ const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} €`;
 };
-calcDisplayBalance(account1.movements);
 
 //////////////////////////////////
 // LEZIONE 12: The Magic of Chaining Methods (Sez. 11, Lez. 155)
-const calcDisplaySummary = function (movements) {
+const calcDisplaySummary = function (acc) {
   // Ottengo le entrate (IN):
-  const incomes = movements
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  console.log(incomes); // 5020
+  // console.log(incomes); // 5020
   labelSumIn.textContent = `${incomes}€`;
 
   // Ottengo le uscite (OUT):
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  console.log(out); // -1180
+  // console.log(out); // -1180
   labelSumOut.textContent = `${Math.abs(out)}€`; // Math.abs() per eliminare il segno negativo ed estrapolare solamente il valore assoluto
 
   // Ottengo il tasso di interesse (favorevole ad ogni deposito, quindi supponiamo che ogni deposito sia un investimento che fa maturare un tasso di interesse):
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(dep => (dep * account1.interestRate) / 100) // tasso di interesse in percentuale: 1.2 / 100
+    .map(dep => (dep * acc.interestRate) / 100) // tasso di interesse in percentuale, esempio: 1.2 / 100
     .filter((int, i, arr) => {
-      console.log(arr); // [ 2.4, 5.4, 36, 0.84, 15.6 ] il valore 0.84 verrà escluso dal filtro
+      // console.log(arr); // [ 2.4, 5.4, 36, 0.84, 15.6 ] il valore 0.84 verrà escluso dal filtro
       return int >= 1;
     }) // aggiungo metodo che rende valido il tasso di interesse solamente se è >= 1
     .reduce((acc, int) => acc + int, 0);
-  console.log(interest);
+  // console.log(interest);
   labelSumInterest.textContent = `${interest}€`;
 };
-calcDisplaySummary(account1.movements);
 
 //////////////////////////////////
 // LEZIONE 9: Computing Usernames (Sez. 11, Lez. 151)
@@ -153,7 +150,7 @@ const usernameTest = user
   .split(' ')
   .map(name => name[0])
   .join('');
-console.log(usernameTest); // stw
+// console.log(usernameTest); // stw
 
 // con ciclo FOR-OF lo faremmo in questo modo
 // const username = user.toLowerCase().split(' ');
@@ -191,7 +188,52 @@ const createUsernames = function (accs) {
   // non restituiamo nulla perché stiamo solamente modificando un oggetto, ossia creando un effetto collaterale, e NON stiamo creando un nuovo valore da restituire
 };
 createUsernames(accounts);
-console.log(accounts);
+// console.log(accounts);
+
+//////////////////////////////////
+// LEZIONE 14: Implementing Login (Sez. 11, Lez. 158)
+// Event handler:
+let currentAccount; // creiamo variabile al di fuori della funzione perché abbiamo bisogno di sapere l'account utilizzato anche per altre operazioni oltre a quella di login
+
+btnLogin.addEventListener('click', function (e) {
+  // Prevent form from submitting
+  e.preventDefault();
+  console.log('LOGIN'); // il pulsante è un elemento del form per cui avviene di default la ricarica della pagina al submit del form, per NON avere questo comportamento dobbiamo prevenire il comportamento degli eventi predefiniti aggiungendo l'evento come parametro della funzione di CALLBACK per ottenere l'accesso all'oggetto evento
+
+  // *** Se ci troviamo in uno dei campi input del form la pressione del tasto INVIO scatenerà automaticamente l'evento click sul pulsante submit del form
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  // con l'optional chaining possiamo controllare se l'account esiste prima di leggere la proprietà pin
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Mostro UI e messaggio di benvenuto
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`; // Utilizzo metodo split per ottenere solo il nome
+    containerApp.style.opacity = 100;
+
+    // Pulisco campi input:
+    // inputLoginUsername.value = '';
+    // inputLoginPin.value = '';
+    // OPPURE in una riga sola:
+    inputLoginUsername.value = inputLoginPin.value = ''; // perché assignment operator va da DX verso SX
+    // Togliere il focus (non risultano attivi) ai campi input (blur method) una volta effettuato il login:
+    inputLoginUsername.blur();
+    inputLoginPin.blur();
+
+    // Mostro movimenti
+    displayMovements(currentAccount.movements);
+
+    // Mostro saldo corrente
+    calcDisplayBalance(currentAccount.movements);
+
+    // Mostro sommario
+    calcDisplaySummary(currentAccount); // devo passare come parametro l'intero account perché oltre ai movimenti ho bisogno del tasso di interesse
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -503,6 +545,7 @@ console.log(`${testDebug.toFixed(2)} $`);
 // *** Il CHAINING dei METODI è molto utile ma NON bisogna ABUSARNE. Concatenare più metodi in array molto grandi può causare problemi di performance (ottenere la funzionalità richiesta concatenando il minor numero di metodi possibile). Inoltre, è BAD PRACTICE concatenare metodi che mutano l'array originale sottostante (esempio: metodi splice e reverse)
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 13: The find Method (Sez. 11, Lez. 157)
 // Find method permette di trovare un elemento in un array
@@ -520,3 +563,9 @@ console.log(firstWithdrawal); // -400
 // Supponiamo di voler ottenere un oggetto specifico mediante il nome del proprietario:
 const account = accounts.find(acc => acc.owner === 'Jessica Davis'); // in questo caso acc non sta per accumulatore ma per account!!!
 console.log(account); // Object { owner: "Jessica Davis", movements: (8) […], interestRate: 1.5, pin: 2222, username: "jd" }
+
+// Challenge con ciclo FOR-OF:
+for (const account of accounts) {
+  if (account.owner === 'Jessica Davis') console.log(account);
+}
+*/
