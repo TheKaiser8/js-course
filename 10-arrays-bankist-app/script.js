@@ -94,9 +94,10 @@ const displayMovements = function (movements) {
 //////////////////////////////////
 // LEZIONE 11: The reduce Method (Sez. 11, Lez. 153)
 // Funzione per stampare in pagina il saldo corrente
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} €`;
+const calcDisplayBalance = function (acc) {
+  // Creo proprietà sull'intero oggetto account per poter accedere al saldo corrente anche all'esterno della funzione
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance} €`;
 };
 
 //////////////////////////////////
@@ -192,6 +193,19 @@ createUsernames(accounts);
 
 //////////////////////////////////
 // LEZIONE 14: Implementing Login (Sez. 11, Lez. 158)
+
+// Creo funzione per racchiudere tutte le funzioni che aggiornano l'UI:
+const updateUI = function (acc) {
+  // Mostro movimenti
+  displayMovements(acc.movements);
+
+  // Mostro saldo corrente
+  calcDisplayBalance(acc);
+
+  // Mostro sommario
+  calcDisplaySummary(acc); // devo passare come parametro l'intero account perché oltre ai movimenti ho bisogno del tasso di interesse
+};
+
 // Event handler:
 let currentAccount; // creiamo variabile al di fuori della funzione perché abbiamo bisogno di sapere l'account utilizzato anche per altre operazioni oltre a quella di login
 
@@ -224,14 +238,50 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.blur();
     inputLoginPin.blur();
 
-    // Mostro movimenti
-    displayMovements(currentAccount.movements);
+    // // Mostro movimenti
+    // displayMovements(currentAccount.movements);
 
-    // Mostro saldo corrente
-    calcDisplayBalance(currentAccount.movements);
+    // // Mostro saldo corrente
+    // calcDisplayBalance(currentAccount.movements);
 
-    // Mostro sommario
-    calcDisplaySummary(currentAccount); // devo passare come parametro l'intero account perché oltre ai movimenti ho bisogno del tasso di interesse
+    // // Mostro sommario
+    // calcDisplaySummary(currentAccount); // devo passare come parametro l'intero account perché oltre ai movimenti ho bisogno del tasso di interesse
+
+    // Richiamo funzione (creata per non duplicare codice delle funzioni soprastanti)
+    updateUI(currentAccount);
+  }
+});
+
+//////////////////////////////////
+// LEZIONE 15: Implementing Transfers (Sez. 11, Lez. 159)
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log('TRANSFER');
+
+  // creo variabile per salvare l'importo di denaro da trasferire
+  const amount = Number(inputTransferAmount.value);
+  // creo variabile per salvare l'utente a cui trasferire l'importo
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  console.log(amount, receiverAcc);
+
+  // Puliamo i campi input (a prescindere dal successo dell'operazione di trasferimento):
+  inputTransferTo.value = inputTransferAmount.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    // console.log('Transfer valid');
+    // Effettuiamo il trasferimento:
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    // Aggiorniamo l'interfaccia utente:
+    updateUI(currentAccount);
   }
 });
 
