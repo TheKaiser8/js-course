@@ -285,6 +285,32 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+//////////////////////////////////
+// LEZIONE 16: The findIndex Method (Sez. 11, Lez. 160)
+// Funziona come find method, ma invece che restituire l'elemento trovato restituisce l'indice dell'elemento stesso
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const currentAccIndex = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    // Cancello account:
+    accounts.splice(currentAccIndex, 1);
+    console.log(accounts);
+
+    // Nascondo UI e cambio messaggio di benvenuto (messaggio generale):
+    containerApp.style.opacity = 0;
+    labelWelcome.textContent = 'Log in to get started';
+  }
+
+  inputCloseUsername.value = inputClosePin.value = ''; // svuoto campi input
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
