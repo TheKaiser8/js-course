@@ -286,6 +286,26 @@ btnTransfer.addEventListener('click', function (e) {
 });
 
 //////////////////////////////////
+// LEZIONE 17: some and every (Sez. 11, Lez. 161)
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  // Il prestito è concesso se c'è almeno un deposito che è uguale o maggiore del 10% del prestito richiesto
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Aggiungo prestito (come deposito)
+    currentAccount.movements.push(amount);
+  }
+
+  // Aggiorniamo l'interfaccia utente:
+  updateUI(currentAccount);
+
+  // Puliamo i campi input (a prescindere dal successo dell'operazione):
+  inputLoanAmount.value = '';
+});
+
+//////////////////////////////////
 // LEZIONE 16: The findIndex Method (Sez. 11, Lez. 160)
 // Funziona come find method, ma invece che restituire l'elemento trovato restituisce l'indice dell'elemento stesso
 btnClose.addEventListener('click', function (e) {
@@ -645,3 +665,29 @@ for (const account of accounts) {
   if (account.owner === 'Jessica Davis') console.log(account);
 }
 */
+
+//////////////////////////////////
+// LEZIONE 17: some and every (Sez. 11, Lez. 161)
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// SOME METHOD
+// Utilizzo includes method per verificare se un array include un certo valore (VERIFICA solamente l'UGUAGLIANZA):
+console.log(movements.includes(-130)); // true
+// con some method:
+console.log(movements.some(mov => mov === -130)); // true
+
+// Se vogliamo VERIFICARE una CONDIZIONE dobbiamo utilizzare some method:
+// in questo caso verifichiamo la presenza di depositi (movimenti positivi)
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits); // true
+
+// EVERY METHOD
+// Restituisce TRUE solamente se tutti gli elementi di un array soddisfano la condizione specificata
+console.log(movements.every(mov => mov > 0)); // false
+console.log(account4.movements.every(mov => mov > 0)); // true, l'account 4 ha solo movimenti positivi, pertanto soddisfa la condizione data
+
+// SEPARARE LA FUNZIONE DI CALLBACK
+const deposit = mov => mov > 0; // creiamo una variabile separata con la funzione di CALLBACK
+console.log(movements.some(deposit)); // true
+console.log(movements.every(deposit)); // false
+console.log(movements.filter(deposit)); // [ 200, 450, 3000, 70, 1300 ]
