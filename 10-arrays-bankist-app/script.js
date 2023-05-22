@@ -666,6 +666,7 @@ for (const account of accounts) {
 }
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 17: some and every (Sez. 11, Lez. 161)
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -691,3 +692,42 @@ const deposit = mov => mov > 0; // creiamo una variabile separata con la funzion
 console.log(movements.some(deposit)); // true
 console.log(movements.every(deposit)); // false
 console.log(movements.filter(deposit)); // [ 200, 450, 3000, 70, 1300 ]
+*/
+
+//////////////////////////////////
+// LEZIONE 18: flat and flatMap (Sez. 11, Lez. 162)
+// Introdotti in ES2019
+const arrNested = [[1, 2, 3], [4, 5, 6], 7, 8];
+// FLAT METHOD (NO CALLBACK function come argomento): per creare un unico array con tutti gli elementi, viene definito flat perché appiatisce gli array annidati di 1 solo livello di annidamento
+console.log(arrNested.flat()); // [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+
+// Nell'argomento del metodo flat possiamo specificare il livello di profondità (di DEFAULT è 1)
+const arrDeepNested = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeepNested.flat()); // [ [1, 2], 3, 4, [5, 6], 7, 8 ]
+console.log(arrDeepNested.flat(2)); // [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+
+// Immaginiamo di voler calcolare il bilancio complessivo di tutti i conti corrente:
+// creo un array globale, con il metodo map, che contiene tutti i movimenti bancari
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+// Essendo un array annidato, con FLAT METHOD, creo un array con tutti i movimenti:
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+// Ottengo la somma dei movimenti bancari con il metodo reduce:
+const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance); // 17840
+
+// Possiamo utilizzare anche il CHAINING dei METODI:
+const overallBalChaining = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalChaining); // 17840
+
+// FLATMAP METHOD: unisce i 2 metodi FLAT e MAP  e migliora le prestazioni
+const overallBalChaining2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalChaining); // 17840
+
+// *** N.B. FLATMAP va giù solo di un livello di profondità (per cui in situazione di array annidati in profondità devo utilizzare FLAT METHOD + MAP METHOD)
