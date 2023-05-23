@@ -69,11 +69,14 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // LEZIONE 6: Creating DOM Elements (Sez. 11, Lez. 147)
 
 // GOOD PRACTICE: Creiamo una funzione a cui passiamo i dati per visualizzare i movimenti bancari invece di creare una variabile globale
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   // per non avere i movimenti creati di default durante la scrittura dell'HTML svuotiamo il ccntainer dei movimenti
   containerMovements.innerHTML = ''; // .textContent restituisce solo il testo, innerHTML restituisce tutto, HTML incluso
 
-  movements.forEach(function (mov, i) {
+  // creiamo una variabile che ordini i movimenti in base alla variabile sort (true or false) e utilizziamo il metodo slice per creare una copia dell'array movements, in quanto NON vogliamo mutare l'array originale
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     // creiamo variabile per definire la tipologia di movimento
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
@@ -329,6 +332,29 @@ btnClose.addEventListener('click', function (e) {
   }
 
   inputCloseUsername.value = inputClosePin.value = ''; // svuoto campi input
+});
+
+//////////////////////////////////
+// LEZIONE 19: Sorting Arrays (Sez. 11, Lez. 163)
+// Variabile di stato per controllare se i dati sono stati ordinati o meno:
+let sorted = false;
+
+// Ordinare i movimenti in ordine crescente (nella visualizzazione avremo il valore più grande come primo, ma risulterà come l'ultimo movimento effettuato)
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Soluzione NON ottimizzata:
+  // if (sorted) {
+  //   displayMovements(currentAccount.movements, false);
+  //   sorted = false;
+  // } else {
+  //   displayMovements(currentAccount.movements, true);
+  //   sorted = true;
+  // }
+
+  // Soluzione OTTIMIZZATA:
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted; // la variabile di stato assume TRUE o FALSE in base al valore del 2° parametro della funzione di callback
 });
 
 /////////////////////////////////////////////////
@@ -694,6 +720,7 @@ console.log(movements.every(deposit)); // false
 console.log(movements.filter(deposit)); // [ 200, 450, 3000, 70, 1300 ]
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 18: flat and flatMap (Sez. 11, Lez. 162)
 // Introdotti in ES2019
@@ -731,3 +758,50 @@ const overallBalChaining2 = accounts
 console.log(overallBalChaining); // 17840
 
 // *** N.B. FLATMAP va giù solo di un livello di profondità (per cui in situazione di array annidati in profondità devo utilizzare FLAT METHOD + MAP METHOD)
+*/
+
+//////////////////////////////////
+// LEZIONE 19: Sorting Arrays (Sez. 11, Lez. 163)
+// Sorting: ORDINAMENTO ELEMENTI
+
+// Con le STRINGHE:
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+// Dalla A alla Z:
+console.log(owners.sort()); // [ "Adam", "Jonas", "Martha", "Zach" ]
+console.log(owners); // il metodo sort MUTA l'array originale
+
+// Con i NUMERI:
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// SORT METHOD converte i numeri in stringhe e poi utilizza l'ordine alfabetico
+console.log(movements.sort()); // [ -130, -400, -650, 1300, 200, 3000, 450, 70 ] NON è il risultato aspettato ma ha senso perchè ordina prima i negativi e parte dalla cifra iniziale di ogni numero quindi 1
+
+// per FIXARE il problema sopra bisogna passare una funzione di CALLBACK al metdo SORT:
+// SE RETURN < 0 --> A prima di B (mantiene ordine)
+// SE RETURN > 0 --> B prima di A (cambia ordine, scambia i 2 numeri)
+// ORDINE CRESCENTE:
+movements.sort((a, b) => {
+  if (a > b) return 1; // NON è importante il numero da restituire, l'importante è che sia > 0
+  if (a < b) return -1;
+}); // supponiamo che A e B siano 2 numeri consecutivi
+// Otteniamo array MUTATO in ORDINE NUMERICO
+console.log(movements); // [ -650, -400, -130, 70, 200, 450, 1300, 3000 ]
+
+// ORDINE DECRESCENTE:
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+console.log(movements); // [ 3000, 1300, 450, 200, 70, -130, -400, -650 ]
+
+// *** N.B. A > B significa anche A - B > 0, quindi ritorniamo un valore POSITIVO, mentre A - B < 0 ritorna un valore NEGATIVO
+
+// Possiamo ridurre la quantità di codice in questo modo:
+// ORDINE CRESCENTE:
+movements.sort((a, b) => a - b);
+console.log(movements); // [ -650, -400, -130, 70, 200, 450, 1300, 3000 ]
+
+// ORDINE DECRESCENTE:
+movements.sort((a, b) => b - a);
+console.log(movements); // [ 3000, 1300, 450, 200, 70, -130, -400, -650 ]
+
+// *** N.B. NON utilizzare SORT method con array MISTI (STRINGHE e numeri) perché non avrebbe senso e non funzionerebbe
