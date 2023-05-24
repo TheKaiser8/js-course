@@ -808,6 +808,7 @@ console.log(movements); // [ 3000, 1300, 450, 200, 70, -130, -400, -650 ]
 // *** N.B. NON utilizzare SORT method con array MISTI (STRINGHE e numeri) perché non avrebbe senso e non funzionerebbe
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 20: More Ways of Creating and Filling Arrays (Sez. 11, Lez. 164)
 // Modi imparati finora per CREARE ARRAY MANUALMENTE:
@@ -869,3 +870,103 @@ labelBalance.addEventListener('click', function () {
 });
 
 // *** N.B. Con Array.from() il 1° argomento può essere un NodeList e il 2° una funzione di callback come MAP method
+*/
+
+//////////////////////////////////
+// LEZIONE 21: Array Methods Practice (Sez. 11, Lez. 166)
+
+// ESERCIZIO 1. Calcolare quanto è stato depositato in banca (tutti gli account):
+// const bankDepositSum = accounts.map(acc => acc.movements).flat(); // MAP method per creare un NUOVO array annidato con tutti i depositi, FLAT method per ottenere un array unico ed eliminare gli array annidati
+// Possiamo semplificare utilizzando FLATMAP method
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0) // FILTRO per ottenere solo i depositi
+  .reduce((acc, cur) => acc + cur, 0);
+console.log(bankDepositSum); // 25180
+
+// ESERCIZIO 2. Calcolare i depositi con almeno 1000 € (o $)
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length; // utilizzando la LUNGHEZZA dell'array
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  // .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0); // utilizzando REDUCE method
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0); // ++ OPERATOR come PREFISSO
+console.log(numDeposits1000); // 6
+
+// ++ OPERATOR:
+let a = 10;
+console.log(a++); // 10, esegue l'incremento ma restituisce il valore precedente
+console.log(a); // 11, l'incremento a questo punto è stato eseguito e restituisce il valore corretto
+// per ovviare a questo problema utilizzo ++ OPERATOR come prefisso:
+let prefixOperator = 10;
+console.log(++prefixOperator); // 11
+console.log(prefixOperator); // 11
+
+// ESERCIZIO 3. Creare un oggetto che contiene la somma dei depositi e dei prelevamenti
+const sums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      return sums; // avendo le parentesi graffe dobbiamo esplicitare la keyword RETURN per far sì che restituisca l'ACCUMULATORE
+    },
+    { deposits: 0, withdrawals: 0 }
+  ); // come valore di partenza imposto un OGGETTO con proprietà e valori di partenza
+console.log(sums); // { deposits: 25180, withdrawals: -7340 }
+
+// DESTRUTTURO l'oggetto per ottenere le 2 variabili che contengono i 2 valori calcolati
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur); // con DOT NOTATION abbiamo più ripetizione di codice
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur; // con BRACKET NOTATION possiamo evitare la duplicazione di codice
+
+      return sums; // avendo le parentesi graffe dobbiamo esplicitare la keyword RETURN per far sì che restituisca l'ACCUMULATORE
+    },
+    { deposits: 0, withdrawals: 0 }
+  ); // come valore di partenza imposto un OGGETTO con proprietà e valori di partenza
+console.log(deposits, withdrawals); // 25180 -7340
+
+// ESERCIZIO 4: creare funzione per convertire qualsiasi stringa con la prima lettera in maiuscolo (TITLE CASE: tutte le parole con la prima lettere maiuscola eccetto alcune)
+// this is a nice title --> This Is a Nice Title
+const convertTitleCase = function (title) {
+  // creo array con le parole d'eccezione
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  // 1) trasformo tutto il titolo in minuscolo (toLowerCase())
+  // 2) lo salvo come un array contenente tutte le parole (split(' '))
+  // 3) creo un nuovo array con la stessa dimensione di prima (MAP METHOD)
+  //  3.1) controllo con INCLUDES se la parola si trova nell'array delle eccezioni
+  //  3.2) se è INCLUSA restituisco la parola minuscola, ALTRIMENTI restituisco la parola con la prima lettera maiuscola
+  // 4) creo la stringa unendo le parole contenute nell'array con JOIN METHOD
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word =>
+      exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join(' ');
+  return titleCase;
+};
+console.log(convertTitleCase('this is a nice title')); // This Is a Nice Title
+console.log(convertTitleCase('this is a LONG title but not too long')); // This Is a Long Title but Not Too Long
+console.log(convertTitleCase('and here is another title with an EXAMPLE')); // and Here Is Another Title with an Example
+
+// --> per EVITARE una situazione come questa: "and Here Is Another Title with an Example", in cui la prima parola del titolo risulta minuscola poiché presente nelle ECCEZIONI, creo una funziona autonoma
+const convertTitleCaseFixed = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  // creo array con le parole d'eccezione
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+console.log(convertTitleCaseFixed('and here is another title with an EXAMPLE')); // And Here Is Another Title with an Example
