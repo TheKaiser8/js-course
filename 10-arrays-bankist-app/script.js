@@ -760,6 +760,7 @@ console.log(overallBalChaining); // 17840
 // *** N.B. FLATMAP va giù solo di un livello di profondità (per cui in situazione di array annidati in profondità devo utilizzare FLAT METHOD + MAP METHOD)
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 19: Sorting Arrays (Sez. 11, Lez. 163)
 // Sorting: ORDINAMENTO ELEMENTI
@@ -805,3 +806,66 @@ movements.sort((a, b) => b - a);
 console.log(movements); // [ 3000, 1300, 450, 200, 70, -130, -400, -650 ]
 
 // *** N.B. NON utilizzare SORT method con array MISTI (STRINGHE e numeri) perché non avrebbe senso e non funzionerebbe
+*/
+
+//////////////////////////////////
+// LEZIONE 20: More Ways of Creating and Filling Arrays (Sez. 11, Lez. 164)
+// Modi imparati finora per CREARE ARRAY MANUALMENTE:
+console.log([1, 2, 3, 4, 5, 6, 7]);
+console.log(new Array(1, 2, 3, 4, 5, 6, 7)); // utilizzando un costruttore
+
+// CREARE ARRAY in MODO PROGRAMMATICO:
+// 1: ARRAY CONSTRUCTOR FUNCTION
+const arr = new Array(7);
+console.log(arr); // [ <7 empty slots> ] otteniamo un array che ha come lunghezza 7 ma non contiene valori
+console.log(arr.map(() => 5)); // [ <7 empty slots> ] non funziona alcun metodo per riempirlo, eccetto 1
+// per riempirlo possiamo utilizzare solo FILL method (esempio: per riempirlo impostiamo un numero come parametro)
+console.log(arr.fill(5)); // [ 5, 5, 5, 5, 5, 5, 5 ]
+// FILL method MUTA array originale:
+console.log(arr); // [ 5, 5, 5, 5, 5, 5, 5 ]
+
+// Possiamo specificare anche l'indice da cui far partire e/o finire il riempimento (2° e 3° parametro del metodo fill) come avviene per il metodo slice()
+const arrFillIndex = new Array(7);
+arrFillIndex.fill(5, 3, 6);
+console.log(arrFillIndex); // [ <3 empty slots>, 5, 5, 5, <1 empty slot> ]
+
+// MODIFICARE array ESISTENTE:
+const arrToEdit = [1, 2, 3, 4, 5, 6, 7];
+console.log(arrToEdit.fill(23, 2, 6)); // [ 1, 2, 23, 23, 23, 23, 7 ]
+
+// 2: FROM method su ARRAY CONSTRUCTOR per ricreare un array come questo [ 1, 1, 1, 1, 1, 1, 1 ] e questo [1, 2, 3, 4, 5, 6, 7]
+// 1° ARGOMENTO: oggetto lunghezza array, 2° ARGOMENTO: funzione di CALLBACK del metodo MAP
+const arrFromOnly1 = Array.from({ length: 7 }, () => 1);
+console.log(arrFromOnly1); // [ 1, 1, 1, 1, 1, 1, 1 ]
+
+// const arr1to7 = Array.from({ length: 7 }, (cur, i) => i + 1);
+const arr1to7 = Array.from({ length: 7 }, (_, i) => i + 1); // _ come 1° parametro per indicare che non lo utilizziamo (carattere convenzionale)
+console.log(arr1to7); // [ 1, 2, 3, 4, 5, 6, 7 ]
+
+// Array composto da 100 numeri casuali (esempio array composto dal risultato del lancio di dadi)
+const numbersRandom1to100 = Array.from(
+  { length: 100 },
+  cur => (cur = Math.floor(Math.random() * 100) + 1)
+);
+console.log(numbersRandom1to100.sort((a, b) => a - b)); // ordinare i numeri presenti da 1 a 100
+
+// Supponiamo di non avere i dati dei movimenti bancari e di doverli ottenere dalla UI cliccando (a scopo d'esempio sul bilancio corrente):
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    // il risultato di querySelectorAll è un NodeList (una struttura SIMILE ad un array ma NON è un array), ma con Array.from() possiamo trasformarlo in un vero array
+    document.querySelectorAll('.movements__value'),
+    // possiamo passare come 2° argomento la funzione di callback
+    el => Number(el.textContent.replace('€', ''))
+  );
+
+  console.log(movementsUI); // [ 1300, 70, -130, -650, 3000, -400, 450, 200 ]
+
+  // // Possiamo utilizzare MAP method perché abbiamo già convertito i valori presenti nell'HTML in un vero array con Array.from()
+  // console.log(movementsUI.map(el => Number(el.textContent.replace('€', '')))); // [ 1300, 70, -130, -650, 3000, -400, 450, 200 ]
+
+  // Utilizzando SPREAD OPERATOR la mappatura avverrebbe separatamente:
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI2.map(el => Number(el.textContent.replace('€', '')))); // [ 1300, 70, -130, -650, 3000, -400, 450, 200 ]
+});
+
+// *** N.B. Con Array.from() il 1° argomento può essere un NodeList e il 2° una funzione di callback come MAP method
