@@ -872,6 +872,7 @@ labelBalance.addEventListener('click', function () {
 // *** N.B. Con Array.from() il 1° argomento può essere un NodeList e il 2° una funzione di callback come MAP method
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 21: Array Methods Practice (Sez. 11, Lez. 166)
 
@@ -970,3 +971,4 @@ const convertTitleCaseFixed = function (title) {
   return capitalize(titleCase);
 };
 console.log(convertTitleCaseFixed('and here is another title with an EXAMPLE')); // And Here Is Another Title with an Example
+*/
