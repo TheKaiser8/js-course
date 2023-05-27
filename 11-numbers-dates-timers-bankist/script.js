@@ -306,6 +306,7 @@ console.log(Number.isInteger(23.0)); // true
 console.log(Number.isInteger(23 / 0)); // false
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 2: Math and Rounding (Sez. 12, Lez. 171)
 
@@ -364,3 +365,30 @@ console.log((2.7).toFixed(0)); // '3'
 console.log((2.7).toFixed(3)); // '2,700'
 console.log((2.345).toFixed(2)); // '2,35'
 console.log(+(2.345).toFixed(2)); // 2,35 --> OPERATORE + per convertire STRINGA in NUMERO
+*/
+
+//////////////////////////////////
+// LEZIONE 3: The Remainder Operator (Sez. 12, Lez. 172)
+// REMINDER OPERATOR: restituisce il resto di una divisione
+console.log(5 % 2); // 1
+console.log(5 / 2); // 2.5 --> 5 = 2 * 2 + 1
+console.log(8 % 3); // 2
+console.log(8 / 3); // 2.6666666666666665 --> 8 = 3 * 2 + 2
+
+// REMINDER OPERATOR per verificare un NUMERO PARI (se è divisibile per 2 avrà resto 0):
+console.log(6 % 2 === 0); // true
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(6)); // true
+console.log(isEven(23)); // false
+
+// Coloriamo lo sfondo di tutti i movimenti pari e suddivisibili per 3 al click sul saldo corrente:
+labelBalance.addEventListener('click', function () {
+  // creo array dei movimenti con SPREAD OPERATOR e ciclo su di esso
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    // movimenti pari
+    if (i % 2 === 0) row.style.backgroundColor = 'lightblue';
+    // movimenti divisibili per 3
+    if (i % 3 === 0) row.style.backgroundColor = 'gold';
+  });
+});
