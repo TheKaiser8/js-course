@@ -367,6 +367,7 @@ console.log((2.345).toFixed(2)); // '2,35'
 console.log(+(2.345).toFixed(2)); // 2,35 --> OPERATORE + per convertire STRINGA in NUMERO
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 3: The Remainder Operator (Sez. 12, Lez. 172)
 // REMINDER OPERATOR: restituisce il resto di una divisione
@@ -392,3 +393,27 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'gold';
   });
 });
+*/
+
+//////////////////////////////////
+// LEZIONE 4: Numeric Separators (Sez. 12, Lez. 173)
+// Numeric separators: funzione disponibile dal 2021, sono caratteri di sottolineatura che permettono di comprendere un numero molto grande più facilmente
+
+// Supponiamo di voler rappresentare un numero molto grande, il diametro del nostro sistema solare (287 miliardi e 460 milioni di km)
+// Nel linguaggio inglese formale utilizziamo la virgola come separatore delle migliaia: 287,460,000,000
+const diameter = 287_460_000_000;
+console.log(diameter); // 287460000000
+
+const price = 345_99;
+console.log(price); // 34599
+
+const transferFee1 = 15_00;
+console.log(transferFee1); // 1500
+const transferFee2 = 1_500;
+console.log(transferFee2); // 1500
+
+// *** il numero non cambia, però leggendo le variabili in JS abbiamo una lettura facilitata
+
+// N.B. Numeric separators NON funzionano correttamente con le STRINGHE:
+console.log(Number('230_000')); // NaN
+console.log(parseInt('230_000')); // 230
