@@ -81,19 +81,33 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const displayMovements = function (movements, sort = false) {
+//////////////////////////////////
+// LEZIONE 7: Adding Dates to "Bankist" App (Sez. 12, Lez. 176)
+
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    // Variabile per stampare la data del movimento (utilizziamo l'index per accedere ai dati di un altro array --> bug quando andiamo ad ordinare i movimenti perché vengono cambiate le date dei movimenti stessi)
+    const movDate = new Date(acc.movementsDates[i]);
+    const day = `${movDate.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
+    const month = `${movDate.getMonth() + 1}`.padStart(2, 0);
+    const year = movDate.getFullYear();
+    // Data in formato: giorno/mese/anno
+    const displayDate = `${day}/${month}/${year}`;
 
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+        <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
@@ -142,7 +156,7 @@ createUsernames(accounts);
 
 const updateUI = function (acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 
   // Display balance
   calcDisplayBalance(acc);
@@ -154,6 +168,11 @@ const updateUI = function (acc) {
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
+
+// FAKE LOGIN (per non dover ripetere sempre il login ad ogni variazione del codice e poter visualizzare sempre la UI):
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -170,6 +189,16 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
+
+    // Current balance date:
+    const currentDate = new Date();
+    const day = `${currentDate.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
+    const month = `${currentDate.getMonth() + 1}`.padStart(2, 0);
+    const year = currentDate.getFullYear();
+    const hour = `${currentDate.getHours()}`.padStart(2, 0);
+    const min = `${currentDate.getMinutes()}`.padStart(2, 0);
+    // Format date: day/month/year
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -200,6 +229,10 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -213,6 +246,9 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
     currentAccount.movements.push(amount);
+
+    // Add loan date
+    currentAccount.movementsDates.push(new Date().toISOString());
 
     // Update UI
     updateUI(currentAccount);
@@ -246,7 +282,7 @@ btnClose.addEventListener('click', function (e) {
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
@@ -456,6 +492,7 @@ console.log(10n / 3n); // 3n, BigInt taglia la parte decimale e arrotonda all'in
 console.log(10 / 3); // 3.3333333333333335
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 6: Creating Dates (Sez. 12, Lez. 175)
 // 4 MODI per CREARE una DATA:
@@ -511,3 +548,4 @@ console.log(Date.now()); // 1685290745645
 future.setFullYear(2040);
 console.log(future); // Mon Nov 19 2040 15:23:00 GMT+0100 (Ora standard dell’Europa centrale)
 // *** N.B. possiamo settare anche MESE, GIORNO, ecc
+*/
