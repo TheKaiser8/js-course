@@ -395,6 +395,7 @@ labelBalance.addEventListener('click', function () {
 });
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 4: Numeric Separators (Sez. 12, Lez. 173)
 // Numeric separators: funzione disponibile dal 2021, sono caratteri di sottolineatura che permettono di comprendere un numero molto grande più facilmente
@@ -417,3 +418,38 @@ console.log(transferFee2); // 1500
 // N.B. Numeric separators NON funzionano correttamente con le STRINGHE:
 console.log(Number('230_000')); // NaN
 console.log(parseInt('230_000')); // 230
+*/
+
+//////////////////////////////////
+// LEZIONE 5: Working with BigInt (Sez. 12, Lez. 174)
+// Introdotto in ES2020
+// I numeri sono rappresentati internamente in 64 bit, ma solo 53 sono utilizzati per memorizzare le cifre stesse, le restanti vengono utilizzate per memorizzare la posizione della virgola e del segno
+console.log(2 ** 53 - 1); // 9007199254740991 --> NUMERO PIù grande che JS può memorizzare in sicurezza
+console.log(Number.MAX_SAFE_INTEGER); // // 9007199254740991 --> è anche salvato nel NAMESPACE dell'oggetto Number
+
+// *** Facendo calcoli con numeri più GRANDI di questo perderemmo precisione di calcolo e non avremo risultati corretti
+// BigInt ci aiuta a risolvere questo problema permettendoci di memorizzare numeri più grandi del MAX_SAFE_INTEGER
+console.log(2395734084392570443574857487n); // la n trasforma il numero in un BigInt
+console.log(BigInt(2395734084392570443574857487));
+
+// Operazioni con BigInt:
+console.log(10000n + 10000n); // 20000n
+// console.log(Math.sqrt(16n)); // NON funziona! La radice quadrata è possibile solo con un numero
+
+// *** N.B. NON è possibile mischiare numeri BigInt con numeri di altri tipi, per eseguire l'operazione BISOGNA CONVERTIRE tutti i dati in BigInt
+// console.log(2473269572395743975349n + 23); // Uncaught TypeError: can't convert BigInt to number
+console.log(2473269572395743975349n + BigInt(23)); // 2473269572395743975372n
+
+// ECCEZIONI con OPERATORI LOGICI:
+console.log(20n > 15); // true
+console.log(20n === 20); // false
+console.log(typeof 20n); // bigint
+console.log(20n == 20); // true
+console.log(20n == '20'); // true
+
+// BigInt + STRINGA = STRINGA
+console.log(2473269572395743975349n + ' is REALLY big!!!');
+
+// DIVISIONI:
+console.log(10n / 3n); // 3n, BigInt taglia la parte decimale e arrotonda all'intero più vicino
+console.log(10 / 3); // 3.3333333333333335
