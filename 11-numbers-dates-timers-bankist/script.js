@@ -420,6 +420,7 @@ console.log(Number('230_000')); // NaN
 console.log(parseInt('230_000')); // 230
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 5: Working with BigInt (Sez. 12, Lez. 174)
 // Introdotto in ES2020
@@ -453,3 +454,60 @@ console.log(2473269572395743975349n + ' is REALLY big!!!');
 // DIVISIONI:
 console.log(10n / 3n); // 3n, BigInt taglia la parte decimale e arrotonda all'intero più vicino
 console.log(10 / 3); // 3.3333333333333335
+*/
+
+//////////////////////////////////
+// LEZIONE 6: Creating Dates (Sez. 12, Lez. 175)
+// 4 MODI per CREARE una DATA:
+
+// 1. new Date() CONSTRUCTOR:
+const now = new Date();
+console.log(now);
+
+// 2. PARSING di una DATA in formato STRINGA:
+console.log(new Date('Sun May 28 2023 17:42:29')); // Sun May 28 2023 17:45:43 GMT+0200 (Ora legale dell’Europa centrale)
+console.log(new Date('2019-11-18T21:31:17.178Z')); // Mon Nov 18 2019 22:31:17 GMT+0100 (Ora standard dell’Europa centrale)
+// N.B. La Z rappresenta lì'UTC (Coordinated Universal Time)
+console.log(new Date(account1.movementsDates[0])); // // Mon Nov 18 2019 22:31:17 GMT+0100 (Ora standard dell’Europa centrale)
+
+// 3. Possiamo passare al costruttore ANNO, MESE, GIORNO, ORA, MINUTI e secondi:
+console.log(new Date(2037, 10, 19, 15, 23, 5)); // Thu Nov 19 2037 15:23:05 GMT+0100 (Ora standard dell’Europa centrale)
+// N.B. il MESE è rappresentato in BASE 0, per cui il 1° MESE è indice 0
+
+// JS corregge AUTOMATICAMENTE il giorno del mese:
+console.log(new Date(2037, 10, 31)); // Tue Dec 01 2037 00:00:00 GMT+0100 (Ora standard dell’Europa centrale)
+console.log(new Date(2037, 10, 33)); // Thu Dec 03 2037 00:00:00 GMT+0100 (Ora standard dell’Europa centrale)
+
+// 4. Possiamo passare la quantità di MILLISECONDI passati dall'UNIX TIME --> 1° gennaio 1970
+console.log(new Date(0)); // Thu Jan 01 1970 01:00:00 GMT+0100 (Ora standard dell’Europa centrale)
+console.log(new Date(10000000000)); // Sun Apr 26 1970 18:46:40 GMT+0100 (Ora standard dell’Europa centrale)
+// 3 giorni DOPO Unix Time (GIORNI * ORE * MINUTI * SECONDI * MILLISECONDI):
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); // Sun Jan 04 1970 01:00:00 GMT+0100 (Ora standard dell’Europa centrale)
+
+// *** N.B. Le date create sono OGGETTI SPECIALI che hanno dei metodi
+const future = new Date(2037, 10, 19, 15, 23);
+// Ottenere l'ANNO INTERO (esiste anche getYear() ma NON è consigliato usarlo):
+console.log(future.getFullYear()); // 2037
+console.log(future.getMonth()); // 10 --> è in BASE 0
+console.log(future.getDate()); // 19
+console.log(future.getDay()); // 4 (giovedì) --> è il NUMERO del GIORNO della SETTIMANA
+console.log(future.getHours()); // 15
+console.log(future.getMinutes()); // 23
+console.log(future.getSeconds()); // 0
+
+// STRINGA DATA ISO che segue una STANDARD INTERNAZIONALE:
+console.log(future.toISOString()); // 2037-11-19T14:23:00.000Z
+// Le stringhe di account1.movementsDates sono state generate in questo modo
+
+// TIMESTAMP: MILLISECONDI TRASCORSI dal 1 gennaio 1970
+console.log(future.getTime()); // 2142253380000
+// CONVERTIRE TIMESTAMP in DATA:
+console.log(new Date(2142253380000)); // Thu Nov 19 2037 15:23:00 GMT+0100 (Ora standard dell’Europa centrale)
+
+// TIMESTAMP ATTUALE:
+console.log(Date.now()); // 1685290745645
+
+// SETTARE L'ANNO di una DATA:
+future.setFullYear(2040);
+console.log(future); // Mon Nov 19 2040 15:23:00 GMT+0100 (Ora standard dell’Europa centrale)
+// *** N.B. possiamo settare anche MESE, GIORNO, ecc
