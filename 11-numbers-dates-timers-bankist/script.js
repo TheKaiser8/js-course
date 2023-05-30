@@ -21,9 +21,9 @@ const account1 = {
     '2020-01-28T09:15:04.904Z',
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2023-05-27T17:01:17.194Z',
+    '2023-05-28T23:36:17.929Z',
+    '2023-05-30T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -82,6 +82,34 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // Functions
 
 //////////////////////////////////
+// LEZIONE 8: Operations With Dates (Sez. 12, Lez. 177)
+
+const formatMovementDate = function (date) {
+  // Funzione che richiede 2 DATE e restituisce i giorni che trascorrono tra queste 2 DATE:
+  const calcDaysPassed = (date1, date2) =>
+    // Math.abs(date2 - date1) / (1000 * 60 * 60 * 24); // prendiamo sempre il VALORE ASSOLUTO per non ottenere output negativi nel caso la 2° data passata fosse antecedente alla 1° data
+    // millisecondi / (secondo * minuto * ore * giorno) --> CONVERSIONE MILLISECONDI in GIORNI
+
+    // Nel caso passassimo come argomento una DATA con l'aggiunta di ora e minuti dovremmo utilizzare Math.round() per ARROTONDARE i GIORNI all'intero più vicino:
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calcDaysPassed(new Date(), date);
+  console.log(daysPassed);
+
+  // Applicando il return l'esecuzione del codice della funzione viene interrotta nel momento in cui si verifica quella condizione, per cui potremmo anche NON mettere nel blocco ELSE il codice contenuto al suo interno
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+  else {
+    const day = `${date.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+    // Data in formato: giorno/mese/anno
+    return `${day}/${month}/${year}`;
+  }
+};
+
+//////////////////////////////////
 // LEZIONE 7: Adding Dates to "Bankist" App (Sez. 12, Lez. 176)
 
 const displayMovements = function (acc, sort = false) {
@@ -94,13 +122,10 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-    // Variabile per stampare la data del movimento (utilizziamo l'index per accedere ai dati di un altro array --> bug quando andiamo ad ordinare i movimenti perché vengono cambiate le date dei movimenti stessi)
+    // Variabile per stampare la data del movimento (utilizziamo l'index per accedere ai dati di un altro array)
     const movDate = new Date(acc.movementsDates[i]);
-    const day = `${movDate.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
-    const month = `${movDate.getMonth() + 1}`.padStart(2, 0);
-    const year = movDate.getFullYear();
-    // Data in formato: giorno/mese/anno
-    const displayDate = `${day}/${month}/${year}`;
+    // Data in formato: giorno/mese/anno o "Today", "Yesterday", "2 days ago"; ecc
+    const displayDate = formatMovementDate(movDate);
 
     const html = `
       <div class="movements__row">
@@ -549,3 +574,23 @@ future.setFullYear(2040);
 console.log(future); // Mon Nov 19 2040 15:23:00 GMT+0100 (Ora standard dell’Europa centrale)
 // *** N.B. possiamo settare anche MESE, GIORNO, ecc
 */
+
+//////////////////////////////////
+// LEZIONE 8: Operations With Dates (Sez. 12, Lez. 177)
+// Per fare operazioni con le date dobbiamo convertirle in numeri, in questo modo otteniamo i timestamp in millisecondi che ci permettono di effettuare calcoli
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(+future); // 2142253380000 --> CONVERSIONE DATA in NUMERO (timestamp in millisecondi)
+
+// Funzione che richiede 2 DATE e restituisce i giorni che trascorrono tra queste 2 DATE:
+const calcDaysPassed = (date1, date2) =>
+  // Math.abs(date2 - date1) / (1000 * 60 * 60 * 24); // prendiamo sempre il VALORE ASSOLUTO per non ottenere output negativi nel caso la 2° data passata fosse antecedente alla 1° data
+  // millisecondi / (secondo * minuto * ore * giorno) --> CONVERSIONE MILLISECONDI in GIORNI
+
+  // Nel caso passassimo come argomento una DATA con l'aggiunta di ora e minuti dovremmo utilizzare Math.round() per ARROTONDARE i GIORNI all'intero più vicino:
+  Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+const days1 = calcDaysPassed(
+  new Date(2037, 3, 14),
+  new Date(2037, 3, 24, 10, 8)
+);
+console.log(days1); // 10
