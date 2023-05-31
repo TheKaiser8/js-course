@@ -84,7 +84,10 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //////////////////////////////////
 // LEZIONE 8: Operations With Dates (Sez. 12, Lez. 177)
 
-const formatMovementDate = function (date) {
+//////////////////////////////////
+// LEZIONE 9: Internationalizing Dates (Intl) (Sez. 12, Lez. 178)
+
+const formatMovementDate = function (date, locale) {
   // Funzione che richiede 2 DATE e restituisce i giorni che trascorrono tra queste 2 DATE:
   const calcDaysPassed = (date1, date2) =>
     // Math.abs(date2 - date1) / (1000 * 60 * 60 * 24); // prendiamo sempre il VALORE ASSOLUTO per non ottenere output negativi nel caso la 2° data passata fosse antecedente alla 1° data
@@ -94,19 +97,21 @@ const formatMovementDate = function (date) {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
+  // console.log(daysPassed);
 
   // Applicando il return l'esecuzione del codice della funzione viene interrotta nel momento in cui si verifica quella condizione, per cui potremmo anche NON mettere nel blocco ELSE il codice contenuto al suo interno
   if (daysPassed === 0) return 'Today';
   if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 7) return `${daysPassed} days ago`;
-  else {
-    const day = `${date.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
-    // Data in formato: giorno/mese/anno
-    return `${day}/${month}/${year}`;
-  }
+  // else {
+  //   const day = `${date.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
+  //   const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  //   const year = date.getFullYear();
+  //   // Data in formato: giorno/mese/anno
+  //   return `${day}/${month}/${year}`;
+  // }
+
+  return new Intl.DateTimeFormat(locale).format(date);
 };
 
 //////////////////////////////////
@@ -125,7 +130,7 @@ const displayMovements = function (acc, sort = false) {
     // Variabile per stampare la data del movimento (utilizziamo l'index per accedere ai dati di un altro array)
     const movDate = new Date(acc.movementsDates[i]);
     // Data in formato: giorno/mese/anno o "Today", "Yesterday", "2 days ago"; ecc
-    const displayDate = formatMovementDate(movDate);
+    const displayDate = formatMovementDate(movDate, acc.locale);
 
     const html = `
       <div class="movements__row">
@@ -215,15 +220,43 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     containerApp.style.opacity = 100;
 
-    // Current balance date:
+    // // Current balance date:
+    // const currentDate = new Date();
+    // const day = `${currentDate.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
+    // const month = `${currentDate.getMonth() + 1}`.padStart(2, 0);
+    // const year = currentDate.getFullYear();
+    // const hour = `${currentDate.getHours()}`.padStart(2, 0);
+    // const min = `${currentDate.getMinutes()}`.padStart(2, 0);
+    // // Format date: day/month/year
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+
+    // // Current balance date and time with Internalization API:
     const currentDate = new Date();
-    const day = `${currentDate.getDate()}`.padStart(2, 0); // padStart per avere sempre giorno e mese espressi con 2 cifre
-    const month = `${currentDate.getMonth() + 1}`.padStart(2, 0);
-    const year = currentDate.getFullYear();
-    const hour = `${currentDate.getHours()}`.padStart(2, 0);
-    const min = `${currentDate.getMinutes()}`.padStart(2, 0);
-    // Format date: day/month/year
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric', // anche: 'long' --> maggio e '2-digit' --> 05
+      year: 'numeric',
+      // weekday: 'long', // anche: 'short' --> mer e 'narrow' --> M
+    }; // definiamo un oggetto di configurazione chiamato options per avere anche l'orario
+
+    // labelDate.textContent = new Intl.DateTimeFormat('it-IT', options).format(
+    //   currentDate
+    // ); // come 1° argomento viene passata una LOCAL STRING ('lingua-PAESE'), come 2° l'oggetto options per l'orario
+
+    // Possiamo ottenere automaticamente le impostazioni dal browser dell'utente:
+    // const locale = navigator.language;
+    // // console.log(locale); // it-IT
+
+    // labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(
+    //   currentDate
+    // );
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(currentDate);
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -575,6 +608,7 @@ console.log(future); // Mon Nov 19 2040 15:23:00 GMT+0100 (Ora standard dell’E
 // *** N.B. possiamo settare anche MESE, GIORNO, ecc
 */
 
+/*
 //////////////////////////////////
 // LEZIONE 8: Operations With Dates (Sez. 12, Lez. 177)
 // Per fare operazioni con le date dobbiamo convertirle in numeri, in questo modo otteniamo i timestamp in millisecondi che ci permettono di effettuare calcoli
@@ -594,3 +628,4 @@ const days1 = calcDaysPassed(
   new Date(2037, 3, 24, 10, 8)
 );
 console.log(days1); // 10
+*/
